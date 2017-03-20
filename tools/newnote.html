@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New Note</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../assets/css/photon.min.css" />
+</head>
+
+<body class="body">
+  <div class="content-fluid">
+
+    <header class="toolbar toolbar-header mytool">
+      <div class="doc-info">
+        <p id="doc-title" class="doc-titles"> New Note</p>
+
+        <p id="lineas-cont">lineas : 0</p>
+
+      </div>
+
+
+      <div class="btn-group">
+
+        <button class="btn btn-tab" id="">
+                <span class="icon icon-picture"></span>
+        </button>
+
+        <button class="btn btn-tab" id="pdf-button">
+               <span class="icon icon-print"></span>
+        </button>
+        <button class="btn btn-tab" id="btn-trash">
+               <span class="icon icon-trash"></span>
+        </button>
+        <button class="btn btn-tab" id="btn-save-notes">
+              <span class="icon icon-folder"></span>
+        </button>
+      </div>
+    </header>
+
+    <section class="panel-principal modo-espera" id="writeableDiv" tabindex="0">
+      <h3>Presione Enter para Escribir</h3>
+    </section>
+
+  </div>
+
+  <script >
+    const remote = require('electron').remote;
+    var main = remote.require("./main.js");
+    var $ = require('jquery');
+    require("../assets/js/writer.js");
+  
+  </script>
+
+</body>
+
+</html>

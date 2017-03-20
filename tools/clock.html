@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>clock</title>
+
+    <link rel="stylesheet" href="../assets/css/main.css"/>
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js"  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+   
+    
+</head>
+<body>
+
+<div class="dateTime">
+ <div class="time">
+   <span class="hour">11:00</span>
+ </div>
+
+ <div class="date">
+   <span class="weekday">Miercoles</span>
+   <span class="day"> 8</span>
+   <span class="month"> de Febrero</span>
+   <span class="year">2017</span>
+  </div>
+
+</div>
+
+<script >
+    const remote = require('electron').remote;
+    var main = remote.require("./main.js");
+    var $ = require('jquery');
+    require("../assets/js/clock.js");
+  
+    
+
+  </script>
+</body>
+</html>
