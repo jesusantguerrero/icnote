@@ -5,7 +5,9 @@
   "main": "main.js",
   "dependencies": {
     "electron-json-storage": "^3.0.1",
-    "jquery": "^3.1.1"
+    "jquery": "^3.1.1",
+    "remark": "^7.0.0",
+    "remark-html": "^6.0.0"
   },
   "devDependencies": {
     "electron": "^1.4.15",

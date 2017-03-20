@@ -316,7 +316,7 @@ input[type="button"] {
   justify-content: flex-end;
   overflow: hidden;
   background-color: #fff;
-  border-radius: 10px 10px 0 0;
+  border-radius: 4px 4px 0 0;
   opacity: 0;
   transition: all ease 0.3s; }
   .mytool:hover, .mytool-ext:hover {
@@ -355,8 +355,9 @@ input[type="button"] {
   position: relative;
   overflow: hidden;
   height: 100vh;
-  border-radius: 10px;
-  background: #fff; }
+  border-radius: 4px;
+  background: #fff;
+  border: 1.2px solid #aaa; }
 
 .index-fluid {
   height: 100vh; }
@@ -368,8 +369,7 @@ input[type="button"] {
   height: 90%;
   background: #272727;
   color: white;
-  position: relative;
-  border-left: 1px solid #ccc; }
+  position: relative; }
 
 .index-panel {
   height: 88%; }
@@ -417,15 +417,20 @@ input[type="button"] {
   cursor: text; }
 
 .linea {
+  width: 100%;
   min-height: 22px;
   height: auto;
   max-height: max-content;
   font-size: 18px;
   z-index: 200;
   cursor: text;
-  color: #777; }
+  color: #777;
+  text-align: justify; }
   .linea:focus {
     outline: 0px; }
+  .linea p {
+    margin: 0 0 0 0;
+    padding: 0; }
 
 .between-div {
   background: white;
@@ -473,7 +478,7 @@ input[type="button"] {
   cursor: default; }
 
 #writeableDiv::-webkit-scrollbar-thumb {
-  background-color: transparent;
+  background-color: #aaa;
   cursor: default;
   border-radius: 3px; }
 

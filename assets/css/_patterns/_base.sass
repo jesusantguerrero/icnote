@@ -19,7 +19,7 @@
   justify-content: flex-end
   overflow: hidden
   background-color: #fff
-  border-radius: 10px 10px 0 0
+  border-radius: 4px 4px 0 0
   opacity: 0
   transition: all ease .3s
 
@@ -65,8 +65,9 @@
   position: relative
   overflow: hidden
   height: 100vh
-  border-radius: 10px
+  border-radius: 4px
   background: #fff
+  border: 1.2px solid #aaa
 
 .index-fluid
   height: 100vh
@@ -79,7 +80,6 @@
   background: $dark-color
   color: white
   position: relative
-  border-left: 1px solid #ccc
 
 .index-panel
   height: 88%
@@ -133,6 +133,7 @@
   cursor: text
 
 .linea
+  width: 100%
   min-height: 22px
   height: auto
   max-height: max-content
@@ -140,10 +141,14 @@
   z-index: 200
   cursor: text
   color: #777
+  text-align: justify
 
   &:focus
     outline: 0px
-
+  
+  p 
+    margin: 0 0 0 0
+    padding: 0
 
 .between-div
   background: white

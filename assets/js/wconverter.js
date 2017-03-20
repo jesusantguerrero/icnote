@@ -4,6 +4,8 @@ var tableWidth;
 var span;
 var translatedLine;
 
+const remark = require('remark'),
+      remarkHmtl = require('remark-html');
 
 
 
@@ -20,7 +22,7 @@ exports.decode = function(WDOldLine,temp){
       }
 
       switch(params[0]){
-                                                                                                                                      // 1- header decoder
+               //J-shunks my Languaje supports                                                                                                                       // 1- header decoder
               case 'h': {
                 span = $("<span></span>").addClass("icon icon-link");
                 translatedLine = $("<h3></h3>").html(span);
@@ -133,6 +135,15 @@ exports.decode = function(WDOldLine,temp){
                 WDOldLine.addClass("apuntes-link");
               }
               break;
+              
+              //default is a markdownsupport
+              default:
+                var fileresult = remark().use(remarkHmtl).processSync([temp].join('\n'));
+                setTimeout(WDOldLine.html(String(fileresult).trim()),1000);
+                main.log(String(fileresult));
+    
+                break;
+              
 
 
             } // end of switch
