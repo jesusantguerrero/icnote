@@ -19,16 +19,16 @@ function getTyping(writeableDiv){
       key = event.which;
 
       if(key == 13){
-        writeableDiv.removeAttr("contenteditable");
+         writeableDiv.removeAttr("contenteditable");
         if(line < 1){
             writeableDiv.removeClass("modo-espera");
             writeableDiv.html("");
             modoEscritura =true;
-            nuevaLinea();
+            addLine();
             line++;
             // principaljs.allowDrop();
         }else{
-          nuevaLinea();
+          addLine();
           line++;
           temp = WDOldLine.text();
           wconverter.decode(WDOldLine,temp);
@@ -48,7 +48,7 @@ function getTyping(writeableDiv){
       }  
     });
 
-    function nuevaLinea(){
+    function addLine(){
         if(line > 0 || !modoEscritura){
           WDOldLine = lineElement;
           WDOldLine.removeAttr("contenteditable");
@@ -60,7 +60,6 @@ function getTyping(writeableDiv){
         lineElement.html("");
         setTimeout(()=>{ lineElement.html(""),1})
         lineElement.focus();
-        showLineNumber();
         // main.getImageFromTo(lineElement);
       }
 
@@ -75,7 +74,7 @@ function getTyping(writeableDiv){
         WDOldLine = writeableDiv.children(".line-" + index);
         lineElement = WDOldLine;
         lineElement.attr("contenteditable","true");
-        showLineNumber();
+        
         // main.getImageFromTo(lineElement);
       }
 
@@ -98,7 +97,7 @@ function getTyping(writeableDiv){
 
         function showLineNumber(){
           let lineNumber = line + 1;
-          $("#lineas-cont").text("lines: " + lineNumber);
+          main.log("lines: " + lineNumber);
         }
   }
 

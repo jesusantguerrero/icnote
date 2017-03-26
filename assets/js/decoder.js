@@ -34,3 +34,4 @@ exports.decode = function(sentence){
                 break;
       }
 }
+
