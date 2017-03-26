@@ -74,7 +74,6 @@ function getTyping(writeableDiv){
         WDOldLine = writeableDiv.children(".line-" + index);
         lineElement = WDOldLine;
         lineElement.attr("contenteditable","true");
-        
         // main.getImageFromTo(lineElement);
       }
 
