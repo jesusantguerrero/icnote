@@ -88,10 +88,6 @@ pre {
     overflow: auto
 }
 
-code, kbd, pre, samp {
-    font-family: monospace, monospace;
-    font-size: 1em
-}
 
 button, input, optgroup, select, textarea {
     color: inherit;
@@ -150,12 +146,6 @@ hr {
     border-bottom: 1px solid #ddd
 }
 
-h1, h2, h3, h4, h5, h6 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-weight: 500;
-    overflow: hidden
-}
 
 .btn .icon, .toolbar-header .title {
     margin-top: 1px
@@ -439,7 +429,7 @@ h5 {
 
 .btn-group {
     position: relative;
-    display: inline-block
+    /*display: inline-block*/
 }
 
 .toolbar-actions:after, .toolbar-actions:before, .toolbar:after, .toolbar:before {
@@ -531,7 +521,6 @@ h5 {
 
 .form-control, label {
     display: inline-block;
-    font-size: 13px
 }
 
 .toolbar-actions>.btn, .toolbar-actions>.btn-group {

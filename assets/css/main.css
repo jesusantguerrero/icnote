@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -231,6 +232,48 @@ hr {
   clear: both;
   height: 0; }
 
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 0 0; }
+
+code {
+  display: block;
+  background: #eee;
+  font-family: "Fira Code", "Consolas";
+  font-size: 14px;
+  height: 100%;
+  width: 80%;
+  position: relative;
+  padding-left: 20px; }
+
+[type="checkbox"] {
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  background: white;
+  display: block;
+  margin: 5px 10px 0 0;
+  border-radius: 3px;
+  border: 3px solid #666;
+  position: relative;
+  cursor: pointer;
+  transition: all ease 0.3s;
+  display: inline-block; }
+  [type="checkbox"]:focus {
+    outline: 0; }
+
+label {
+  display: inline-block;
+  font-size: 18px; }
+
+[type="checkbox"]:checked {
+  background: #655; }
+  [type="checkbox"]:checked:before {
+    content: "✔";
+    color: #fff;
+    left: 2%;
+    position: absolute;
+    font-size: 18px; }
+
 .button,
 button,
 input[type="submit"],
@@ -279,26 +322,21 @@ input[type="button"] {
     border-radius: 0px; }
 
 .btn-tab {
-  background: transparent;
   color: #05507a;
   border: 0;
   font-size: 20px;
-  border-bottom: 1px solid #ccc;
   cursor: pointer;
   height: 100%;
-  width: 70px;
+  width: 40px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  box-shadow: none; }
+  justify-content: flex;
+  box-shadow: none;
+  background: transparent; }
   .btn-tab:hover, .btn-tab:active, .btn-tab:focus {
     color: #fff;
-    border-color: #fff;
-    outline: 0;
-    background: #fff;
-    color: white; }
+    outline: 0; }
     .btn-tab:hover .icon, .btn-tab:active .icon, .btn-tab:focus .icon {
-      font-size: 20px;
       cursor: pointer;
       text-align: center;
       color: #3bb3f7; }
@@ -306,56 +344,52 @@ input[type="button"] {
 * {
   margin: 0;
   padding: 0; }
-  * h1, * h2, * h3, * h4, * h5, * h6 {
-    margin: 0; }
 
-.mytool, .mytool-ext {
-  padding: 0 2% 0 0;
-  height: 55px;
+.mytool {
+  padding: 0;
+  height: 50px;
+  width: 100%;
   display: flex;
-  justify-content: flex-end;
+  border-radius: 8px 8px 0 0;
+  transition: all ease 0.3s;
   overflow: hidden;
-  background-color: #fff;
-  border-radius: 4px 4px 0 0;
-  opacity: 0;
-  transition: all ease 0.3s; }
-  .mytool:hover, .mytool-ext:hover {
-    opacity: 7; }
-  .mytool .doc-info, .mytool-ext .doc-info {
-    display: flex;
-    justify-content: flex-start;
-    margin: 0;
-    width: 50%; }
-  .mytool .btn-group, .mytool-ext .btn-group {
-    display: flex;
-    justify-content: flex-end;
-    margin: 0;
-    width: 50%; }
-  .mytool p, .mytool-ext p {
-    color: white;
-    width: max-content;
-    padding: 1%;
-    margin: 0; }
-  .mytool .doc-titles, .mytool-ext .doc-titles {
-    display: block;
-    width: 300px;
-    height: 100%;
-    padding: 10px 0 0 20px;
-    display: flex;
-    align-items: center;
-    -webkit-user-selection: none;
-    -webkit-app-region: drag; }
+  -webkit-user-selection: none;
+  -webkit-app-region: drag; }
 
-.mytool-ext {
+.note-menu {
+  display: block;
+  width: 5%;
+  height: 100%;
+  text-align: center;
+  padding: 5px 0 0 0;
+  font-size: 25px;
+  font-weight: 600; }
+
+.doc-title {
+  display: block;
+  width: 35%;
+  height: 100%;
+  padding: 10px 0 0 20px;
   display: flex;
-  justify-content: center;
   align-items: center; }
+
+.btn-group {
+  display: flex;
+  width: 40%;
+  margin: 0;
+  justify-content: flex-end;
+  -webkit-user-selection: none;
+  -webkit-app-region: drag; }
+
+.control-group {
+  width: 20%;
+  justify-content: flex-end; }
 
 .content-fluid {
   position: relative;
   overflow: hidden;
   height: 100vh;
-  border-radius: 4px;
+  border-radius: 10px;
   background: #fff;
   border: 1.2px solid #aaa; }
 
@@ -371,39 +405,9 @@ input[type="button"] {
   color: white;
   position: relative; }
 
-.index-panel {
-  height: 88%; }
-
-.flex-row {
-  display: flex;
-  width: 100%;
-  position: relative;
-  height: fit-content;
-  overflow: hidden;
-  justify-content: flex-end; }
-  .flex-row:nth-child(1) {
-    height: 60%;
-    padding: 10px; }
-  .flex-row:nth-child(2) {
-    height: 40%; }
-
-.notes-container::-webkit-scrollbar-track {
-  background-color: white;
-  border-left: 1px solid #aaa; }
-
-.notes-container::-webkit-scrollbar {
-  width: 10px;
-  background-color: white; }
-
-.notes-container::-webkit-scrollbar-thumb {
-  background-color: #ccc; }
-
-.ventanas {
-  overflow: hidden; }
-
 #writeableDiv,
 #viewer {
-  padding: 1% 3% 2% 3%;
+  padding: 20px 3% 2% 3%;
   position: relative;
   display: block;
   overflow-y: scroll;
@@ -419,18 +423,19 @@ input[type="button"] {
 .linea {
   width: 100%;
   min-height: 22px;
-  height: auto;
+  height: max-content;
   max-height: max-content;
   font-size: 18px;
   z-index: 200;
   cursor: text;
   color: #777;
   text-align: justify; }
-  .linea:focus {
-    outline: 0px; }
+  .linea:focus, .linea:hover {
+    outline: 0; }
   .linea p {
     margin: 0 0 0 0;
-    padding: 0; }
+    padding: 0;
+    width: 100%; }
 
 .between-div {
   background: white;
@@ -441,11 +446,11 @@ input[type="button"] {
   box-shadow: 0px 2px 5px whitesmoke;
   z-index: 50; }
 
-.linea.apuntes-title {
+.linea.note-title {
   height: 28px;
   color: #555;
   margin: 6px 0 5px 0; }
-  .linea.apuntes-title:hover {
+  .linea.note-title:hover {
     color: #05507a; }
 
 .linea-lista {
@@ -481,34 +486,6 @@ input[type="button"] {
   background-color: #aaa;
   cursor: default;
   border-radius: 3px; }
-
-#toolpages {
-  height: 90vh;
-  border-left: 1px solid #ccc;
-  overflow-y: scroll;
-  width: 95%; }
-
-.toolpages-menu {
-  width: 5%;
-  position: absolute;
-  height: 90vh;
-  right: 0;
-  top: 40px; }
-  .toolpages-menu .nav-group-item {
-    padding-left: 10%; }
-
-.decorator-line {
-  height: 5px;
-  width: 100%;
-  position: absolute;
-  top: 40px; }
-
-.tab-name {
-  padding: 1px 2%;
-  position: absolute;
-  top: 40px;
-  height: 30px;
-  width: 200px; }
 
 * {
   box-sizing: border-box;
@@ -623,13 +600,14 @@ body {
   background: transparent; }
 
 .mytool, .mytool-ext {
-  color: #fff; }
+  color: #777;
+  box-shadow: 1px 0 2px 2px rgba(238, 238, 238, 0.3); }
   .mytool .btn, .mytool-ext .btn {
     color: #05507a;
     opacity: 1;
     border: none; }
   .mytool .icon, .mytool-ext .icon {
-    color: #fff; }
+    color: #777; }
 
 .pane-sm {
   background: #fff; }
@@ -676,32 +654,6 @@ table {
 
 .modo-espera {
   color: #05507a; }
-
-#toolpages::-webkit-scrollbar-track {
-  background-color: white; }
-
-#toolpages::-webkit-scrollbar {
-  width: 5px;
-  background: white; }
-
-#toolpages::-webkit-scrollbar-thumb {
-  background: #0f6; }
-
-.toolpages-menu {
-  background: #05507a; }
-  .toolpages-menu .nav-group-item .icon {
-    color: white; }
-
-.decorator-line {
-  background: #05507a; }
-
-.tab-name {
-  background: #05507a;
-  color: white; }
-
-.doc-titles {
-  color: white;
-  background: rgba(59, 179, 247, 0.7); }
 
 .linea {
   color: #222; }

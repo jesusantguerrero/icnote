@@ -1,35 +1,41 @@
 
-var listaNumber;
-var tableWidth;
-var span;
-var translatedLine;
+var listaNumber,
+    checkNumber = 0,
+    tableWidth,
+    span,
+    translatedLine;
 
 const remark = require('remark'),
       remarkHmtl = require('remark-html');
-
+      myHelpers = require('./myHelpers.js');
 
 
 exports.decode = function(WDOldLine,temp){
+
       temp = WDOldLine.text();
       var params = temp.split(" ");
+
       if(temp.slice(0,1) == "i")
       {
         params= myHelpers.getImage(temp);
       }
-      if(temp.slice(0,2) == "->")
+      else if(temp.slice(0,2) == "->")
       {
         params = myHelpers.getLink(temp);
       }
 
       switch(params[0]){
                //J-shunks my Languaje supports                                                                                                                       // 1- header decoder
-              case 'h': {
-                span = $("<span></span>").addClass("icon icon-link");
-                translatedLine = $("<h3></h3>").html(span);
-                translatedLine.append(temp.slice(1));
-                WDOldLine.html(translatedLine);
-                WDOldLine.addClass("apuntes-title")
-              }
+              case 't': 
+                  var text = temp.slice(1);
+
+                  span = $("<span></span>").addClass("icon icon-link");
+                  translatedLine = $("<h3></h3>").html(span);
+                  translatedLine.append(text);
+                  WDOldLine.html(translatedLine);
+                  WDOldLine.addClass("note-title");
+                  $(".doc-title").eq(0).text(text);
+              
               break;
                                                                                                                                       //2- image decoder
               case 'i': {
@@ -61,10 +67,11 @@ exports.decode = function(WDOldLine,temp){
               break;
                                                                                                                                    //4-checklist decoder
               case 'c':{
-                temp = " <input type='checkbox' class='filled-in'>" + temp.slice(2);
-                listaNumber++;
+                var text = temp.slice(2);
+                temp = `<input type='checkbox' id='check-${checkNumber}' class='filled-in'/> <label for='check-${checkNumber}'>` + text + "</label>";
                 WDOldLine.html(temp);
-                WDOldLine.addClass("linea-lista")
+                WDOldLine.addClass("linea-lista");
+                checkNumber++;
               }
               break;
                                                                                                                                    //5-Line
@@ -98,7 +105,7 @@ exports.decode = function(WDOldLine,temp){
               }
               break;
                                                                                                                                   //8 - tables Header decoder
-              case 'th': {
+              case '||': {
                 temp = temp.slice(2);
                 params = temp.split("|");
                 temp = $("<table></table>").addClass('apuntes-table');
@@ -111,7 +118,7 @@ exports.decode = function(WDOldLine,temp){
               }
               break;
                                                                                                                                     // 8.1- Tables decoder
-              case 't': {
+              case '|': {
                 temp = temp.slice(1);
                 params = temp.split("|");
                 temp = $("<table></table>").addClass('apuntes-table body');
