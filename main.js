@@ -17,23 +17,14 @@ app.on('ready', () => {
   var accentColor = systemPreferences.getAccentColor();
   let x = mainScreen.bounds.width / 2 - 600 / 2;
 
-  var winSearcher = new BrowserWindow({
-    width: 600,
-    height: 50,
-    show: false,
-    skipTaskbar: true,
-    transparent: true,
-    frame: false,
-    y: 30,
-    x: x,
-    resizable: false
-  });
+    winSearcher = new BrowserWindow({width: 600,height: 500,show: false,skipTaskbar: true,transparent: true,frame: false,
+                                      y: 30,x: x,resizable: false});
 
   winSearcher.loadURL(`file://${__dirname}/index` + ".html");
   winSearcher.once('ready-to-show', () => {
     winSearcher.show();
     winSearcher.webContents.insertCSS(`#buscador:hover{border: 1px solid #${accentColor};box-shadow: 0px 0px 5px #${accentColor}}`);
-    // winSearcher.webContents.openDevTools()
+    winSearcher.webContents.openDevTools()
     getClock();
   });
 
@@ -59,8 +50,20 @@ app.on('ready', () => {
     winNewNote.loadURL(`file://${__dirname}/tools/newnote.html`);
     winNewNote.on('ready-to-show', () => {
       winNewNote.show();
-      winNewNote.webContents.openDevTools();
+
+    });   
+
+
+    ipcMain.on('note-close',()=>{
+      winNewNote.close();
+      winNewNote = null;
+
     });
+
+    ipcMain.on('note-min',()=>{
+     winNewNote.minimize();
+    });
+    
   }
 
 
@@ -75,16 +78,14 @@ app.on('ready', () => {
       dataTip = false;
     }
 
-  })
+  });
 
   ipcMain.on('note', () => {
     if (winNewNote == null) {
-      newNote();
-    } else {
-      winNewNote.close();
-      winNewNote = null;
-    }
+        newNote();
+    } 
   });
+
 
 
   ipcMain.on('clock', () => {

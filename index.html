@@ -20,12 +20,13 @@
 </p>
 </div>
   <script>
-    const {remote, ipcRenderer} = require('electron');
-    const $ = require('jquery');
-    const storage = require('electron-json-storage');
-    var main = remote.require("./main.js");
-    var decoder = require("./assets/js/decoder.js");
-    var searcher = require('./assets/js/searcher.js');
+    const {remote, ipcRenderer} = require('electron'),
+          $ = require('jquery'),
+          storage = require('electron-json-storage');
+
+    var main = remote.require("./main.js"),
+        decoder = require("./assets/js/decoder.js"),
+        searcher = require("./assets/js/searcher.js");
     
   </script>
 </body>

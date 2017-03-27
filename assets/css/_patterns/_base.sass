@@ -74,7 +74,7 @@
 
 // apuntes
 
-#writeableDiv,
+#editor,
 #viewer
   padding: 20px  3% 2% 3%
   position: relative
@@ -86,7 +86,7 @@
   &:focus
     outline: 0px
 
-#writeableDiv
+#editor
   cursor: text
 
 .linea
@@ -123,6 +123,7 @@
   height: 28px
   color: #555
   margin: 6px 0 5px 0
+  cursor: text
 
   &:hover
     color: $primary-color
@@ -148,20 +149,33 @@
   border-radius: 5px
   box-shadow: 0p 1px 5px rgba(0,0,0,.7)
 
-#writeableDiv::-webkit-scrollbar-track
+#editor::-webkit-scrollbar-track
   background-color: transparent
   cursor: default
 
 
-#writeableDiv::-webkit-scrollbar
+#editor::-webkit-scrollbar
   width: 15px
   background-color: white
   cursor: default
 
 
-#writeableDiv::-webkit-scrollbar-thumb
+#editor::-webkit-scrollbar-thumb
   background-color: #aaa
   cursor: default
   border-radius: 3px  
+
+.editor-preferences
+  position: absolute
+  height: 100%
+  width: 300px
+  background: whitesmoke
+  right: -300px
+  top: 50px
+  z-index: 1000
+  padding: 0 15px
+
+  &.showed
+    right: 0
 
 //apuntes

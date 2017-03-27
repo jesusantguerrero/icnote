@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>New Note</title>
   <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="../node_modules/highlight.js/styles/vs.css">
   <link rel="stylesheet" href="../assets/css/photon.min.css" />
 </head>
 
@@ -28,31 +29,67 @@
         <button class="btn btn-tab" id="btn-save-notes">
               <span class="icon icon-folder"></span>
         </button>
+        <button class="btn btn-tab" id="btn-preferences">
+              <span class="icon icon-cog"></span>
+        </button>
 
       </div>
 
       <div class="btn-group control-group">
-        <button class="btn btn-tab" id="pdf-button">
+        <button class="btn btn-tab" id="btn-maximaze">
                <span class="icon icon-control">&#9744;</span>
         </button>
-        <button class="btn btn-tab" id="btn-trash">
+        <button class="btn btn-tab" id="btn-minimaze">
                <span class="icon icon-control">&#9866;</span>
         </button>
-        <button class="btn btn-tab" id="btn-save-notes">
+        <button class="btn btn-tab" id="btn-close">
               <span class="icon icon-control">&#10006;</span>
         </button>
       </div>
 
     </header>
 
-    <section class="panel-principal modo-espera" id="writeableDiv" tabindex="0">
+    <section class="panel-principal modo-espera" id="editor" tabindex="0">
       <h3>Presione Enter para Escribir</h3>
     </section>
+
+    <div class="editor-preferences">
+      <h1>Settings</h1>
+
+      <div class="input-group">
+        <label for="directory">Notes Directory</label>
+        <input type="text">
+      </div>
+      
+      <div class="input-group">
+        <label for="directory">Font Size</label>
+        <input type="text">
+      </div>
+
+      <div class="input-group">
+        <label for="directory">Font Family</label>
+        <input type="text">
+      </div>
+
+      <div class="input-group">
+        <label for="directory">Code Theme</label>
+        <input type="text">
+      </div>
+
+      <div class="input-group">
+        <label for="directory">Pictures Size</label>
+        <input type="text">
+        <button>Save Preferences</button>
+
+      </div>
+
+       
+    </div>
 
   </div>
 
   <script >
-    const remote = require('electron').remote;
+    const {remote, ipcRenderer} = require('electron');
     var main = remote.require("./main.js");
     var $ = require('jquery');
     require("../assets/js/writer.js");

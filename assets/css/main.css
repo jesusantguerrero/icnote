@@ -245,6 +245,13 @@ code {
   position: relative;
   padding-left: 20px; }
 
+[type="text"] {
+  height: 38px;
+  border: 1px solid #aaa;
+  padding: 0 10px; }
+  [type="text"]:hover, [type="text"]:focus {
+    outline-color: #05507a; }
+
 [type="checkbox"] {
   -webkit-appearance: none;
   width: 24px;
@@ -261,18 +268,29 @@ code {
   [type="checkbox"]:focus {
     outline: 0; }
 
-label {
+[for^="check"] {
   display: inline-block;
-  font-size: 18px; }
+  font-size: 20px;
+  height: 100%;
+  cursor: pointer; }
 
 [type="checkbox"]:checked {
   background: #655; }
   [type="checkbox"]:checked:before {
-    content: "✔";
+    content: "✘";
     color: #fff;
-    left: 2%;
+    left: 5%;
     position: absolute;
-    font-size: 18px; }
+    font-size: 14px; }
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+  padding: 0 15px; }
+  .input-group label {
+    font-weight: bolder;
+    font-font-size: 18px; }
 
 .button,
 button,
@@ -324,7 +342,7 @@ input[type="button"] {
 .btn-tab {
   color: #05507a;
   border: 0;
-  font-size: 20px;
+  font-size: 25px;
   cursor: pointer;
   height: 100%;
   width: 40px;
@@ -338,8 +356,12 @@ input[type="button"] {
     outline: 0; }
     .btn-tab:hover .icon, .btn-tab:active .icon, .btn-tab:focus .icon {
       cursor: pointer;
-      text-align: center;
       color: #3bb3f7; }
+  .btn-tab .icon {
+    cursor: pointer;
+    text-align: center;
+    color: #3bb3f7;
+    font-size: 18px; }
 
 * {
   margin: 0;
@@ -405,7 +427,7 @@ input[type="button"] {
   color: white;
   position: relative; }
 
-#writeableDiv,
+#editor,
 #viewer {
   padding: 20px 3% 2% 3%;
   position: relative;
@@ -413,11 +435,11 @@ input[type="button"] {
   overflow-y: scroll;
   z-index: 100;
   background: transparent; }
-  #writeableDiv:focus,
+  #editor:focus,
   #viewer:focus {
     outline: 0px; }
 
-#writeableDiv {
+#editor {
   cursor: text; }
 
 .linea {
@@ -449,7 +471,8 @@ input[type="button"] {
 .linea.note-title {
   height: 28px;
   color: #555;
-  margin: 6px 0 5px 0; }
+  margin: 6px 0 5px 0;
+  cursor: text; }
   .linea.note-title:hover {
     color: #05507a; }
 
@@ -473,19 +496,31 @@ input[type="button"] {
   border-radius: 5px;
   box-shadow: 0p 1px 5px rgba(0, 0, 0, 0.7); }
 
-#writeableDiv::-webkit-scrollbar-track {
+#editor::-webkit-scrollbar-track {
   background-color: transparent;
   cursor: default; }
 
-#writeableDiv::-webkit-scrollbar {
+#editor::-webkit-scrollbar {
   width: 15px;
   background-color: white;
   cursor: default; }
 
-#writeableDiv::-webkit-scrollbar-thumb {
+#editor::-webkit-scrollbar-thumb {
   background-color: #aaa;
   cursor: default;
   border-radius: 3px; }
+
+.editor-preferences {
+  position: absolute;
+  height: 100%;
+  width: 300px;
+  background: whitesmoke;
+  right: -300px;
+  top: 50px;
+  z-index: 1000;
+  padding: 0 15px; }
+  .editor-preferences.showed {
+    right: 0; }
 
 * {
   box-sizing: border-box;

@@ -64,6 +64,15 @@ code
 
 
 // ============  checkboxes    =================
+[type="text"]
+  height: 38px
+  border: 1px solid #aaa
+  padding: 0 10px
+
+  &:hover,
+  &:focus
+    outline-color: $primary-color
+
 [type="checkbox"]
   -webkit-appearance: none
   width: 24px
@@ -80,19 +89,29 @@ code
   &:focus
     outline: 0
     
-label
+[for^="check"]
   display: inline-block
-  font-size: 18px
+  font-size: 20px
+  height: 100%
+  cursor: pointer
     
 [type="checkbox"]:checked
   background: #655
   
   &:before
-    content: '\2714'
+    content: '\2718'
     color: #fff
-    left: 2%
+    left: 5%
     position: absolute
-    font-size: 18px
+    font-size: 14px
   
+.input-group
+  display: flex
+  flex-direction: column
+  margin-bottom: 5px
+  padding: 0 15px
 
-
+  label
+    font:
+      weight: bolder
+      font-size: 18px

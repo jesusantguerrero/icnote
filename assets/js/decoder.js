@@ -1,4 +1,5 @@
-//  aqui es donde hacemos a conversion de todos los comandos posibles / here we convert the command shurtcuts
+//  aqui es donde hacemos a conversion de todos los comandos posibles del buscador / here we convert the command shurtcuts and commands of
+// jbar
 
 exports.decode = function(sentence){
       var token = sentence.slice(0,1); 

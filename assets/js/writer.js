@@ -1,28 +1,45 @@
+
+
+
 const wconverter = require("./wconverter.js");
 
-getTyping($("#writeableDiv"));
 
-function getTyping(writeableDiv){
-      var line = 0;
-      var temp;
-      var key;
-      var range = document.createRange();
-      var lineElement;
-      var WDOldLine;
-      var listaNumber;
-      var modoEscritura = false;
-      var widthTable;
-      var btnTrash = $("#btn-trash");
       
 
-    writeableDiv.on('keydown', function(event){
+// the DOM Elements
+var editor        = $("#editor"),
+    preferences   = $(".editor-preferences"),
+    btnTrash      = $("#btn-trash"),
+    btnPreferences= $("#btn-preferences"),
+    btnMaximaze   = $("#btn-maximaze"),
+    btnMinimaze   = $("#btn-minimaze"),
+    btnClose      = $("#btn-close");
+
+// the context vars 
+var line = 0,
+    temp,
+    key,
+    lineElement,
+    WDOldLine,
+    listNumber,
+    modoEscritura = false,
+    widthTable,
+    is_preferences = false;
+
+getTyping();
+
+function getTyping(){
+      //  all the functionalities ,convertions and functions called when typing on the editor
+      // todas las funcionalidades que ocurren al escribir en el editor
+
+    editor.on('keydown', function(event){
       key = event.which;
 
       if(key == 13){
-         writeableDiv.removeAttr("contenteditable");
+         editor.removeAttr("contenteditable");
         if(line < 1){
-            writeableDiv.removeClass("modo-espera");
-            writeableDiv.html("");
+            editor.removeClass("modo-espera");
+            editor.html("");
             modoEscritura =true;
             addLine();
             line++;
@@ -38,7 +55,7 @@ function getTyping(writeableDiv){
       if(key == 8){
         if(lineElement.text() == ""){
           removeLine();
-          // writeableDiv.removeAttr("contenteditable");
+          // editor.removeAttr("contenteditable");
           if(line == 0){
             resetDiv();
             
@@ -56,48 +73,89 @@ function getTyping(writeableDiv){
         
         lineElement = $("<div></div>").addClass("linea line-"+ line);
         lineElement.attr("contenteditable","true");
-        writeableDiv.append(lineElement);
+        editor.append(lineElement);
         lineElement.html("");
         setTimeout(()=>{ lineElement.html(""),1})
         lineElement.focus();
         // main.getImageFromTo(lineElement);
-      }
+    }
 
-      function removeLine(){
-        if(line > 0){
-          line--;
-        }
+    function removeLine(){
+      if(line > 0){
+        line--;
+      }
         
-        lineElement.remove();
-        writeableDiv.attr("contenteditable","true");
-        var index = line - 1;
-        WDOldLine = writeableDiv.children(".line-" + index);
-        lineElement = WDOldLine;
-        lineElement.attr("contenteditable","true");
-        // main.getImageFromTo(lineElement);
-      }
+      lineElement.remove();
+      editor.attr("contenteditable","true");
+      var index = line - 1;
+      WDOldLine = editor.children(".line-" + index);
+      lineElement = WDOldLine;
+      lineElement.attr("contenteditable","true");
+      // main.getImageFromTo(lineElement);
+    }
 
-
-       btnTrash.on('click',function(){
-         console.log(" basura")
-          if(modoEscritura){
-              resetDiv();
-          }
-        });
-
-        function resetDiv(){
-          writeableDiv.removeAttr("contenteditable");
-          writeableDiv.addClass("modo-espera");
-          writeableDiv.html("<h3>Presione enter para escribir</h3>");
-          writeableDiv.focus();
-          modoEscritura = false;
-          line = 0
-        }
-
-        function showLineNumber(){
-          let lineNumber = line + 1;
-          main.log("lines: " + lineNumber);
-        }
   }
 
+  //  buttons functions / funciones de los botones
+
+  btnTrash.on('click',function(){
+    console.log(" basura")
+    if(modoEscritura){
+      resetDiv();
+    }
+  });
+
+  btnMinimaze.on('click',function(){
+    ipcRenderer.send('note-min');
+  });
+
+  btnMaximaze.on('click',function(){
+    ipcRenderer.send('note-max');
+  });
+
+  btnClose.on('click',function(){
+    ipcRenderer.send('note-close');
+  });
+
+  btnPreferences.on('click',function(){
+    togglePReferences();
+  });
  
+
+//  editor states
+ function resetDiv(){
+      editor.removeAttr("contenteditable");
+      editor.addClass("modo-espera");
+      editor.html("<h3>Presione enter para escribir</h3>");
+      editor.focus();
+      modoEscritura = false;
+      line = 0
+    }
+
+function togglePReferences(){
+  if(!is_preferences){
+    preferences.animate({right:"0"},500,function(){
+      preferences.addClass("show");
+      is_preferences = true;
+    });
+  }else{
+    preferences.animate({right:"-300px"},500,function(){
+      preferences.removeClass("show");
+      is_preferences = false
+    });
+  }
+}
+
+
+
+
+
+
+
+// TODO: eliminar esto cuando termine el periodo de prueba
+    function showLineNumber(){
+      let lineNumber = line + 1;
+      main.log("lines: " + lineNumber);
+    }
+
+    

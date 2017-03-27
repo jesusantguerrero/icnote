@@ -414,7 +414,6 @@ h5 {
     height: 14px;
     margin-bottom: 1px;
     color: #737475;
-    font-size: 14px;
     line-height: 1
 }
 
@@ -528,9 +527,6 @@ h5 {
     margin-right: 4px
 }
 
-label {
-    margin-bottom: 5px
-}
 
 input[type=search] {
     -webkit-appearance: textfield;
@@ -571,10 +567,8 @@ textarea {
     display: block;
     margin-top: 10px
 }
-
 .checkbox label, .radio label {
     padding-left: 20px;
-    margin-bottom: 0;
     font-weight: 400
 }
 
@@ -708,7 +702,6 @@ textarea {
     color: #737475;
     margin-top: -3px;
     margin-right: 7px;
-    font-size: 18px;
     text-align: center
 }
 

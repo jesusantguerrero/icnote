@@ -1,13 +1,18 @@
 
-var listaNumber,
+var listNumber,
     checkNumber = 0,
     tableWidth,
     span,
-    translatedLine;
+    translatedLine,
+    links;
 
 const remark = require('remark'),
-      remarkHmtl = require('remark-html');
+      remarkHmtl = require('remark-html'),
+      highlight = require('highlight.js'),
+      {shell} = require('electron'),
       myHelpers = require('./myHelpers.js');
+
+
 
 
 exports.decode = function(WDOldLine,temp){
@@ -50,17 +55,17 @@ exports.decode = function(WDOldLine,temp){
               break;
                                                                                                                                      //3-numered list start decoder
               case '-':{
-                listaNumber = 1;
-                temp = listaNumber + ". " + temp.slice(1);
-                listaNumber++;
+                listNumber = 1;
+                temp = listNumber + ". " + temp.slice(1);
+                listNumber++;
                 WDOldLine.html(temp);
                 WDOldLine.addClass("linea-lista")
               }
               break;
                                                                                                                                   //3.1 numered list cotinuation decoder
               case '--':{
-                temp =listaNumber + ". " + temp.slice(2);
-                listaNumber++;
+                temp =listNumber + ". " + temp.slice(2);
+                listNumber++;
                 WDOldLine.html(temp);
                 WDOldLine.addClass("linea-lista")
               }
@@ -78,7 +83,7 @@ exports.decode = function(WDOldLine,temp){
               case '_':{
                 temp = $("<hr>");
                 temp.css({"height":"2px","width":"98%"});
-                listaNumber++;
+                listNumber++;
                 WDOldLine.html(temp);
               }
               break;
@@ -140,20 +145,41 @@ exports.decode = function(WDOldLine,temp){
                 translatedLine.prepend(span);
                 WDOldLine.html(translatedLine);
                 WDOldLine.addClass("apuntes-link");
+                getAllLinks();
+
               }
               break;
               
+              
               //default is a markdownsupport
               default:
-                var fileresult = remark().use(remarkHmtl).processSync([temp].join('\n'));
-                setTimeout(WDOldLine.html(String(fileresult).trim()),1000);
-                main.log(String(fileresult));
-    
-                break;
-              
+                var fileresult = remark().use(remarkHmtl).processSync([temp].join('\n'));             
+                WDOldLine.html(String(fileresult).trim());
 
+                $("code").each(function(i, block){
+                  highlight.highlightBlock(block);
+                })
+                break;
 
             } // end of switch
 
           temp = null;
 }
+
+
+function getAllLinks() {
+
+    
+
+      links = document.querySelectorAll('a[href]');
+      Array.prototype.forEach.call(links, function (link) {
+        const url = link.getAttribute('href')
+        if (url.indexOf('http') === 0) {
+          link.addEventListener('click', function (e) {
+            e.preventDefault();
+            shell.openExternal(url);
+          });
+        }
+      });
+      
+    }
