@@ -38,7 +38,6 @@ $buscador.on('keydown',function(event){
   
 });
 
-
 function makeItems(data){
   var items = "";
   for(key in data){
@@ -48,8 +47,7 @@ function makeItems(data){
   }
 
   $(".data").html(items);
-  searchFunctions()
-
+  searchFunctions();
 }
 
 function searchFunctions(){

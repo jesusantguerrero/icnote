@@ -29,6 +29,7 @@
   font:
     size: 25px
     weight: 600
+  -webkit-app-region: no-drag
 
 .doc-title
   display: block
@@ -193,5 +194,55 @@
   z-index: 1000
   color: #fff
   opacity: .1
+
+.notes-list-box
+  display: flex
+  height: 100%
+  width: 300px
+  overflow: hidden
+  top: 50px
+  left: -310px
+  position: absolute
+  z-index: 1000
+  color: #555
+
+  &:show-list
+    left: 0
+
+.list-menu
+  width: 50px
+  height: 100%
+  background: #222
+
+.notes-list
+  width: 260px
+  height: 95%
+  background: whitesmoke
+  overflow-x: auto
+
+.note-item
+  padding: 10px
+  height: 120px
+  width: 100%
+  background: whitesmoke
+  cursor: pointer
+  overflow: hidden
+
+  &:hover
+    background: lighten($primary-color,20%)
+    color: #fff
+   
+
+  .title
+    text-align: left
+    font-size: 18px
+  .preview
+    margin: 10px
+  .tags
+
+  .body
+    visibility: hidden
+
+    
 
 //apuntes

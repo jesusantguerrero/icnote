@@ -8,6 +8,8 @@ const wconverter = require("./wconverter.js");
 // the DOM Elements
 var editor        = $("#editor"),
     preferences   = $(".editor-preferences"),
+    noteListBox   = $(".notes-list-box"),
+    btnMenu       = $("#btn-menu"),
     btnTrash      = $("#btn-trash"),
     btnSave       = $("#btn-save-note"),
     btnPreferences= $("#btn-preferences"),
@@ -25,7 +27,8 @@ var line = 0,
     listNumber,
     modoEscritura = false,
     widthTable,
-    is_preferences = false;
+    is_preferences = false,
+    is_menu = false;
 
 getTyping();
 
@@ -123,6 +126,11 @@ function getTyping(){
   btnPreferences.on('click',function(){
     togglePReferences();
   });
+
+   btnMenu.on('click',function(){
+     console.log("menu clickeado");
+    toggleMenu();
+  });
  
 
 //  editor states
@@ -149,6 +157,23 @@ function togglePReferences(){
   }
 }
 
+function toggleMenu(){
+  if(!is_menu){
+    console.log('menu togleado');
+    
+    DB.getNotes();
+    noteListBox.animate({left:"0"},500,function(){
+      noteListBox.addClass("show-list");
+      is_menu = true;
+    });
+  }else{
+    noteListBox.animate({left:"-310px"},500,function(){
+      noteListBox.removeClass("show-list");
+      is_menu = false;
+    });
+  }
+}
+
 
 // TODO: eliminar esto cuando termine el periodo de prueba
     function showLineNumber(){
@@ -158,14 +183,14 @@ function togglePReferences(){
 
 function saveNote(){
       var noteTitle  = $("#doc-title").text(),
-          tagsDoc    = $(".tag"),
-          body       = $("#editor").html(),
-          preview    = $("#editor").text(),
+          body       = editor.html(),
+          tagsDoc    = editor.find(".tag"),
+          preview    = editor.text().replace(noteTitle,""),
           tagsToSave = "";
 
       tagsDoc.each(function(i , tag){
-        tagsToSave += tag.text(); 
-      });
+        tagsToSave += tag.textContent; 
+      },this);
 
       if(noteTitle != ""){
         DB.saveNote(noteTitle,body, tagsToSave, preview);

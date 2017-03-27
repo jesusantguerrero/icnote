@@ -30,11 +30,29 @@ this.deleteNote = function(name){
 }
 
 this.getNotes = function(){
-  // TODO: read all the notes
+  storage.getAll((err,data)=>{
+        if(err) main.log("ha ocurrido un error 11:searcher");
+        makeItems(data);
+      });
 }
 
 this.search = function(name){
   // TODO: search notes stuff
+}
+
+function makeItems(data){
+  var items = "";
+  
+  for(key in data){
+    items += "<div class='note-item'>";
+    items += "<h3 class='title'>" + data[key]["title"] + "</h3>";
+    items += "<p class='preview'>" + data[key]["preview"] + "</p>";
+    items += "<p class='tags'>" + data[key]["tags"] + "</p>";
+    items += "<div class='body'>" + data[key]["body"] + "</div>";
+    items += "</div>";
+  }
+
+  $(".notes-list").html(items);
 }
 
 
