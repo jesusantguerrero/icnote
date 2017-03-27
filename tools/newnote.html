@@ -26,7 +26,7 @@
         <button class="btn btn-tab" id="btn-trash">
                <span class="icon icon-trash"></span>
         </button>
-        <button class="btn btn-tab" id="btn-save-notes">
+        <button class="btn btn-tab" id="btn-save-note">
               <span class="icon icon-folder"></span>
         </button>
         <button class="btn btn-tab" id="btn-preferences">
@@ -89,10 +89,14 @@
   </div>
 
   <script >
-    const {remote, ipcRenderer} = require('electron');
-    var main = remote.require("./main.js");
+    const {remote, ipcRenderer} = require('electron'),
+           main = remote.require("./main.js"),
+           myDB = require('../assets/js/myDB'),
+           DB = new myDB.DB();
+
     var $ = require('jquery');
     require("../assets/js/writer.js");
+    
   
   </script>
 

@@ -1,16 +1,24 @@
-exports.myDb = function(){
-      storage = require('electron-json-storage'),
-      filesPath = "notes/";
+exports.DB = function(){
+      const storage = require('electron-json-storage');
+      storage.setDirectory("notes");
 
-var structure ={
-        title: "something",
-        body : "body",
-        tags : "tags",
-        preview: "preview"
-      }
+//data interface
+//  vdata ={ title: "something",
+//           body : "body",
+//           tags : "tags",
+//           preview: "preview"
+//         }
 
-this.saveNote = function(){
-  // TODO:  save notes function
+this.saveNote = function(title, body, tags, preview){
+ var data = {"title": title, "body": body, "tags" : tags, "preview": preview};
+ var noteTitle = prepareToSave(title);
+
+
+    storage.set(noteTitle, data,(err)=>{
+      if(err) main.log("ha ocurrido un error");
+      main.log("guardado con exito");
+    });
+
 }
 
 this.updateNote = function () {
@@ -27,6 +35,19 @@ this.getNotes = function(){
 
 this.search = function(name){
   // TODO: search notes stuff
+}
+
+function prepareToSave(sentence){
+  var sentence = sentence.split(" ");
+  var result = "";
+
+  sentence.forEach(function(word) {
+      result += word + "-";
+    
+  }, this);
+
+  return result;
+
 }
 
 

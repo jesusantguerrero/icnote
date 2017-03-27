@@ -168,9 +168,6 @@ exports.decode = function(WDOldLine,temp){
 
 
 function getAllLinks() {
-
-    
-
       links = document.querySelectorAll('a[href]');
       Array.prototype.forEach.call(links, function (link) {
         const url = link.getAttribute('href')
@@ -181,5 +178,5 @@ function getAllLinks() {
           });
         }
       });
-      
-    }
+
+}

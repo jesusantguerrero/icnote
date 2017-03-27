@@ -1,15 +1,12 @@
 
 
-
-const wconverter = require("./wconverter.js");
-
-
-      
+const wconverter = require("./wconverter.js");     
 
 // the DOM Elements
 var editor        = $("#editor"),
     preferences   = $(".editor-preferences"),
     btnTrash      = $("#btn-trash"),
+    btnSave       = $("#btn-save-note"),
     btnPreferences= $("#btn-preferences"),
     btnMaximaze   = $("#btn-maximaze"),
     btnMinimaze   = $("#btn-minimaze"),
@@ -98,6 +95,25 @@ function getTyping(){
 
   //  buttons functions / funciones de los botones
 
+  $("#btn-save-note").on('click',function(){
+      var noteTitle =document.querySelector("#doc-title").textContent;
+      var tagsDoc = document.querySelectorAll(".tag");
+      var body  = document.querySelector("#editor").innerHTML;
+      var preview = document.querySelector("#editor").textContent;
+      var tagsToSave ="";
+
+      for(var i = 0 ; i >  tagsDoc.legth; i++ ){
+        tagsToSave += tagsDoc[i].TEXT_NODE + " ";
+      }
+
+      if(noteTitle != ""){
+        DB.saveNote(noteTitle,body, tagsToSave, preview);
+        main.log(noteTitle,body, tagsToSave, preview);
+      }else{
+        main.log("Apunte Vacio","No puede guardar un documento vacio");
+      }
+  });
+
   btnTrash.on('click',function(){
     console.log(" basura")
     if(modoEscritura){
@@ -147,15 +163,8 @@ function togglePReferences(){
 }
 
 
-
-
-
-
-
 // TODO: eliminar esto cuando termine el periodo de prueba
     function showLineNumber(){
       let lineNumber = line + 1;
       main.log("lines: " + lineNumber);
     }
-
-    
