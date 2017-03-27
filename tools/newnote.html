@@ -53,6 +53,10 @@
       <h3>Presione Enter para Escribir</h3>
     </section>
 
+    <footer id="notification-bar">  
+      <div class="message-box">Hola Soy Un Mensaje</div>
+    </footer>
+
     <div class="editor-preferences">
       <h1>Settings</h1>
 
@@ -90,11 +94,14 @@
 
   <script >
     const {remote, ipcRenderer} = require('electron'),
-           main = remote.require("./main.js"),
-           myDB = require('../assets/js/myDB'),
-           DB = new myDB.DB();
+                             $  = require('jquery');
+                           main = remote.require("./main.js"),
+                  notifications = require("../assets/js/notifications.js"),
+                   notification = new notifications.notification($("#notification-bar"));
+                           myDB = require('../assets/js/myDB'),
+                             DB = new myDB.DB();
 
-    var $ = require('jquery');
+ 
     require("../assets/js/writer.js");
     
   

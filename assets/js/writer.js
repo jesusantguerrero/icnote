@@ -1,6 +1,9 @@
 
 
-const wconverter = require("./wconverter.js");     
+const wconverter = require("./wconverter.js");
+      
+
+         
 
 // the DOM Elements
 var editor        = $("#editor"),
@@ -11,6 +14,7 @@ var editor        = $("#editor"),
     btnMaximaze   = $("#btn-maximaze"),
     btnMinimaze   = $("#btn-minimaze"),
     btnClose      = $("#btn-close");
+
 
 // the context vars 
 var line = 0,
@@ -95,24 +99,7 @@ function getTyping(){
 
   //  buttons functions / funciones de los botones
 
-  $("#btn-save-note").on('click',function(){
-      var noteTitle =document.querySelector("#doc-title").textContent;
-      var tagsDoc = document.querySelectorAll(".tag");
-      var body  = document.querySelector("#editor").innerHTML;
-      var preview = document.querySelector("#editor").textContent;
-      var tagsToSave ="";
-
-      for(var i = 0 ; i >  tagsDoc.legth; i++ ){
-        tagsToSave += tagsDoc[i].TEXT_NODE + " ";
-      }
-
-      if(noteTitle != ""){
-        DB.saveNote(noteTitle,body, tagsToSave, preview);
-        main.log(noteTitle,body, tagsToSave, preview);
-      }else{
-        main.log("Apunte Vacio","No puede guardar un documento vacio");
-      }
-  });
+  $("#btn-save-note").on('click',saveNote);
 
   btnTrash.on('click',function(){
     console.log(" basura")
@@ -165,6 +152,25 @@ function togglePReferences(){
 
 // TODO: eliminar esto cuando termine el periodo de prueba
     function showLineNumber(){
-      let lineNumber = line + 1;
+      var lineNumber = line + 1;
       main.log("lines: " + lineNumber);
     }
+
+function saveNote(){
+      var noteTitle  = $("#doc-title").text(),
+          tagsDoc    = $(".tag"),
+          body       = $("#editor").html(),
+          preview    = $("#editor").text(),
+          tagsToSave = "";
+
+      tagsDoc.each(function(i , tag){
+        tagsToSave += tag.text(); 
+      });
+
+      if(noteTitle != ""){
+        DB.saveNote(noteTitle,body, tagsToSave, preview);
+
+      }else{
+        main.log("Apunte Vacio","No puede guardar un documento vacio");
+      }
+  }

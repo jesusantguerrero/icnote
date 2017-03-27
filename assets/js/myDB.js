@@ -11,12 +11,12 @@ exports.DB = function(){
 
 this.saveNote = function(title, body, tags, preview){
  var data = {"title": title, "body": body, "tags" : tags, "preview": preview};
- var noteTitle = prepareToSave(title);
+ var noteTitle = title.trim().split(" ").join("-");
 
 
     storage.set(noteTitle, data,(err)=>{
-      if(err) main.log("ha ocurrido un error");
-      main.log("guardado con exito");
+      if(err) notification.show("Ha ocurrido un error","error");
+      notification.show("Nota guardada con exito","success");
     });
 
 }
@@ -35,19 +35,6 @@ this.getNotes = function(){
 
 this.search = function(name){
   // TODO: search notes stuff
-}
-
-function prepareToSave(sentence){
-  var sentence = sentence.split(" ");
-  var result = "";
-
-  sentence.forEach(function(word) {
-      result += word + "-";
-    
-  }, this);
-
-  return result;
-
 }
 
 

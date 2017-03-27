@@ -2,6 +2,7 @@ const electron = require('electron'),
       cp = require('child_process'),
       {app, BrowserWindow, shell,systemPreferences,ipcMain} = electron,
       $ = require('jquery');
+      os = require('os');
 
 
 var winSearcher = null,
@@ -11,19 +12,23 @@ var winSearcher = null,
 
 // inicio de la app
 
+
 app.on('ready', () => {
   const {screen} = electron;
   const mainScreen = screen.getPrimaryDisplay();
   var accentColor = systemPreferences.getAccentColor();
+  accentColor = accentColor.slice(0,6);
   let x = mainScreen.bounds.width / 2 - 600 / 2;
 
-    winSearcher = new BrowserWindow({width: 600,height: 50,show: false,skipTaskbar: true,transparent: true,frame: false,
+  winSearcher = new BrowserWindow({width: 600,height: 50,show: false,skipTaskbar: true,transparent: true,frame: false,
                                       y: 30,x: x,resizable: false});
 
   winSearcher.loadURL(`file://${__dirname}/index` + ".html");
   winSearcher.once('ready-to-show', () => {
     winSearcher.show();
-    winSearcher.webContents.insertCSS(`#buscador:hover{border: 1px solid #${accentColor};box-shadow: 0px 0px 5px #${accentColor}}`);
+    var styles = `#buscador:hover{ border: 1px solid #${accentColor} !important;box-shadow: 0px 0px 5px #${accentColor} !important;}`
+    winSearcher.webContents.insertCSS(styles);
+    console.log(styles);
     getClock();
   });
 
@@ -50,7 +55,6 @@ app.on('ready', () => {
     winNewNote.on('ready-to-show', () => {
       winNewNote.show();
       winNewNote.webContents.openDevTools();
-
     });   
 
 

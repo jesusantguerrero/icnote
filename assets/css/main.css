@@ -498,16 +498,17 @@ input[type="button"] {
 
 #editor::-webkit-scrollbar-track {
   background-color: transparent;
-  cursor: default; }
+  cursor: pointer;
+  z-index: 500; }
 
 #editor::-webkit-scrollbar {
   width: 15px;
   background-color: white;
-  cursor: default; }
+  cursor: pointer; }
 
 #editor::-webkit-scrollbar-thumb {
-  background-color: #aaa;
-  cursor: default;
+  background-color: #ddd;
+  cursor: pointer;
   border-radius: 3px; }
 
 .editor-preferences {
@@ -521,6 +522,20 @@ input[type="button"] {
   padding: 0 15px; }
   .editor-preferences.showed {
     right: 0; }
+
+#notification-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 20px;
+  height: 20px;
+  width: 1px;
+  overflow: hidden;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  z-index: 1000;
+  color: #fff;
+  opacity: 0.1; }
 
 * {
   box-sizing: border-box;

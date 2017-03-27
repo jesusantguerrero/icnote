@@ -11,6 +11,7 @@
     "remark-html": "^6.0.0"
   },
   "devDependencies": {
+    "@types/jquery": "^2.0.41",
     "electron": "^1.4.15",
     "electron-packager": "^8.5.1",
     "jquery": "^3.1.1"
