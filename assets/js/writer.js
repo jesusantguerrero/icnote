@@ -43,7 +43,7 @@ function getTyping () {
         modoEscritura = true
         addLine()
       } else {
-        wconverter.decode(lineElement, temp)
+        wconverter.decode(lineElement)
         addLine()
       }
     }
@@ -71,6 +71,7 @@ function getTyping () {
     setTimeout(() => { lineElement.html(''), 1 })
     lineElement.focus()
     line++
+    updateLines()
   }
 
   function removeLine () {
@@ -80,7 +81,19 @@ function getTyping () {
     lineElement.attr("contenteditable","true")
     lib.focusElement(lineElement)
     line--
-    
+    updateLines()
+  }
+
+  function updateLines(){
+    var editorLines = $(".linea")
+
+    editorLines.on('click',function(){
+      $(this).attr("contenteditable","true")
+    })
+
+    editorLines.on('blur',function(){
+      $(this).attr("contenteditable","false")
+    })
   }
 }
 
@@ -120,6 +133,7 @@ function resetEditor () {
   editor.addClass('modo-espera')
   editor.html('<h3>Presione enter para escribir</h3>')
   editor.focus()
+  $('#doc-title').text("New Note")
   modoEscritura = false
   line = 0
 }

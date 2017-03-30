@@ -534,13 +534,9 @@ input[type=search] {
 }
 
 input[type=checkbox], input[type=radio] {
-    margin: 4px 0 0;
     line-height: normal
 }
 
-.checkbox, .form-group, .radio {
-    margin-bottom: 10px
-}
 
 .form-control {
     width: 100%;
@@ -565,18 +561,11 @@ textarea {
 .checkbox, .radio {
     position: relative;
     display: block;
-    margin-top: 10px
 }
 .checkbox label, .radio label {
-    padding-left: 20px;
     font-weight: 400
 }
 
-.checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio] {
-    position: absolute;
-    margin-left: -20px;
-    margin-top: 4px
-}
 
 .form-actions .btn {
     margin-right: 10px

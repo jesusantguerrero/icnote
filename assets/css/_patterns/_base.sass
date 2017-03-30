@@ -3,6 +3,7 @@
 @import _links
 @import _typography
 @import _buttons
+@import _modules
 
 
 *
@@ -16,9 +17,9 @@
   display: flex
   border-radius: 8px 8px 0 0
   transition: all ease .3s
-  overflow: hidden
   -webkit-user-selection: none
   -webkit-app-region: drag
+  z-index: 200
 
 .note-menu
   display: block
@@ -30,6 +31,7 @@
     size: 25px
     weight: 600
   -webkit-app-region: no-drag
+  cursor: pointer
 
 .doc-title
   display: block
@@ -104,6 +106,7 @@
   &:focus,
   &:hover,
     outline: 0
+    cursor: text
   
   p 
     margin: 0 0 0 0
@@ -149,24 +152,25 @@
   height: 250px
   width: 250px
   border-radius: 5px
-  box-shadow: 0p 1px 5px rgba(0,0,0,.7)
+  box-shadow: 0px 1px 5px rgba(0,0,0,.7)
 
-#editor::-webkit-scrollbar-track
+::-webkit-scrollbar-track
   background-color: transparent
   cursor: pointer
   z-index: 500
 
 
-#editor::-webkit-scrollbar
-  width: 15px
+::-webkit-scrollbar
+  width: 5px
   background-color: white
   cursor: pointer
 
 
-#editor::-webkit-scrollbar-thumb
+::-webkit-scrollbar-thumb
   background-color: #ddd
   cursor: pointer
-  border-radius: 3px  
+  border-radius: 3px 
+  z-index: 100 
 
 .editor-preferences
   position: absolute
@@ -175,7 +179,7 @@
   background: whitesmoke
   right: -300px
   top: 50px
-  z-index: 1000
+  z-index: 100
   padding: 0 15px
 
   &.showed
@@ -214,7 +218,7 @@
 .list-menu
   width: 50px
   height: 100%
-  background: #fafafa
+  background: $accent-color
 
 .notes-list
   width: 260px
@@ -229,15 +233,22 @@
   background: white
   cursor: pointer
   overflow: hidden
+  border-bottom: 1px solid #ddd
+
+
 
   &:hover
-    background: lighten($primary-color,20%)
+    background: $primary-color
     color: #fff
-   
+    
+    .title
+      color: #fff
 
   .title
     text-align: left
     font-size: 18px
+    color: $accent-color
+
   .preview
     margin: 10px
   .tags

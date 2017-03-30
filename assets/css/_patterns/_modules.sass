@@ -1,0 +1,45 @@
+// Tooltips
+
+#btn-pdf,
+#btn-trash,
+#btn-save-note,
+#btn-preferences
+  position: relative
+
+  &:after
+    position: absolute
+    width: 100px
+    height: 16px
+    background: rgba(0,0,0,.5)
+    visibility: hidden
+    left: -32px
+    bottom: -40px
+    transition: all ease .3s
+    opacity: 0
+    border-radius: 3px
+    color: white
+    padding: 10px
+    text-align: center
+    font-size: 10px
+    z-index: 200
+
+
+
+  &:hover
+
+    &:after
+      visibility: visible
+      opacity: 1
+
+#btn-pdf
+  &:after
+    content: 'Exp. to PDF'
+#btn-trash
+  &:after
+    content: 'clear'
+#btn-save-note
+  &:after
+    content: 'Save Note'
+#btn-preferences
+  &:after
+    content: 'preferences'

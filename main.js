@@ -1,10 +1,6 @@
 const electron = require('electron')
 const cp = require('child_process')
-const {app} = electron
-const {BrowserWindow} = electron
-const {shell} = electron
-const {systemPreferences} = electron
-const {ipcMain} = electron
+const {app, BrowserWindow ,ipcMain} = electron
 
 var winSearcher = null
 var winClock = null
@@ -33,8 +29,6 @@ app.on('ready', () => {
   winSearcher.loadURL(`file://${__dirname}/index` + '.html')
   winSearcher.once('ready-to-show', () => {
     winSearcher.show()
-    var styles = `#buscador:hover{ border: 1px solid #${accentColor} !important;box-shadow: 0px 0px 5px #${accentColor} !important;}`
-    winSearcher.webContents.insertCSS(styles)
     getClock()
   })
 
@@ -67,21 +61,21 @@ app.on('ready', () => {
     winNewNote.loadURL(`file://${__dirname}/tools/newnote.html`)
     winNewNote.on('ready-to-show', () => {
       winNewNote.show()
+      winNewNote.webContents.openDevTools();
     })
 
     ipcMain.on('note-close', () => {
       try {
         winNewNote.close()
         winNewNote = null
-      } catch (error) {
-        
-      }
+      } catch (error) {}
       
     })
 
     ipcMain.on('note-min', () => {
       winNewNote.minimize()
     })
+
   }
 
   // comunicacion con los renderer
