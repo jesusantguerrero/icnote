@@ -30,8 +30,8 @@ var is_menu = false
 getTyping()
 
 function getTyping () {
-      //  all the functionalities ,convertions and functions called when typing on the editor
-      // todas las funcionalidades que ocurren al escribir en el editor
+//  all the functionalities ,convertions and functions called when typing on the editor
+// todas las funcionalidades que ocurren al escribir en el editor
 
   editor.on('keydown', function (event) {
     key = event.which
@@ -72,6 +72,7 @@ function getTyping () {
     lineElement.focus()
     line++
     updateLines()
+    saveNote();
   }
 
   function removeLine () {
@@ -82,6 +83,7 @@ function getTyping () {
     lib.focusElement(lineElement)
     line--
     updateLines()
+    saveNote();
   }
 
   function updateLines(){
@@ -127,7 +129,7 @@ btnMenu.on('click', function () {
   toggleMenu()
 })
 
-//  editor states
+// Editor states
 function resetEditor () {
   editor.removeAttr('contenteditable')
   editor.addClass('modo-espera')
