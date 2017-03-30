@@ -1,9 +1,15 @@
-
+const {remote, ipcRenderer} = require('electron')
+const main = remote.require("./main.js")
+const notifications = require('./notifications.js')
+const notification = new notifications.notification($("#notification-bar"))
+const myDB = require('./myDB.js')
+const DB = new myDB.DB(notification)
 const wconverter = require('./wconverter.js')
-lib = require('./mylib.js')
+const lib = require('./mylib.js')
 
 // the DOM Elements
 var editor = $('#editor')
+var docTitle = $('#doc-title')
 var preferences = $('.editor-preferences')
 var noteListBox = $('.notes-list-box')
 var btnMenu = $('#btn-menu')
@@ -14,8 +20,9 @@ var btnMaximaze = $('#btn-maximaze')
 var btnMinimaze = $('#btn-minimaze')
 var btnClose = $('#btn-close')
 
-// the context vars
 
+// the context vars
+const SMOOTHSAVE = true
 var line = 0
 var temp
 var key
@@ -27,11 +34,13 @@ var widthTable
 var is_preferences = false
 var is_menu = false
 
-getTyping()
 
+getTyping()
+/**
+ * this is where the magic happens gettyping controls what happens when you type in the editor
+ * convertions,addlines, remove lines, etc
+ */
 function getTyping () {
-//  all the functionalities ,convertions and functions called when typing on the editor
-// todas las funcionalidades que ocurren al escribir en el editor
 
   editor.on('keydown', function (event) {
     key = event.which
@@ -60,6 +69,7 @@ function getTyping () {
   function addLine () {
     lineElement = $('<div></div>').addClass('linea line-' + line)
     lineElement.attr('contenteditable', 'true')
+
     if (line > 0 || !modoEscritura) {
       oldLine = $('.linea:focus')
       oldLine.removeAttr('contenteditable')
@@ -67,6 +77,7 @@ function getTyping () {
     } else {
       editor.append(lineElement)
     }
+
     lineElement.html('')
     setTimeout(() => { lineElement.html(''), 1 })
     lineElement.focus()
@@ -99,7 +110,7 @@ function getTyping () {
   }
 }
 
-  //  buttons functions / funciones de los botones
+//  buttons functions / funciones de los botones
 
 $('#btn-save-note').on('click', saveNote)
 
@@ -130,12 +141,13 @@ btnMenu.on('click', function () {
 })
 
 // Editor states
-function resetEditor () {
-  editor.removeAttr('contenteditable')
-  editor.addClass('modo-espera')
-  editor.html('<h3>Presione enter para escribir</h3>')
+
+function resetEditor() {
+  editor.removeAttr("contenteditable")
+  editor.addClass("modo-espera")
+  editor.html("<h3>Presione enter para escribir</h3>")
   editor.focus()
-  $('#doc-title').text("New Note")
+  docTitle.text("New Note")
   modoEscritura = false
   line = 0
 }
@@ -160,6 +172,7 @@ function toggleMenu () {
     noteListBox.animate({left: '0'}, 500, function () {
       noteListBox.addClass('show-list')
       is_menu = true
+      recognizeItems();
     })
   } else {
     noteListBox.animate({left: '-310px'}, 500, function () {
@@ -175,19 +188,49 @@ function showLineNumber () {
 }
 
 function saveNote () {
-  var noteTitle = $('#doc-title').text(),
-    body = editor.html(),
-    tagsDoc = editor.find('.tag'),
-    preview = editor.text().replace(noteTitle, ''),
-    tagsToSave = ''
+  var noteTitle = docTitle.text(),
+      body = editor.html(),
+      tagsDoc = editor.find(".tag"),
+      preview = editor.text().replace(noteTitle, ""),
+      tagsToSave = "",
+      data
 
   tagsDoc.each(function (i, tag) {
     tagsToSave += tag.textContent
   }, this)
 
-  if (noteTitle != '') {
-    DB.saveNote(noteTitle, body, tagsToSave, preview)
+  data = {
+      title: noteTitle,
+      body: body,
+      tags: tagsToSave,
+      preview: preview,
+      date: "30-mar-2017",
+      lines: line
+    }
+
+  if (noteTitle != "") {
+    DB.saveNote(data,SMOOTHSAVE)
   } else {
  
   }
+}
+
+function recognizeItems(){
+  var noteItem = $(".note-item");
+
+
+  noteItem.on('click',function(){
+    var $this = $(this),
+        ntitle = $this.find(".title").text(),
+        nbody = $this.find(".body").html(),
+        nlines = $this.find(".lines").text()
+
+
+    docTitle.text(ntitle) 
+    editor.html(nbody) 
+    line = parseInt(nlines)
+    lib.externalLinks();
+    modoEscritura = true
+  })
+
 }

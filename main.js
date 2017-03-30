@@ -8,12 +8,12 @@ var winNewNote
 // inicio de la app
 
 app.on('ready', () => {
-  
   newNote()
 
 
   // notes
   function newNote () {
+
     winNewNote = new BrowserWindow({
       width: 900,
       height: 600,
@@ -22,10 +22,9 @@ app.on('ready', () => {
       frame: false
     })
     
-    winNewNote.loadURL(`file://${__dirname}/tools/newnote.html`)
+    winNewNote.loadURL(`file://${__dirname}/ui/newnote.html`)
     winNewNote.on('ready-to-show', () => {
       winNewNote.show()
-      winNewNote.webContents.openDevTools();
     })
 
     ipcMain.on('note-close', () => {

@@ -108,17 +108,9 @@
 
   </div>
 
-  <script >
-    const {remote, ipcRenderer} = require('electron'),
-                             $  = require('jquery');
-                           main = remote.require("./main.js"),
-                  notifications = require("../assets/js/notifications.js"),
-                   notification = new notifications.notification($("#notification-bar"));
-                           myDB = require('../assets/js/myDB'),
-                             DB = new myDB.DB();
-
- 
-    require("../assets/js/writer.js");
+  <script > 
+   const $  = require('jquery')
+    require("../src/writer.js");
     
   
   </script>
