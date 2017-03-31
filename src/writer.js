@@ -8,6 +8,7 @@ const wconverter = require('./wconverter.js')
 const lib = require('./mylib.js')
 
 // the DOM Elements
+
 var editor = $('#editor')
 var docTitle = $('#doc-title')
 var preferences = $('.editor-preferences')
@@ -83,7 +84,6 @@ function getTyping () {
     lineElement.focus()
     line++
     updateLines()
-    saveNote();
   }
 
   function removeLine () {
@@ -94,20 +94,8 @@ function getTyping () {
     lib.focusElement(lineElement)
     line--
     updateLines()
-    saveNote();
   }
 
-  function updateLines(){
-    var editorLines = $(".linea")
-
-    editorLines.on('click',function(){
-      $(this).attr("contenteditable","true")
-    })
-
-    editorLines.on('blur',function(){
-      $(this).attr("contenteditable","false")
-    })
-  }
 }
 
 //  buttons functions / funciones de los botones
@@ -140,7 +128,7 @@ btnMenu.on('click', function () {
   toggleMenu()
 })
 
-// Editor states
+// ====  Editor states ====
 
 function resetEditor() {
   editor.removeAttr("contenteditable")
@@ -182,11 +170,27 @@ function toggleMenu () {
   }
 }
 
-// TODO: eliminar esto cuando termine el periodo de prueba
-function showLineNumber () {
-  var lineNumber = line + 1
-}
+//==== other functions ====
 
+/**
+ *  get the new created lines to give them an onclick functionality
+ */
+  function updateLines(){
+    var editorLines = $(".linea")
+
+    editorLines.on('click',function(){
+      var $this = $(this)
+      $this.attr("contenteditable","true")
+      lineElement = $this
+    })
+
+    editorLines.on('blur',function(){
+      $(this).attr("contenteditable","false")
+    })
+  }
+/**
+ * get the data of the current note and send it to a db.saveNote() to storage in a file
+ */
 function saveNote () {
   var noteTitle = docTitle.text(),
       body = editor.html(),
@@ -206,7 +210,7 @@ function saveNote () {
       preview: preview,
       date: "30-mar-2017",
       lines: line
-    }
+  }
 
   if (noteTitle != "") {
     DB.saveNote(data,SMOOTHSAVE)
@@ -214,6 +218,10 @@ function saveNote () {
  
   }
 }
+
+/**
+ *  get the note-items elements in order to give them an onclick functionality
+ */
 
 function recognizeItems(){
   var noteItem = $(".note-item");
@@ -231,6 +239,8 @@ function recognizeItems(){
     line = parseInt(nlines)
     lib.externalLinks();
     modoEscritura = true
+    updateLines();
+    
   })
 
 }

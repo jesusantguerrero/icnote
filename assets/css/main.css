@@ -556,7 +556,7 @@ input[type="button"] {
   z-index: 500; }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 10px;
   background-color: white;
   cursor: pointer; }
 
@@ -609,7 +609,7 @@ input[type="button"] {
 .list-menu {
   width: 50px;
   height: 100%;
-  background: #3bb3f7; }
+  background: whitesmoke; }
 
 .notes-list {
   width: 260px;
@@ -638,113 +638,8 @@ input[type="button"] {
     margin: 10px; }
   .note-item .body {
     visibility: hidden; }
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0; }
-
-#buscador-body {
-  background: transparent;
-  display: flex;
-  flex-direction: column;
-  align-items: center; }
-
-.search-container, .data {
-  display: flex;
-  width: 100%;
-  height: 50px;
-  justify-content: center;
-  align-items: center; }
-
-#buscador {
-  height: 38px;
-  width: 95%;
-  padding: 0 5%;
-  font-size: 20px;
-  color: #555;
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid #aaa;
-  font-family: inconsalata, roboto, sans serif;
-  outline: none;
-  -webkit-user-selection: none; }
-  #buscador:hover {
-    outline: none;
-    background: rgba(255, 255, 255, 0.7); }
-
-.data {
-  width: 95%;
-  height: 120px;
-  background: rgba(0, 102, 255, 0.3);
-  flex-direction: column;
-  justify-content: flex-start;
-  -webkit-user-select: none;
-  visibility: hidden; }
-
-.data-visible {
-  visibility: visible;
-  overflow-y: scroll; }
-
-.data-item {
-  height: 40px;
-  padding: 2% 5%;
-  width: 100%;
-  color: white;
-  border: 1px solid transparent;
-  -webkit-user-select: none;
-  margin: 0 0 0 0;
-  cursor: pointer; }
-  .data-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3); }
-
-.data::-webkit-scrollbar-track {
-  background-color: transparent;
-  border-left: 1px solid #eee;
-  cursor: default; }
-
-.data::-webkit-scrollbar {
-  width: 15px;
-  background-color: transparent;
-  cursor: default; }
-
-.data::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.1);
-  cursor: default;
-  border-radius: 3px; }
-
-body {
-  background: transparent;
-  overflow: hidden; }
-
-.dateTime {
-  width: 600px;
-  height: 300px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 5px;
-  font-family: "UbuntuCondensed-Regular", "roboto", "squarefont";
-  text-shadow: 1px 2px 5px #aaa;
-  cursor: pointer;
-  -webkit-user-selection: none;
-  -webkit-app-region: drag; }
-  .dateTime:hover {
-    border: 1px solid #fff; }
-
-.time, .date {
-  width: 100%;
-  text-align: center; }
-
-.time {
-  width: 100%;
-  height: 80%;
-  font-size: 150px; }
-
-.date {
-  height: 40%;
-  font-size: 25px; }
+  .note-item .metadata {
+    visibility: hidden; }
 
 .body {
   background: transparent; }
