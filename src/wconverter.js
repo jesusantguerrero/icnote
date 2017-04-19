@@ -22,7 +22,7 @@ exports.decode = function (lineElement) {
         var text = temp.slice(1)
 
         span = $('<span></span>').addClass('icon icon-link')
-        translatedLine = $('<h3></h3>').html(span)
+        translatedLine = $('<h1></h1>').html(span)
         translatedLine.append(text)
         lineElement.html(translatedLine)
         lineElement.addClass('note-title')
