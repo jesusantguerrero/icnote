@@ -17,7 +17,7 @@ exports.decode = function (lineElement) {
     var params = temp.split(' ')
 
     switch (params[0]) {
-     // J-shunks support                                                                                                                      // 1- header decoder
+     // J-shunks support                                                                                                                     
       case 't':
         var text = temp.slice(1)
 
@@ -29,7 +29,7 @@ exports.decode = function (lineElement) {
         $('.doc-title').eq(0).text(text)
 
         break
-                                                                                                                         // 4-checklist decoder
+                                                                                                                         
       case 'c': {
         var text = temp.slice(2)
         temp = `<input type='checkbox' id='check-${checkNumber}' class='filled-in'/> <label for='check-${checkNumber}'>` + text + '</label>'
@@ -38,7 +38,7 @@ exports.decode = function (lineElement) {
         checkNumber++
       }
         break
-                                                                                                                                  // 6 -header colorful
+                                                                                                                                
       case 'hc': {
         temp = $('<h3></h3>')
         temp.css({'color': params[1]})

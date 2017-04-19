@@ -1,4 +1,5 @@
 .button,
+.btn,
 button,
 input[type="submit"],
 input[type="reset"],
@@ -53,7 +54,6 @@ input[type="button"]
   background: transparent
 
   &:hover,
-  &:active,
   &:focus
     color: #fff
     outline: 0
@@ -67,3 +67,26 @@ input[type="button"]
     text-align: center
     color: $accent-color
     font-size: 18px
+
+.btn-lm
+  width: 100%
+  backface-visibility: transparent
+  margin: 10px 0
+  border: none
+  height: 48px
+
+  .icon
+    cursor: pointer
+    text-align: center
+    color: #ccc
+    font-size: 25px
+    margin-left: 5px
+
+  &:hover
+    background: transparentize(#fff,.8)
+
+    .icon
+      cursor: pointer
+      text-align: center
+      color: #fff
+      font-size: 25px

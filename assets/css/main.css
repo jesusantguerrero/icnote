@@ -191,6 +191,24 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
   color: #555; }
 
+h1 {
+  font-size: 1.2em; }
+
+h2 {
+  font-size: 1.1em; }
+
+h3 {
+  font-size: 1.05em; }
+
+h4 {
+  font-size: 0.9em; }
+
+h5 {
+  font-size: 0.8em; }
+
+h6 {
+  font-size: 0.6em; }
+
 p {
   margin: 0 0 20px 0; }
 
@@ -274,6 +292,7 @@ ul {
   margin: 5px 10px 0 5%; }
 
 .button,
+.btn,
 button,
 input[type="submit"],
 input[type="reset"],
@@ -296,6 +315,9 @@ input[type="button"] {
   cursor: pointer;
   box-sizing: border-box; }
   .button:hover, .button:active, .button:focus,
+  .btn:hover,
+  .btn:active,
+  .btn:focus,
   button:hover,
   button:active,
   button:focus,
@@ -332,10 +354,10 @@ input[type="button"] {
   justify-content: flex;
   box-shadow: none;
   background: transparent; }
-  .btn-tab:hover, .btn-tab:active, .btn-tab:focus {
+  .btn-tab:hover, .btn-tab:focus {
     color: #fff;
     outline: 0; }
-    .btn-tab:hover .icon, .btn-tab:active .icon, .btn-tab:focus .icon {
+    .btn-tab:hover .icon, .btn-tab:focus .icon {
       cursor: pointer;
       color: #3bb3f7; }
   .btn-tab .icon {
@@ -343,6 +365,26 @@ input[type="button"] {
     text-align: center;
     color: #3bb3f7;
     font-size: 18px; }
+
+.btn-lm {
+  width: 100%;
+  backface-visibility: transparent;
+  margin: 10px 0;
+  border: none;
+  height: 48px; }
+  .btn-lm .icon {
+    cursor: pointer;
+    text-align: center;
+    color: #ccc;
+    font-size: 25px;
+    margin-left: 5px; }
+  .btn-lm:hover {
+    background: rgba(255, 255, 255, 0.2); }
+    .btn-lm:hover .icon {
+      cursor: pointer;
+      text-align: center;
+      color: #fff;
+      font-size: 25px; }
 
 #btn-pdf,
 #btn-trash,
@@ -404,14 +446,13 @@ input[type="button"] {
 
 .note-menu {
   display: block;
-  width: 5%;
-  height: 100%;
+  width: 48px;
+  height: 50px;
   text-align: center;
   padding: 5px 0 0 0;
   font-size: 25px;
   font-weight: 600;
-  -webkit-app-region: no-drag;
-  cursor: pointer; }
+  -webkit-app-region: no-drag; }
 
 .doc-title {
   display: block;
@@ -583,7 +624,7 @@ input[type="button"] {
 .list-menu {
   width: 50px;
   height: 100%;
-  background: whitesmoke; }
+  background: #333; }
 
 .notes-list {
   width: 260px;
