@@ -25,7 +25,6 @@ app.on('ready', () => {
     winNewNote.loadURL(`file://${__dirname}/ui/newnote.html`)
     winNewNote.on('ready-to-show', () => {
       winNewNote.show()
-      winNewNote.webContents.openDevTools();
     })
 
     ipcMain.on('note-close', () => {

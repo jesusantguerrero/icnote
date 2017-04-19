@@ -12,17 +12,17 @@
   },
   "devDependencies": {
     "@types/jquery": "^2.0.41",
-    "electron": "^1.4.15",
-    "electron-packager": "^8.5.1"
+    "electron": "^1.6.2",
+    "electron-builder": "^16.6.0"
   },
   "scripts": {
     "start": "electron .",
-    "build": "build -w",
+    "build": "build -w --ia32",
     "pack": "build --dir"
   },
   "build": {
     "appId": "insanecode.jnote",
-    "productName": "IC JNote"
+    "productName": "JNote"
   },
   "keywords": [
     "Note",
@@ -30,6 +30,9 @@
     "markdown",
     "tasklist"
   ],
-  "author": "Jesus Guerrero",
+  "author": {
+    "name": "Jesus Guerrero",
+    "email": "jesusant.guerrero@gmail.com"
+  },
   "license": "MIT"
 }
