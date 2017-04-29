@@ -1,15 +1,14 @@
 const electron = require('electron')
 const cp = require('child_process')
-const {app, BrowserWindow ,ipcMain} = electron
+const {app, BrowserWindow ,ipcMain,dialog} = electron
 
-var winNewNote
+let winNewNote
 
 
 // inicio de la app
 
 app.on('ready', () => {
   newNote()
-
 
   // notes
   function newNote () {
@@ -35,6 +34,14 @@ app.on('ready', () => {
       winNewNote.minimize()
     })
 
+    ipcMain.on('devtools', ()=>{
+      winNewNote.webContents.openDevTools()
+    })
+
+    ipcMain.on('reload', ()=>{
+      winNewNote.webContents.reload()
+    })
+
   }
 
 })
@@ -42,7 +49,21 @@ app.on('ready', () => {
 // para visualizar los logs por consola desde el renderer
 
 exports.log = function (word) {
-
   console.log(word)
 
 }
+
+ipcMain.on('delete-item', (event)=>{ 
+
+   let options = {
+    type: "info",
+    title: "Delete?",
+    message: "Are you sure that you want to delete this item?",
+    buttons: ["Yes","No"]
+  }
+
+  dialog.showMessageBox(options, (index)=>{
+    event.sender.send("delete-item-response",index);
+  });
+
+});

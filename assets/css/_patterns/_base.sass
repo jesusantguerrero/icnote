@@ -39,6 +39,7 @@
   padding: 10px 0 0 20px
   display: flex
   align-items: center
+  cursor: move
 
 .btn-group
   display: flex
@@ -185,77 +186,3 @@
     right: 0
 
 
-#notification-bar
-  display: flex
-  justify-content: flex-end
-  padding: 0 20px
-  height: 20px
-  width: 1px
-  overflow: hidden
-  bottom: 0
-  left: 0
-  position: absolute
-  z-index: 1000
-  color: #fff
-  opacity: .1
-
-.notes-list-box
-  display: flex
-  height: 100%
-  width: 300px
-  overflow: hidden
-  top: 50px
-  left: -310px
-  position: absolute
-  z-index: 1000
-  color: #555
-  border-right: 2px solid #fafafa
-
-  &:show-list
-    left: 0
-
-.list-menu
-  width: 50px
-  height: 100%
-  background: #333
-
-.notes-list
-  width: 260px
-  height: 95%
-  background: white
-  overflow-x: auto
-
-.note-item
-  padding: 15px
-  height: 120px
-  width: 100%
-  background: white
-  cursor: pointer
-  overflow: hidden
-  border-bottom: 1px solid #ddd
-
-
-
-  &:hover
-    background: $primary-color
-    color: #fff
-    
-    .title
-      color: #fff
-
-  .title
-    text-align: left
-    font-size: 18px
-    color: $accent-color
-
-  .preview
-    margin: 10px
-  .tags
-
-  .body
-    visibility: hidden
-
-  .metadata
-    visibility: hidden  
-
-//apuntes

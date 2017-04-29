@@ -1,7 +1,5 @@
-const {remote, ipcRenderer} = require('electron')
-const main = remote.require("./main.js")
 const notifications = require('./notifications.js')
-const notification = new notifications.notification($("#notification-bar"))
+const notification = new notifications.init()
 const myDB = require('./myDB.js')
 const DB = new myDB.DB(notification)
 const wconverter = require('./wconverter.js')
@@ -156,15 +154,14 @@ function togglePReferences () {
 
 function toggleMenu () {
   if (!is_menu) {
-    DB.getNotes()
+    DB.getNotes(recognizeItems)   
     btnMenu.css({background:"#333",color:"#f1f1f1"});
     btnMenu.html("&#10132;");
     btnMenu.css({transform:"rotate(180deg)"});
 
     noteListBox.animate({left: '0'}, 500, function () {
       noteListBox.addClass('show-list')
-      is_menu = true
-      recognizeItems();
+      is_menu = true     
     })
   } else {
       btnMenu.css({background:"#f1f1f1",color:"#333"});
@@ -183,7 +180,7 @@ function toggleMenu () {
 /**
  *  get the new created lines to give them an onclick functionality
  */
-  function updateLines(){
+function updateLines(){
     var editorLines = $(".linea")
 
     editorLines.on('click',function(){
@@ -195,7 +192,7 @@ function toggleMenu () {
     editorLines.on('blur',function(){
       $(this).attr("contenteditable","false")
     })
-  }
+}
 /**
  * get the data of the current note and send it to a db.saveNote() to storage in a file
  */
@@ -205,6 +202,7 @@ function saveNote () {
       tagsDoc = editor.find(".tag"),
       preview = editor.text().replace(noteTitle, ""),
       tagsToSave = "",
+      date = lib.getSqlDateNow(),
       data
 
   tagsDoc.each(function (i, tag) {
@@ -216,7 +214,7 @@ function saveNote () {
       body: body,
       tags: tagsToSave,
       preview: preview,
-      date: "30-mar-2017",
+      date: date,
       lines: line
   }
 
@@ -227,12 +225,23 @@ function saveNote () {
   }
 }
 
+
+function deleteNote(noteName) {    
+  ipcRenderer.send('delete-item');
+  ipcRenderer.on('delete-item-response',function(event,index){
+    if(index == 0){
+      DB.deleteNote(noteName); 
+    }
+  });
+
+}
 /**
  *  get the note-items elements in order to give them an onclick functionality
  */
 
 function recognizeItems(){
-  var noteItem = $(".note-item");
+  var noteItem = $(".note-item"),
+      btnErase = $(".erase")
 
 
   noteItem.on('click',function(){
@@ -241,7 +250,6 @@ function recognizeItems(){
         nbody = $this.find(".body").html(),
         nlines = $this.find(".lines").text()
 
-
     docTitle.text(ntitle) 
     editor.html(nbody) 
     line = parseInt(nlines)
@@ -249,6 +257,11 @@ function recognizeItems(){
     modoEscritura = true
     updateLines();
     
+  })
+
+  btnErase.on('click',function(){
+    var noteName = $(this).attr("data-title")
+    deleteNote(noteName)
   })
 
 }

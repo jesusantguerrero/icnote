@@ -1,10 +1,10 @@
 
   /**
    * the constructor of a notification class which show the messages to the users through the bar
-   * @param {HTMLElement} notificationBar 
+   * 
    */
 
-exports.notification = function(notificationBar){
+exports.init = function(){
 
     types = {
       error : 'rgb(255, 20, 20)',
@@ -14,8 +14,8 @@ exports.notification = function(notificationBar){
       smooth: '#fff'
     };
 
-    _notificationBar  = notificationBar; 
-    _messageBox = notificationBar.find(".message-box")
+    _notificationBar  = $("#notification-bar"); 
+    _messageBox = _notificationBar.find(".message-box")
   
 
   /**

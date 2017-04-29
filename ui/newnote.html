@@ -123,7 +123,10 @@
   </div>
 
   <script > 
-   const $  = require('jquery')
+    const {remote, ipcRenderer} = require('electron'),
+    main = remote.require("./main.js"),
+    $  = require('jquery')
+        
     require("../src/writer.js");
     
   
