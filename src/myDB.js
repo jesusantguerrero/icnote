@@ -34,7 +34,6 @@ exports.DB = class DB {
 
   deleteNote(noteName){
     noteName = noteName.trim().split(" ").join("-")
-    main.log(noteName)
 
     this.storage.remove(noteName,(err)=>{
       if(err) this.notification.show("ha ocurrido un error","error")

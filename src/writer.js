@@ -157,18 +157,19 @@ function toggleMenu () {
     DB.getNotes(recognizeItems)   
     btnMenu.css({background:"#333",color:"#f1f1f1"});
     btnMenu.html("&#10132;");
-    btnMenu.css({transform:"rotate(180deg)"});
+    btnMenu.css({transform:"rotate(90deg)"});
 
-    noteListBox.animate({left: '0'}, 500, function () {
+    noteListBox.animate({top: '50px'}, 500, function () {
       noteListBox.addClass('show-list')
       is_menu = true     
     })
   } else {
       btnMenu.css({background:"#f1f1f1",color:"#333"});
       btnMenu.html("&#9776;");
+      btnMenu.css({transform:"rotate(0deg)"});
     
     
-    noteListBox.animate({left: '-310px'}, 500, function () {
+    noteListBox.animate({top: '610px'}, 500, function () {
       noteListBox.removeClass('show-list')
       is_menu = false
     })

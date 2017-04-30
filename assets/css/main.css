@@ -330,8 +330,8 @@ input[type="button"] {
   input[type="button"]:hover,
   input[type="button"]:active,
   input[type="button"]:focus {
-    color: #3bb3f7;
-    border-color: #3bb3f7;
+    color: #333;
+    border-color: #333;
     outline: 0;
     color: white; }
 
@@ -359,11 +359,11 @@ input[type="button"] {
     outline: 0; }
     .btn-tab:hover .icon, .btn-tab:focus .icon {
       cursor: pointer;
-      color: #3bb3f7; }
+      color: #333; }
   .btn-tab .icon {
     cursor: pointer;
     text-align: center;
-    color: #3bb3f7;
+    color: #333;
     font-size: 18px; }
 
 .btn-lm {
@@ -445,28 +445,46 @@ input[type="button"] {
 
 .notes-list-box {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 100%;
-  width: 300px;
+  width: 900px;
   overflow: hidden;
-  top: 50px;
-  left: -310px;
+  top: 610px;
+  left: 0;
   position: absolute;
   z-index: 199;
   color: #555;
-  border-right: 2px solid #fafafa; }
+  border-right: 2px solid #fafafa;
+  opacity: 0.9;
+  background: whitesmoke; }
   .notes-list-box:show-list {
     left: 0; }
 
-.list-menu {
-  width: 50px;
-  height: 100%;
-  background: #333; }
-
-.notes-list {
-  width: 260px;
-  height: 95%;
+.note-list-header {
+  width: 95%;
+  height: 20%;
+  text-align: center;
   background: whitesmoke;
   overflow-x: auto; }
+
+.search-note {
+  height: 48px;
+  width: 100%;
+  padding: 0 10px;
+  font-size: 25px;
+  margin: 10px 0 0 0; }
+  .search-note:focus {
+    outline: 0; }
+
+.notes-list {
+  width: 95%;
+  height: 60%;
+  overflow-x: auto; }
+
+.list-menu {
+  width: 95%;
+  height: 20%; }
 
 .note-item {
   padding: 15px;
@@ -478,7 +496,7 @@ input[type="button"] {
   border-bottom: 1px solid #ddd;
   position: relative; }
   .note-item:hover {
-    background: #0990dc;
+    background: #333;
     color: #fff; }
     .note-item:hover .title {
       color: #fff; }
@@ -490,7 +508,7 @@ input[type="button"] {
   .note-item .title {
     text-align: left;
     font-size: 18px;
-    color: #3bb3f7; }
+    color: #333; }
   .note-item .date {
     text-decoration: dotted; }
   .note-item .body {

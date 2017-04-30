@@ -63,29 +63,49 @@
 
 .notes-list-box
   display: flex
+  flex-direction: column
+  align-items: center
   height: 100%
-  width: 300px
+  width: 900px
   overflow: hidden
-  top: 50px
-  left: -310px
+  top: 610px
+  left: 0
   position: absolute
   z-index: 199
   color: #555
   border-right: 2px solid #fafafa
+  opacity: .9
+  background: whitesmoke
 
   &:show-list
     left: 0
 
-.list-menu
-  width: 50px
-  height: 100%
-  background: #333
-
-.notes-list
-  width: 260px
-  height: 95%
+.note-list-header
+  width: 95%
+  height: 20%
+  text-align: center
   background: whitesmoke
   overflow-x: auto
+
+.search-note
+  height: 48px
+  width: 100%
+  padding: 0 10px
+  font-size: 25px
+  margin: 10px 0 0 0
+
+  &:focus
+    outline: 0
+
+.notes-list
+  width: 95%
+  height: 60%
+  overflow-x: auto
+
+.list-menu
+  width: 95%
+  height: 20%
+
 
 .note-item
   padding: 15px
@@ -99,7 +119,7 @@
 
 
   &:hover
-    background: $primary-color
+    background: $accent-color
     color: #fff
     
     .title
