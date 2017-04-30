@@ -468,13 +468,14 @@ input[type="button"] {
   background: whitesmoke;
   overflow-x: auto; }
 
-.search-note {
+.searchbar {
   height: 48px;
   width: 100%;
   padding: 0 10px;
   font-size: 25px;
-  margin: 10px 0 0 0; }
-  .search-note:focus {
+  margin: 10px 0 0 0;
+  border: 2px solid #666; }
+  .searchbar:focus {
     outline: 0; }
 
 .notes-list {

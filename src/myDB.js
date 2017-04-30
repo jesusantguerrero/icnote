@@ -10,6 +10,7 @@ exports.DB = class DB {
     this.storage.setDirectory("notes")
     this.notification = notification
     this.callback = function(){}
+    this.searchedText = ""
   }
 
  
@@ -50,8 +51,15 @@ exports.DB = class DB {
         });
   }
 
-  search(name){
-    // TODO: search notes stuff
+  search(text){
+    this.searchedText= text.toLowerCase()
+    console.log('Estoy en la base de datos y el texto a buscar es: ' + text);
+    
+    this.storage.getAll((err,data)=>{
+          if(err) main.log("ha ocurrido un error 11")
+          this.makeSearchedItems(data)
+        });
+
   }
 
   makeItems(data){
@@ -68,6 +76,36 @@ exports.DB = class DB {
 
       items += "<div class='erase' data-title='"+ data[key]["title"]+"'> <span class='icon icon-trash'></span></div>"
       items += "</div>";
+    }
+
+    $(".notes-list").html(items);
+    this.callback();
+  }
+
+  makeSearchedItems(data){
+    var items = "",
+    title,date,preview,tags,
+    text = this.searchedText
+
+    for(var key in data){
+      title = data[key]["title"].toLowerCase()
+      date = data[key]["date"].toLowerCase()
+      preview = data[key]["preview"].toLowerCase()
+      tags = data[key]["tags"].toLowerCase()
+
+      if(title.includes(text) ||date.includes(text) ||preview.includes(text) || tags.includes(text)){
+        items += "<div class='note-item'>";
+        items += "<h3 class='title'>" + data[key]["title"] + "</h3>"
+        items += "<small class='date'>" + data[key]["date"] + "</small>"
+        items += "<p class='preview'>" + data[key]["preview"].slice(0,50) + "</p>"
+        items += "<p class='tags'>" + data[key]["tags"] + "</p>"
+        items += "<div class='body'>" + data[key]["body"] + "</div>"
+        items += "<p class='metadata'><span class='lines'>" + data[key]["lines"] + "</span></span>" 
+
+        items += "<div class='erase' data-title='"+ data[key]["title"]+"'> <span class='icon icon-trash'></span></div>"
+        items += "</div>";
+      }
+           
     }
 
     $(".notes-list").html(items);

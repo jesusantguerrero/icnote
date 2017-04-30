@@ -13,7 +13,7 @@ app.on('ready', () => {
   // notes
   function newNote () {
 
-    winNewNote = new BrowserWindow({
+    let winNewNote = new BrowserWindow({
       width: 900,
       height: 600,
       show: false,
@@ -35,7 +35,7 @@ app.on('ready', () => {
     })
 
     ipcMain.on('devtools', ()=>{
-      winNewNote.webContents.openDevTools()
+      winNewNote.webContents.toggleDevTools()
     })
 
     ipcMain.on('reload', ()=>{

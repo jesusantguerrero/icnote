@@ -18,6 +18,7 @@ var btnPreferences = $('#btn-preferences')
 var btnMaximaze = $('#btn-maximaze')
 var btnMinimaze = $('#btn-minimaze')
 var btnClose = $('#btn-close')
+var searchbar = $(".searchbar")
 
 
 // the context vars
@@ -125,6 +126,24 @@ btnPreferences.on('click', function () {
 btnMenu.on('click', function () {
   toggleMenu()
 })
+
+$("#btn-devtools").on("click",function(){
+  ipcRenderer.send("devtools")
+})
+
+
+$("#btn-pdf").on("click",function(){
+  ipcRenderer.send("reload")
+})
+
+searchbar.on('change',function(){
+  console.log('Estoy buscando');  
+  var text = searchbar.val()
+  DB.search(text)
+  searchbar.css({border: "2px solid 333"})
+  searchbar.animate({border: "1px solid #666"},1000)
+})
+
 
 // ====  Editor states ====
 
