@@ -50,7 +50,12 @@
     </header>
 
     <section class="panel-principal modo-espera" id="editor" tabindex="0">
-      <h3>Presione Enter para Escribir</h3>
+
+      <div class="welcome-screen">
+        <h3 class="logo"><span class="company">IC</span> <span class="product">Note</span> </h3>
+        <p class="info"> <span>Press Enter to write</span> or <a href="">Read the Turorial</a></p>
+      </div>
+      
     </section>
 
     <footer id="notification-bar">  
@@ -94,7 +99,7 @@
     <div class="notes-list-box">
 
       <div class="note-list-header">
-        <h3> Your Notes </h3>
+        <h3 class="menu-title"> Your Notes </h3>
         <input class="searchbar" type="search">
       </div>
 
@@ -131,9 +136,10 @@
   </div>
 
   <script > 
-    const {remote, ipcRenderer} = require('electron'),
-    main = remote.require("./main.js"),
-    $  = require('jquery')
+    const {remote, ipcRenderer} = require('electron')
+    const main = remote.require("./main.js")
+    const $  = require('jquery')
+    const lib = require('../src/mylib.js')
         
     require("../src/writer.js");
     

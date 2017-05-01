@@ -3,7 +3,6 @@ const {shell} = require('electron')
 // focus line and go to the end of the line
 exports.focusElement = function(el){  
   var classname = el.attr("class").split(" ").join('\.');
-  console.log(classname);
   el = document.querySelector("." + classname); 
   
   el.focus();

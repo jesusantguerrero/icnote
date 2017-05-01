@@ -463,10 +463,14 @@ input[type="button"] {
 
 .note-list-header {
   width: 95%;
-  height: 20%;
+  height: 30%;
   text-align: center;
   background: whitesmoke;
   overflow-x: auto; }
+
+.menu-title {
+  font-size: 30px;
+  margin: 10px 0 20px 0; }
 
 .searchbar {
   height: 48px;
@@ -485,7 +489,7 @@ input[type="button"] {
 
 .list-menu {
   width: 95%;
-  height: 20%; }
+  height: 10%; }
 
 .note-item {
   padding: 15px;
@@ -591,6 +595,31 @@ input[type="button"] {
   color: white;
   position: relative; }
 
+.welcome-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .welcome-screen .info {
+    color: #aaa;
+    font-size: 24px; }
+
+.logo {
+  font-size: 9em;
+  color: #ddd;
+  text-shadow: 1px 1px 1px #ccc, -1px -1px 1px #ccc;
+  cursor: pointer; }
+  .logo:hover {
+    color: #0990dc;
+    text-shadow: 1px 1px 1px #0990dc, -1px -1px 1px #0990dc; }
+  .logo .company {
+    font-family: squarefont;
+    cursor: pointer; }
+  .logo .product {
+    cursor: pointer; }
+
 #editor,
 #viewer {
   padding: 20px 3% 2% 3%;
@@ -607,7 +636,7 @@ input[type="button"] {
   cursor: text; }
 
 .linea {
-  width: 100%;
+  min-width: 100%;
   min-height: 22px;
   height: max-content;
   max-height: max-content;
@@ -615,10 +644,12 @@ input[type="button"] {
   z-index: 200;
   cursor: text;
   color: #777;
-  text-align: justify; }
+  text-align: justify;
+  border: 1px solid transparent; }
   .linea:focus, .linea:hover {
     outline: 0;
-    cursor: text; }
+    cursor: text;
+    border: 1px solid #eee; }
   .linea p {
     margin: 0 0 0 0;
     padding: 0;
@@ -634,12 +665,11 @@ input[type="button"] {
   box-shadow: 0px 2px 5px whitesmoke;
   z-index: 50; }
 
-.linea.note-title {
-  height: 28px;
+.note-title {
   color: #555;
-  margin: 6px 0 5px 0;
+  margin: 6px 0 10px 0;
   cursor: text; }
-  .linea.note-title:hover {
+  .note-title:hover {
     color: #0990dc; }
 
 .linea-lista {
@@ -779,5 +809,28 @@ table {
   background: whitesmoke;
   border: 1px solid #777;
   border-top: 0; }
+
+h1 {
+  height: 28px;
+  color: #555;
+  margin: 6px 0 5px 0;
+  padding: 0 20px;
+  cursor: text;
+  position: relative; }
+  h1:hover {
+    color: #0990dc; }
+  h1:after {
+    content: "♯";
+    position: absolute;
+    left: 0;
+    top: 0; }
+
+blockquote {
+  border-left: 5px solid #ccc;
+  padding: 0 20px;
+  color: #888; }
+
+a {
+  cursor: pointer; }
 
 /*# sourceMappingURL=main.css.map */

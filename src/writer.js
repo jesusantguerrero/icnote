@@ -41,29 +41,78 @@ getTyping()
  * convertions,addlines, remove lines, etc
  */
 function getTyping () {
+  var keys = {
+        ENTER: 13,
+        BACKSPACE: 8,
+        TAB: 9,
+        lParenthesis: 40,
+        lBracket: 91,
+        lBrace: 123,
+        grave: 96,
+        quot: 34
+  }
+
+  var Simbols = {
+      rParenthesis: "&rpar;",
+      rBracket: "&rbrack;",
+      rBrace: "&rbrace;",
+      grave: "&grave;",
+      quot: "&quot;"
+  }
 
   editor.on('keydown', function (event) {
     key = event.which
 
-    if (key == 13) {
-      if (line < 1) {
-        editor.removeClass('modo-espera')
-        editor.html('')
-        modoEscritura = true
-        addLine()
-      } else {
-        wconverter.decode(lineElement)
-        addLine()
-      }
+    switch (key) {
+      case keys.ENTER:
+        if (line < 1) {
+          editor.removeClass('modo-espera')
+          editor.html('')
+          modoEscritura = true
+          addLine()
+        } else {
+          wconverter.decode(lineElement)
+          addLine()
+        } 
+        break;
+      case keys.BACKSPACE:
+        if (lineElement.text() === '' && line > 1) {
+          removeLine()
+        } 
+        else if (line == 1 && lineElement.text() === '') {
+          resetEditor()
+        }
+        break;
+      case keys.TAB:
+        event.preventDefault()
+        lineElement.prepend("&nbsp;&nbsp;&nbsp;&nbsp;")
+        break
     }
+  })
 
-    if (key == 8) {
-      if (lineElement.text() === '' && line > 1) {
-        removeLine()
-      } else if (line == 1 && lineElement.text() === '') {
-        resetEditor()
+  editor.on("keypress",function(){
+    key = event.which
+
+    switch (key) {
+      case keys.lParenthesis:
+        lineElement.append(Simbols.rParenthesis)
+        break;
+      case keys.lBracket:
+        lineElement.append(Simbols.rBracket)
+        break;
+      case keys.lBrace:
+        lineElement.append(Simbols.rBrace)
+        break;
+      case keys.grave:
+        lineElement.append(Simbols.grave)
+        break;
+      case keys.quot:
+        lineElement.append(Simbols.quot)
+        break;
+      default:
+        
+        break;
       }
-    }
   })
 
   function addLine () {
@@ -83,6 +132,7 @@ function getTyping () {
     lineElement.focus()
     line++
     updateLines()
+    saveNote()
   }
 
   function removeLine () {
@@ -93,6 +143,7 @@ function getTyping () {
     lib.focusElement(lineElement)
     line--
     updateLines()
+    saveNote()
   }
 
 }
@@ -215,8 +266,11 @@ function updateLines(){
 }
 /**
  * get the data of the current note and send it to a db.saveNote() to storage in a file
- */
+ * @return {void}
+ */  
+
 function saveNote () {
+
   var noteTitle = docTitle.text(),
       body = editor.html(),
       tagsDoc = editor.find(".tag"),
@@ -238,11 +292,8 @@ function saveNote () {
       lines: line
   }
 
-  if (noteTitle != "") {
-    DB.saveNote(data,SMOOTHSAVE)
-  } else {
- 
-  }
+    DB.saveNote(data)
+
 }
 
 

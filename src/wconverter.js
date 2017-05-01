@@ -12,17 +12,23 @@ var span
 var translatedLine
 var links
 
+
+/**
+ * Recieves the line and Converts the markdown into html
+ * @param {jqueryElement} lineElement
+ * @return {void}
+ */  
+
 exports.decode = function (lineElement) {
     var temp = lineElement.text()
     var params = temp.split(' ')
 
     switch (params[0]) {
      // J-shunks support                                                                                                                     
-      case 't':
+      case '#':
         var text = temp.slice(1)
 
-        span = $('<span></span>').addClass('icon icon-link')
-        translatedLine = $('<h1></h1>').html(span)
+        translatedLine = $('<h1></h1>')
         translatedLine.append(text)
         lineElement.html(translatedLine)
         lineElement.addClass('note-title')
@@ -40,9 +46,8 @@ exports.decode = function (lineElement) {
         break
                                                                                                                                 
       case 'hc': {
-        temp = $('<h3></h3>')
+        temp = $('<h2></h2>')
         temp.css({'color': params[1]})
-        console.log(params[0] + ' ' + params[1] + ' ' + params[2])
         for (var i = 2; i < params.length; i++) {
           temp.append(params[i] + ' ')
         }
@@ -96,8 +101,10 @@ exports.decode = function (lineElement) {
         $('code').each(function (i, block) {
           highlight.highlightBlock(block)
         })
+        lib.externalLinks();      
         break
     } // end of switch
+
   }
 
 
