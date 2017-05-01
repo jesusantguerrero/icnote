@@ -264,8 +264,12 @@ function updateLines(){
       lib.focusElement(lineElement)
     })
 
-    editorLines.on('blur',function(){
-      $(this).attr("contenteditable","false")
+    editorLines.on('blur',function(e){
+      e.stopImmediatePropagation()
+      var $this = $(this)
+      $this.attr("contenteditable","false")
+      wconverter.decode(lineElement)
+      
     })
 }
 /**

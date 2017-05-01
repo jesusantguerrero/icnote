@@ -23,7 +23,7 @@ var links
 exports.decode = function (lineElement) {
     var temp = lineElement.text()
     var params = temp.split(' ')
-
+    
     switch (params[0]) {
      // J-shunks support                                                                                                                     
       case '#':
