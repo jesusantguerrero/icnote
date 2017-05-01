@@ -2,7 +2,6 @@
 //  aquin convertimos el codigo markdown, jchunk o texto en nuevo html
 const remark = require('remark')
 const remarkHmtl = require('remark-html')
-const highlight = require('highlight.js')
 const toMarkdown = require('to-markdown')
 
 
@@ -37,9 +36,17 @@ exports.decode = function (lineElement) {
 
         break
                                                                                                                          
-      case 'c': {
+      case '[]': {
         var text = temp.slice(2)
         temp = `<input type='checkbox' id='check-${checkNumber}' class='filled-in'/> <label for='check-${checkNumber}'>` + text + '</label>'
+        lineElement.html(temp)
+        lineElement.addClass('linea-lista')
+        checkNumber++
+      }
+        break
+      case '[x]': {
+        var text = temp.slice(3)
+        temp = `<input type='checkbox' id='check-${checkNumber}' class='filled-in' checked='true'/> <label for='check-${checkNumber}'>` + text + '</label>'
         lineElement.html(temp)
         lineElement.addClass('linea-lista')
         checkNumber++
@@ -88,7 +95,6 @@ exports.decode = function (lineElement) {
           temp.append('<td>' + params[i].trim() + ' </td>')
         }
         temp.children().css({'width': tableWidth + '%'})
-        console.log(temp.children())
         lineElement.html(temp)
       }
         break
@@ -98,10 +104,6 @@ exports.decode = function (lineElement) {
       default:
         var fileresult = remark().use(remarkHmtl).processSync([temp].join('\n'))
         lineElement.html(String(fileresult).trim())
-
-        $('code').each(function (i, block) {
-          highlight.highlightBlock(block)
-        })
         lib.externalLinks();      
         break
     } // end of switch
@@ -110,16 +112,45 @@ exports.decode = function (lineElement) {
 
   exports.encode = function (lineElement) {
     var temp = lineElement.html()
-    var endTag = temp.indexOf(">") + 1
-    var tag = temp.slice(0,endTag)
-    var s = " "
-    if(tag.includes("type=checkbox")){
+    var endTag = temp.indexOf(">") 
+    var tag = temp.slice(0,endTag + 1)
+    var text = "",
+        th,
+        result
+    
+    if(tag.includes('type="checkbox"')){
+      if(tag.includes('checked="true"')){
+        text = lineElement.find("label").text();
+        lineElement.text("[x] " + text)
+      }else{
+        text = lineElement.find("label").text();
+        lineElement.text("[] " + text)
+      }
 
-    }else if(tag.includes("<table>")){
+    }
+    else if(tag.includes("<table")){
+      if(temp.includes("<th")){
+        th = lineElement.find("th")
+        result = "|"
+      }else{
+        th = lineElement.find("td")
+        result = ""
+      }
 
-    }else if(tag.includes("<span class='icon icon-tag tag'>")){
+      th.each(function(i,el){
+        result += "| " + $(this).text() + " "
+      })
 
-    }else{
+      lineElement.text(result)
+
+    }
+    else if(tag.includes('<span class="icon icon-tag tag">')){
+
+    }
+    else if(temp.includes('=hljs')){
+
+    }
+    else{
       s = toMarkdown(temp)
       lineElement.text(s)
     }

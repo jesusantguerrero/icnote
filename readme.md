@@ -20,7 +20,6 @@ A simple note taker using electron
 * Markdown support
 * Realtime Preview(on enter press)
 * Autosave
-* Code highlight
 * Programmer focused
 * Tags
 * And more...
