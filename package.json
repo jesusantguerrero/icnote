@@ -2,7 +2,27 @@
   "name": "icnote",
   "version": "0.6.0",
   "description": "keep your notes in a simple way with jtools",
+  "bugs":{ "url" : "https://github.com/jesusantguerrero/icnote/issues",
+   "email" : "jesusant.guerrero@gmail.com"
+  },
+  "license": "MIT",
 
+  "keywords": [
+    "Note",
+    "notes",
+    "markdown",
+    "tasklist"
+  ],
+  "author": {
+    "name": "Jesus Guerrero",
+    "email": "jesusant.guerrero@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jesusantguerrero/icnote.git"
+  },
+  
+  
   "main": "main.js",
   "dependencies": {
     "electron-json-storage": "^3.0.1",
@@ -21,19 +41,18 @@
     "build": "build -w --x64",
     "pack": "build --dir"
   },
+
   "build": {
-    "appId": "insanecode.icnote",
-    "productName": "icnote"
+    "appId": "com.insanecode.icnote",
+    "productName": "icnote",
+    "compression": "maximum",
+    "win":{
+      "target":[
+        "nsis",
+        "zip"
+      ]
+    }
   },
-  "keywords": [
-    "Note",
-    "notes",
-    "markdown",
-    "tasklist"
-  ],
-  "author": {
-    "name": "Jesus Guerrero",
-    "email": "jesusant.guerrero@gmail.com"
-  },
-  "license": "MIT"
+
+
 }
