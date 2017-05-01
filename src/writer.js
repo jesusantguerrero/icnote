@@ -199,9 +199,10 @@ searchbar.on('change',function(){
 // ====  Editor states ====
 
 function resetEditor() {
+  let views = require("./views.js")
   editor.removeAttr("contenteditable")
   editor.addClass("modo-espera")
-  editor.html("<h3>Presione enter para escribir</h3>")
+  editor.html(views.welcomeScreen())
   editor.focus()
   docTitle.text("New Note")
   modoEscritura = false
