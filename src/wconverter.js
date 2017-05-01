@@ -3,6 +3,7 @@
 const remark = require('remark')
 const remarkHmtl = require('remark-html')
 const highlight = require('highlight.js')
+const toMarkdown = require('to-markdown')
 
 
 var listNumber
@@ -104,6 +105,24 @@ exports.decode = function (lineElement) {
         lib.externalLinks();      
         break
     } // end of switch
+
+  }
+
+  exports.encode = function (lineElement) {
+    var temp = lineElement.html()
+    var endTag = temp.indexOf(">") + 1
+    var tag = temp.slice(0,endTag)
+    var s = " "
+    if(tag.includes("type=checkbox")){
+
+    }else if(tag.includes("<table>")){
+
+    }else if(tag.includes("<span class='icon icon-tag tag'>")){
+
+    }else{
+      s = toMarkdown(temp)
+      lineElement.text(s)
+    }
 
   }
 

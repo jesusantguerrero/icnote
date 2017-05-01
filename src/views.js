@@ -1,4 +1,5 @@
 var _callback = function(){}
+var _text = ""
 
 /**
  * it's a Helper who take the data and diplay it in a ui
@@ -8,6 +9,11 @@ var _callback = function(){}
 
  exports.setCallback = function(callback){
   _callback = callback
+ }
+
+
+  exports.setSearchedText = function(text){
+  _text = text
  }
 /**
  * it's a Helper who take the data and diplay it in a ui
@@ -32,7 +38,7 @@ var _callback = function(){}
     }
 
     $(".notes-list").html(items);
-    this.callback();
+    _callback();
   }
 
 /**
@@ -51,7 +57,7 @@ var _callback = function(){}
       preview = data[key]["preview"].toLowerCase()
       tags = data[key]["tags"].toLowerCase()
 
-      if(title.includes(text) ||date.includes(text) ||preview.includes(text) || tags.includes(text)){
+      if(title.includes(_text) ||date.includes(_text) ||preview.includes(_text) || tags.includes(_text)){
         items += "<div class='note-item'>";
         items += "<h3 class='title'>" + data[key]["title"] + "</h3>"
         items += "<small class='date'>" + data[key]["date"] + "</small>"
@@ -67,7 +73,7 @@ var _callback = function(){}
     }
 
     $(".notes-list").html(items);
-    this.callback();
+    _callback();
   }
 
 

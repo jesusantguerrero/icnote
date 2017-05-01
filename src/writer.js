@@ -140,7 +140,8 @@ function getTyping () {
     lineElement.remove()
     lineElement = oldLine
     lineElement.attr("contenteditable","true")
-    lib.focusElement(lineElement)
+    wconverter.encode(lineElement)
+    lib.focusElement(lineElement) 
     line--
     updateLines()
     saveNote()
@@ -259,6 +260,8 @@ function updateLines(){
       var $this = $(this)
       $this.attr("contenteditable","true")
       lineElement = $this
+      wconverter.encode(lineElement)
+      lib.focusElement(lineElement)
     })
 
     editorLines.on('blur',function(){

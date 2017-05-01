@@ -1,62 +1,856 @@
-/*
-Error: File to import not found or unreadable: _pagess/_screens.
-       Load path: C:/Users/jesus/Documents/projects/electron/icnote/assets
-        on line 6 of assets/css/main.sass
+@charset "UTF-8";
+/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%; }
 
-1: // This is the single file output by sass. It is intended to ONLY @import other files.
-2: 
-3: 
-4: 
-5: @import _patterns/_base
-6: @import _pagess/_screens
-7: 
-8: // theme
-9: 
-10: @import _theme/_theme
-11: @import _theme/_icnote
+body {
+  margin: 0; }
 
-Backtrace:
-assets/css/main.sass:6
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/tree/import_node.rb:67:in `rescue in import'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/tree/import_node.rb:45:in `import'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/tree/import_node.rb:28:in `imported_file'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/tree/import_node.rb:37:in `css_import?'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:313:in `visit_import'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/tree/visitors/base.rb:36:in `visit'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:160:in `block in visit'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/stack.rb:79:in `block in with_base'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/stack.rb:115:in `with_frame'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/stack.rb:79:in `with_base'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:160:in `visit'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/tree/visitors/base.rb:52:in `map'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/tree/visitors/base.rb:52:in `visit_children'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:169:in `block in visit_children'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:181:in `with_environment'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:168:in `visit_children'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/tree/visitors/base.rb:36:in `block in visit'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:188:in `visit_root'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/tree/visitors/base.rb:36:in `visit'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:159:in `visit'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/tree/visitors/perform.rb:8:in `visit'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/tree/root_node.rb:36:in `css_tree'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/engine.rb:381:in `_render_with_sourcemap'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/engine.rb:298:in `render_with_sourcemap'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/plugin/compiler.rb:492:in `update_stylesheet'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/plugin/compiler.rb:209:in `each'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/plugin/compiler.rb:473:in `on_file_changed'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/lib/sass/plugin/compiler.rb:331:in `block in watch'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/vendor/listen/lib/listen/listener.rb:252:in `call'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/vendor/listen/lib/listen/listener.rb:252:in `on_change'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/vendor/listen/lib/listen/listener.rb:290:in `block in initialize_adapter'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/vendor/listen/lib/listen/adapters/polling.rb:48:in `call'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/vendor/listen/lib/listen/adapters/polling.rb:48:in `poll_changed_directories'
-C:/Ruby22-x64/lib/ruby/gems/2.2.0/gems/sass-3.4.23/vendor/listen/lib/listen/adapter.rb:299:in `block in start_poller'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: File to import not found or unreadable: _pagess/_screens.\A        Load path: C:/Users/jesus/Documents/projects/electron/icnote/assets\A         on line 6 of assets/css/main.sass\A \A 1: // This is the single file output by sass. It is intended to ONLY @import other files.\A 2: \A 3: \A 4: \A 5: @import _patterns/_base\A 6: @import _pagess/_screens\A 7: \A 8: // theme\A 9: \A 10: @import _theme/_theme\A 11: @import _theme/_icnote"; }
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block; }
+
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  vertical-align: baseline; }
+
+audio:not([controls]) {
+  display: none;
+  height: 0; }
+
+[hidden],
+template {
+  display: none; }
+
+a {
+  background-color: transparent; }
+
+a:active,
+a:hover {
+  outline: 0; }
+
+abbr[title] {
+  border-bottom: 1px dotted; }
+
+b,
+strong {
+  font-weight: bold; }
+
+dfn {
+  font-style: italic; }
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0; }
+
+mark {
+  background: #ff0;
+  color: #000; }
+
+small {
+  font-size: 80%; }
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+sup {
+  top: -0.5em; }
+
+sub {
+  bottom: -0.25em; }
+
+img {
+  border: 0; }
+
+svg:not(:root) {
+  overflow: hidden; }
+
+figure {
+  margin: 1em 40px; }
+
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0; }
+
+pre {
+  overflow: auto; }
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em; }
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0; }
+
+button {
+  overflow: visible; }
+
+button,
+select {
+  text-transform: none; }
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer; }
+
+button[disabled],
+html input[disabled] {
+  cursor: default; }
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+input {
+  line-height: normal; }
+
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0; }
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto; }
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box; }
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em; }
+
+legend {
+  border: 0;
+  padding: 0; }
+
+textarea {
+  overflow: auto; }
+
+optgroup {
+  font-weight: bold; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+td,
+th {
+  padding: 0; }
+
+a {
+  color: #0074D9;
+  text-decoration: none;
+  outline: 0; }
+  a:hover, a:focus {
+    color: #40a6ff; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  color: #555; }
+
+h1 {
+  font-size: 1.2em; }
+
+h2 {
+  font-size: 1.1em; }
+
+h3 {
+  font-size: 1.05em; }
+
+h4 {
+  font-size: 0.9em; }
+
+h5 {
+  font-size: 0.8em; }
+
+h6 {
+  font-size: 0.6em; }
+
+p {
+  margin: 0 0 20px 0; }
+
+em {
+  font-style: italic; }
+
+strong {
+  font-weight: bold; }
+
+hr {
+  border: solid #06f;
+  border-width: 1px 0 0;
+  clear: both;
+  height: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 0 0; }
+
+code {
+  display: block;
+  background: #eee;
+  font-family: "Fira Code", "Consolas";
+  font-size: 14px;
+  height: 100%;
+  width: 80%;
+  position: relative;
+  padding-left: 20px; }
+
+[type="text"] {
+  height: 38px;
+  border: 1px solid #aaa;
+  padding: 0 10px; }
+  [type="text"]:hover, [type="text"]:focus {
+    outline-color: #0990dc; }
+
+[type="checkbox"] {
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  background: white;
+  display: block;
+  margin: 5px 10px 0 0;
+  border-radius: 3px;
+  border: 3px solid #666;
+  position: relative;
+  cursor: pointer;
+  transition: all ease 0.3s;
+  display: inline-block; }
+  [type="checkbox"]:focus {
+    outline: 0; }
+
+[for^="check"] {
+  display: inline-block;
+  font-size: 20px;
+  height: 24px;
+  cursor: pointer; }
+
+[type="checkbox"]:checked {
+  background: #655; }
+  [type="checkbox"]:checked:before {
+    content: "✘";
+    color: #fff;
+    left: 5%;
+    position: absolute;
+    font-size: 14px; }
+  [type="checkbox"]:checked + [for^="check"] {
+    text-decoration: line-through; }
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+  padding: 0 15px; }
+  .input-group label {
+    padding-top: 5px;
+    font-weight: bolder;
+    font-font-size: 18px; }
+
+ol,
+ul {
+  margin: 5px 10px 0 5%; }
+
+.button,
+.btn,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  display: inline-block;
+  height: 38px;
+  padding: 0 30px;
+  color: #555;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border-radius: 0px 0px 0px 0px;
+  border: 1px solid #bbb;
+  cursor: pointer;
+  box-sizing: border-box; }
+  .button:hover, .button:active, .button:focus,
+  .btn:hover,
+  .btn:active,
+  .btn:focus,
+  button:hover,
+  button:active,
+  button:focus,
+  input[type="submit"]:hover,
+  input[type="submit"]:active,
+  input[type="submit"]:focus,
+  input[type="reset"]:hover,
+  input[type="reset"]:active,
+  input[type="reset"]:focus,
+  input[type="button"]:hover,
+  input[type="button"]:active,
+  input[type="button"]:focus {
+    color: #333;
+    border-color: #333;
+    outline: 0;
+    color: white; }
+
+.btn-group {
+  height: 100%; }
+  .btn-group:first-child {
+    border-radius: 0px; }
+  .btn-group:last-child {
+    border-radius: 0px; }
+
+.btn-tab {
+  color: #0990dc;
+  border: 0;
+  font-size: 25px;
+  cursor: pointer;
+  height: 100%;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex;
+  box-shadow: none;
+  background: transparent; }
+  .btn-tab:hover, .btn-tab:focus {
+    color: #fff;
+    outline: 0; }
+    .btn-tab:hover .icon, .btn-tab:focus .icon {
+      cursor: pointer;
+      color: #333; }
+  .btn-tab .icon {
+    cursor: pointer;
+    text-align: center;
+    color: #333;
+    font-size: 18px; }
+
+.btn-lm {
+  width: 100%;
+  backface-visibility: transparent;
+  margin: 10px 0;
+  border: none;
+  height: 48px; }
+  .btn-lm .icon {
+    cursor: pointer;
+    text-align: center;
+    color: #ccc;
+    font-size: 25px;
+    margin-left: 5px; }
+  .btn-lm:hover {
+    background: rgba(255, 255, 255, 0.2); }
+    .btn-lm:hover .icon {
+      cursor: pointer;
+      text-align: center;
+      color: #fff;
+      font-size: 25px; }
+
+#btn-pdf,
+#btn-trash,
+#btn-save-note,
+#btn-preferences {
+  position: relative; }
+  #btn-pdf:after,
+  #btn-trash:after,
+  #btn-save-note:after,
+  #btn-preferences:after {
+    position: absolute;
+    width: 100px;
+    height: 16px;
+    background: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    left: -32px;
+    bottom: -40px;
+    transition: all ease 0.3s;
+    opacity: 0;
+    border-radius: 3px;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 10px;
+    z-index: 200; }
+  #btn-pdf:hover:after,
+  #btn-trash:hover:after,
+  #btn-save-note:hover:after,
+  #btn-preferences:hover:after {
+    visibility: visible;
+    opacity: 1; }
+
+#btn-pdf:after {
+  content: "Exp. to PDF"; }
+
+#btn-trash:after {
+  content: "clear"; }
+
+#btn-save-note:after {
+  content: "Save Note"; }
+
+#btn-preferences:after {
+  content: "preferences"; }
+
+#notification-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 20px;
+  height: 20px;
+  width: 1px;
+  overflow: hidden;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  z-index: 1000;
+  color: #fff;
+  opacity: 0.1; }
+
+.notes-list-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 900px;
+  overflow: hidden;
+  top: 610px;
+  left: 0;
+  position: absolute;
+  z-index: 199;
+  color: #555;
+  border-right: 2px solid #fafafa;
+  opacity: 0.9;
+  background: whitesmoke; }
+  .notes-list-box:show-list {
+    left: 0; }
+
+.note-list-header {
+  width: 95%;
+  height: 30%;
+  text-align: center;
+  background: whitesmoke;
+  overflow-x: auto; }
+
+.menu-title {
+  font-size: 30px;
+  margin: 10px 0 20px 0; }
+
+.searchbar {
+  height: 48px;
+  width: 100%;
+  padding: 0 10px;
+  font-size: 25px;
+  margin: 10px 0 0 0;
+  border: 2px solid #666; }
+  .searchbar:focus {
+    outline: 0; }
+
+.notes-list {
+  width: 95%;
+  height: 60%;
+  overflow-x: auto; }
+
+.list-menu {
+  width: 95%;
+  height: 10%; }
+
+.note-item {
+  padding: 15px;
+  height: 120px;
+  width: 100%;
+  background: whitesmoke;
+  cursor: pointer;
+  overflow: hidden;
+  border-bottom: 1px solid #ddd;
+  position: relative; }
+  .note-item:hover {
+    background: #333;
+    color: #fff; }
+    .note-item:hover .title {
+      color: #fff; }
+    .note-item:hover .erase {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      display: block; }
+  .note-item .title {
+    text-align: left;
+    font-size: 18px;
+    color: #333; }
+  .note-item .date {
+    text-decoration: dotted; }
+  .note-item .body {
+    visibility: hidden; }
+  .note-item .metadata {
+    visibility: hidden; }
+
+.erase {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: none;
+  font-size: 15px;
+  cursor: pointer; }
+
+* {
+  margin: 0;
+  padding: 0; }
+
+.mytool {
+  padding: 0;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  border-radius: 8px 8px 0 0;
+  transition: all ease 0.3s;
+  -webkit-user-selection: none;
+  -webkit-app-region: drag;
+  z-index: 200; }
+
+.note-menu {
+  display: block;
+  width: 48px;
+  height: 50px;
+  text-align: center;
+  padding: 5px 0 0 0;
+  font-size: 25px;
+  font-weight: 600;
+  -webkit-app-region: no-drag; }
+
+.doc-title {
+  display: block;
+  width: 35%;
+  height: 100%;
+  padding: 10px 0 0 20px;
+  display: flex;
+  align-items: center;
+  cursor: move; }
+
+.btn-group {
+  display: flex;
+  width: 40%;
+  margin: 0;
+  justify-content: flex-end;
+  -webkit-user-selection: none;
+  -webkit-app-region: drag; }
+
+.control-group {
+  width: 20%;
+  justify-content: flex-end; }
+
+.content-fluid {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  border-radius: 10px;
+  background: #fff;
+  border: 1.2px solid #aaa; }
+
+.index-fluid {
+  height: 100vh; }
+
+.panel-principal {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: 90%;
+  background: #272727;
+  color: white;
+  position: relative; }
+
+#editor,
+#viewer {
+  padding: 20px 3% 2% 3%;
+  position: relative;
+  display: block;
+  overflow-y: scroll;
+  z-index: 100;
+  background: transparent; }
+  #editor:focus,
+  #viewer:focus {
+    outline: 0px; }
+
+#editor {
+  cursor: text; }
+
+.linea {
+  min-width: 100%;
+  min-height: 22px;
+  height: max-content;
+  max-height: max-content;
+  font-size: 18px;
+  z-index: 200;
+  cursor: text;
+  color: #777;
+  text-align: justify;
+  border: 1px solid transparent; }
+  .linea:focus, .linea:hover {
+    outline: 0;
+    cursor: text;
+    border: 1px solid #eee; }
+  .linea p {
+    margin: 0 0 0 0;
+    padding: 0;
+    width: 100%;
+    display: inline-block; }
+
+.between-div {
+  background: white;
+  width: 100%;
+  position: absolute;
+  height: 20vh;
+  top: 60px;
+  box-shadow: 0px 2px 5px whitesmoke;
+  z-index: 50; }
+
+.note-title {
+  color: #555;
+  margin: 6px 0 10px 0;
+  cursor: text; }
+  .note-title:hover {
+    color: #0990dc; }
+
+.linea-lista {
+  padding-left: 3%; }
+
+.img-line {
+  height: 280px;
+  display: flex;
+  padding: 10px; }
+
+.c {
+  justify-content: center; }
+
+.r {
+  justify-content: flex-end; }
+
+.img-apuntes {
+  height: 250px;
+  width: 250px;
+  border-radius: 5px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7); }
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  cursor: pointer;
+  z-index: 500; }
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: white;
+  cursor: pointer; }
+
+::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  cursor: pointer;
+  border-radius: 3px;
+  z-index: 100; }
+
+.editor-preferences {
+  position: absolute;
+  height: 100%;
+  width: 300px;
+  background: whitesmoke;
+  right: -300px;
+  top: 50px;
+  z-index: 100;
+  padding: 0 15px; }
+  .editor-preferences.showed {
+    right: 0; }
+
+.welcome-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .welcome-screen .info {
+    color: #aaa;
+    font-size: 16px;
+    width: 50%;
+    display: flex;
+    justify-content: space-around; }
+  .welcome-screen .more-info {
+    margin: 0;
+    font-size: 24px;
+    color: #aaa; }
+
+.logo {
+  text-align: center;
+  font-size: 9em;
+  color: #ddd;
+  text-shadow: 1px 1px 1px #ccc, -1px -1px 1px #ccc;
+  cursor: pointer;
+  transition: all ease 0.3s; }
+
+.company {
+  font-family: squarefont;
+  cursor: pointer; }
+
+.product {
+  cursor: pointer; }
+
+.movable {
+  transition: all ease 0.5s; }
+
+.about-screen .logo {
+  transition: all ease 0.3s; }
+  .about-screen .logo:hover {
+    color: dodgerblue;
+    text-shadow: 1px 1px 1px #0990dc, -1px -1px 1px #0990dc; }
+    .about-screen .logo:hover .movable {
+      -webkit-transform: rotate(35deg);
+      transform: rotate(35deg); }
+
+.body {
+  background: transparent; }
+
+.mytool, .mytool-ext {
+  color: #777;
+  box-shadow: 1px 0 2px 2px rgba(238, 238, 238, 0.3); }
+  .mytool .btn, .mytool-ext .btn {
+    color: #0990dc;
+    opacity: 1;
+    border: none; }
+  .mytool .icon, .mytool-ext .icon {
+    color: #777; }
+
+.pane-sm {
+  background: #fff; }
+
+.toolbar-footer {
+  background: #0990dc;
+  color: white; }
+
+button {
+  color: white;
+  background: #0990dc; }
+
+#see-tasks {
+  box-shadow: 0 1px 4px #aaa; }
+
+.panel-principal {
+  background: #f0f4f4;
+  background: white;
+  color: #272727; }
+
+.panel-button {
+  background: white;
+  color: #272727;
+  border: 1px solid #ddd;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4); }
+  .panel-button .singleLetter {
+    color: #0990dc; }
+  .panel-button h3 {
+    color: #555;
+    background: whitesmoke;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
+    border-right: 5px solid #0990dc; }
+
+table {
+  border: 1px solid #aaa;
+  text-align: center; }
+  table th {
+    text-align: center;
+    background: #0990dc;
+    color: white;
+    border-right: 1px solid white; }
+  table td {
+    text-align: center; }
+
+.modo-espera {
+  color: #0990dc; }
+
+.linea {
+  color: #222; }
+
+.tag {
+  padding: 2px 4px;
+  margin: auto 1%;
+  color: #777;
+  background: whitesmoke;
+  border-radius: 3px;
+  width: fit-content;
+  box-shadow: 1px 1px 2px #aaa;
+  transition: all ease 0.3s;
+  cursor: pointer; }
+  .tag:hover {
+    color: white;
+    background: #0990dc;
+    box-shadow: 1px 1px 2px #777; }
+
+.tags-container {
+  height: max-content; }
+
+.apuntes-table {
+  border: 1px solid #777;
+  border-bottom: 0; }
+
+.apuntes-table.body {
+  color: #272727;
+  background: whitesmoke;
+  border: 1px solid #777;
+  border-top: 0; }
+
+h1 {
+  height: 28px;
+  color: #555;
+  margin: 6px 0 5px 0;
+  padding: 0 20px;
+  cursor: text;
+  position: relative; }
+  h1:hover {
+    color: #0990dc; }
+  h1:after {
+    content: "♯";
+    position: absolute;
+    left: 0;
+    top: 0; }
+
+blockquote {
+  border-left: 5px solid #ccc;
+  padding: 0 20px;
+  color: #888; }
+
+a {
+  cursor: pointer; }
+
+/*# sourceMappingURL=main.css.map */

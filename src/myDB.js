@@ -2,8 +2,6 @@
 
 const storage = require('electron-json-storage')
 const views = require("./views.js")
-var callback = function(){}
-var searchedText = ""
 
 storage.setDirectory("notes")
 
@@ -68,8 +66,7 @@ exports.DB = function(notification){
  * @return {void}
  */ 
   this.search = function(text){
-    searchedText= text.toLowerCase()
-    console.log('Estoy en la base de datos y el texto a buscar es: ' + text);
+    views.setSearchedText(text.toLowerCase())
     
     storage.getAll((err,data)=>{
       if(err) main.log("ha ocurrido un error 11")
