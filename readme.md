@@ -6,6 +6,8 @@ A simple note taker using electron
 
 ![ICNOTE](documentation/assets/images/img2.png)
 
+![ICNOTE](documentation/assets/images/img3.png)
+
 ## The goals
 
 * **EASY** Provide an easy way to keep little notes
@@ -17,7 +19,17 @@ A simple note taker using electron
 
 * Markdown support
 * Realtime Preview(on enter press)
+* Autosave
+* Code highlight
+* Programmer focused
+* Tags
 * And more...
+
+TODO:
+- export to markdown
+- export to html
+- table of content
+- Drag and drop images to the editor
 
 ## Technologies
 
