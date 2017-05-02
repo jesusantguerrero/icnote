@@ -263,7 +263,7 @@ code {
 [for^="check"] {
   display: inline-block;
   font-size: 20px;
-  height: 24px;
+  padding: 2px 0;
   cursor: pointer; }
 
 [type="checkbox"]:checked {
@@ -386,21 +386,14 @@ input[type="button"] {
       color: #fff;
       font-size: 25px; }
 
-#btn-pdf,
-#btn-trash,
-#btn-save-note,
-#btn-preferences {
+.btn-tab {
   position: relative; }
-  #btn-pdf:after,
-  #btn-trash:after,
-  #btn-save-note:after,
-  #btn-preferences:after {
+  .btn-tab:after {
     position: absolute;
-    width: 100px;
     height: 16px;
     background: rgba(0, 0, 0, 0.5);
     visibility: hidden;
-    left: -32px;
+    left: -50%;
     bottom: -40px;
     transition: all ease 0.3s;
     opacity: 0;
@@ -408,14 +401,14 @@ input[type="button"] {
     color: white;
     padding: 10px;
     text-align: center;
-    font-size: 10px;
+    font-size: 9px;
     z-index: 200; }
-  #btn-pdf:hover:after,
-  #btn-trash:hover:after,
-  #btn-save-note:hover:after,
-  #btn-preferences:hover:after {
+  .btn-tab:hover:after {
     visibility: visible;
     opacity: 1; }
+
+#btn-devtools:after {
+  content: "Table of Contents"; }
 
 #btn-pdf:after {
   content: "Exp. to PDF"; }
@@ -424,7 +417,10 @@ input[type="button"] {
   content: "clear"; }
 
 #btn-save-note:after {
-  content: "Save Note"; }
+  content: "Save As"; }
+
+#btn-read-mode:after {
+  content: "Read Mode"; }
 
 #btn-preferences:after {
   content: "preferences"; }
@@ -457,7 +453,7 @@ input[type="button"] {
   color: #555;
   border-right: 2px solid #fafafa;
   opacity: 0.9;
-  background: whitesmoke; }
+  background: #fefefe; }
   .notes-list-box:show-list {
     left: 0; }
 
@@ -465,11 +461,11 @@ input[type="button"] {
   width: 95%;
   height: 30%;
   text-align: center;
-  background: whitesmoke;
+  background: #fefefe;
   overflow-x: auto; }
 
 .menu-title {
-  font-size: 30px;
+  font-size: 25px;
   margin: 10px 0 20px 0; }
 
 .searchbar {
@@ -484,18 +480,21 @@ input[type="button"] {
 
 .notes-list {
   width: 95%;
-  height: 60%;
+  height: 55%;
   overflow-x: auto; }
 
 .list-menu {
+  border-top: 3px solid #ccc;
+  border-radius: 10px 10px 0 0;
   width: 95%;
-  height: 10%; }
+  height: 20%;
+  display: flex; }
 
 .note-item {
   padding: 15px;
   height: 120px;
   width: 100%;
-  background: whitesmoke;
+  background: #fefefe;
   cursor: pointer;
   overflow: hidden;
   border-bottom: 1px solid #ddd;

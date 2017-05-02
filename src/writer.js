@@ -233,6 +233,7 @@ function toggleMenu () {
 
     noteListBox.animate({top: '50px'}, 500, function () {
       noteListBox.addClass('show-list')
+      $(".editor-tools").css({visibility:"hidden"})
       is_menu = true     
     })
   } else {
@@ -243,6 +244,7 @@ function toggleMenu () {
     
     noteListBox.animate({top: '610px'}, 500, function () {
       noteListBox.removeClass('show-list')
+      $(".editor-tools").css({visibility:"visible"})
       is_menu = false
     })
   }
