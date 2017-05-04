@@ -20,18 +20,40 @@ app.on('ready', () => {
       transparent: true,
       frame: false
     })
+
     
     winNewNote.loadURL(`file://${__dirname}/ui/newnote.html`)
     winNewNote.on('ready-to-show', () => {
       winNewNote.show()
     })
 
+    
+
     ipcMain.on('note-close', () => {
         winNewNote.close()
     })
 
+
     ipcMain.on('note-min', () => {
-      winNewNote.minimize()
+      // winNewNote.minimize()
+      let w = 900
+      let h = 600
+      let c = 10
+      let timer = setInterval(()=>{
+            if(c != 0){
+              w -= 90
+              h -= 60
+              c--
+              winNewNote.setSize(w,h,true)
+            }else{
+              winNewNote.minimize()
+              clearInterval(timer)
+            }     
+          },3)
+    })
+
+    winNewNote.on('restore',()=>{
+      winNewNote.setSize(900,600,true)
     })
 
     ipcMain.on('devtools', ()=>{
@@ -41,6 +63,7 @@ app.on('ready', () => {
     ipcMain.on('reload', ()=>{
       winNewNote.webContents.reload()
     })
+
 
   }
 

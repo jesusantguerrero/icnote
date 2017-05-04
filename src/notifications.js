@@ -16,7 +16,7 @@ exports.init = function(){
 
     texts = {
       error : 'rgb(255, 20, 20)',
-      success: 'rgb(9, 240, 12)',
+      success: '#f8f8f8',
       about: 'rgb(46, 52, 54)',
       info: 'dodgerblue',
       smooth:'rgb(9, 240, 12)'

@@ -37,18 +37,27 @@
   },
   "scripts": {
     "start": "electron .",
+    "postinstall": "install-app-deps",
     "build": "build -w --x64",
     "pack": "build --dir"
   },
   "build": {
     "appId": "com.insanecode.icnote",
-    "productName": "icnote",
+    "productName": "IC Note",
     "compression": "maximum",
+    "electronVersion": "1.6.2",
     "win": {
       "target": [
         "nsis",
         "zip"
       ]
+    },
+    "nsis":{
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon":"build/installerIcon.ico",
+      "installerSidebar": "build/banner.bmp"
     }
+  
   }
 }

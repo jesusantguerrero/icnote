@@ -343,6 +343,7 @@ function recognizeItems(){
   btnErase.on('click',function(){
     var noteName = $(this).attr("data-title")
     deleteNote(noteName)
+    DB.getNotes(recognizeItems)
   })
 
 }

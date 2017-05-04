@@ -240,7 +240,9 @@ code {
 [type="text"] {
   height: 38px;
   border: 1px solid #aaa;
-  padding: 0 10px; }
+  padding: 0 10px;
+  border-radius: 4px;
+  cursor: text; }
   [type="text"]:hover, [type="text"]:focus {
     outline-color: #0990dc; }
 
@@ -281,7 +283,8 @@ code {
   display: flex;
   flex-direction: column;
   margin-bottom: 5px;
-  padding: 0 15px; }
+  padding: 0 15px;
+  text-align: left; }
   .input-group label {
     padding-top: 5px;
     font-weight: bolder;
@@ -293,10 +296,7 @@ ul {
 
 .button,
 .btn,
-button,
-input[type="submit"],
-input[type="reset"],
-input[type="button"] {
+button {
   display: inline-block;
   height: 38px;
   padding: 0 30px;
@@ -320,16 +320,7 @@ input[type="button"] {
   .btn:focus,
   button:hover,
   button:active,
-  button:focus,
-  input[type="submit"]:hover,
-  input[type="submit"]:active,
-  input[type="submit"]:focus,
-  input[type="reset"]:hover,
-  input[type="reset"]:active,
-  input[type="reset"]:focus,
-  input[type="button"]:hover,
-  input[type="button"]:active,
-  input[type="button"]:focus {
+  button:focus {
     color: #333;
     border-color: #333;
     outline: 0;
@@ -386,14 +377,15 @@ input[type="button"] {
       color: #fff;
       font-size: 25px; }
 
-.btn-tab {
+.editor-tools .btn-tab {
   position: relative; }
-  .btn-tab:after {
+  .editor-tools .btn-tab:after {
     position: absolute;
+    width: 130px;
     height: 16px;
-    background: rgba(0, 0, 0, 0.5);
+    background: #aaa;
     visibility: hidden;
-    left: -50%;
+    left: -57px;
     bottom: -40px;
     transition: all ease 0.3s;
     opacity: 0;
@@ -403,9 +395,29 @@ input[type="button"] {
     text-align: center;
     font-size: 9px;
     z-index: 200; }
-  .btn-tab:hover:after {
+  .editor-tools .btn-tab:before {
+    visibility: hidden;
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    opacity: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-right: 15px solid transparent;
+    border-left: 15px solid transparent;
+    border-bottom: 10px solid #aaa;
+    z-index: 200; }
+  .editor-tools .btn-tab .icon {
+    color: #ccc; }
+  .editor-tools .btn-tab:hover:after {
     visibility: visible;
     opacity: 1; }
+  .editor-tools .btn-tab:hover:before {
+    visibility: visible;
+    opacity: 1; }
+  .editor-tools .btn-tab:hover .icon {
+    color: #aaa; }
 
 #btn-devtools:after {
   content: "Table of Contents"; }
@@ -424,6 +436,31 @@ input[type="button"] {
 
 #btn-preferences:after {
   content: "preferences"; }
+
+#btn-close:hover .icon {
+  color: #f15555; }
+
+.editor-preferences {
+  position: absolute;
+  height: 100%;
+  width: 300px;
+  background: whitesmoke;
+  right: -300px;
+  top: 50px;
+  z-index: 100;
+  padding: 0 15px;
+  text-align: center; }
+  .editor-preferences h2,
+  .editor-preferences .call-about {
+    margin: 20px 0 15px 0;
+    font-size: 30px; }
+  .editor-preferences button {
+    margin: 5px;
+    color: #fff; }
+  .editor-preferences .call-about {
+    font-size: 16px; }
+  .editor-preferences.showed {
+    right: 0; }
 
 #notification-bar {
   display: flex;
@@ -452,7 +489,7 @@ input[type="button"] {
   z-index: 199;
   color: #555;
   border-right: 2px solid #fafafa;
-  opacity: 0.9;
+  opacity: 0.99;
   background: #fefefe; }
   .notes-list-box:show-list {
     left: 0; }
@@ -472,9 +509,11 @@ input[type="button"] {
   height: 48px;
   width: 100%;
   padding: 0 10px;
-  font-size: 25px;
+  font-size: 20px;
   margin: 10px 0 0 0;
-  border: 2px solid #666; }
+  border: 2px solid #666;
+  border-radius: 4px;
+  cursor: text; }
   .searchbar:focus {
     outline: 0; }
 
@@ -488,22 +527,24 @@ input[type="button"] {
   border-radius: 10px 10px 0 0;
   width: 95%;
   height: 20%;
-  display: flex; }
+  text-align: center;
+  padding: 15px;
+  color: #0990dc; }
 
 .note-item {
   padding: 15px;
+  margin: 5px 0;
   height: 120px;
   width: 100%;
   background: #fefefe;
   cursor: pointer;
   overflow: hidden;
-  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #f7f7f7;
   position: relative; }
   .note-item:hover {
-    background: #333;
-    color: #fff; }
+    background: #eee; }
     .note-item:hover .title {
-      color: #fff; }
+      color: #222; }
     .note-item:hover .erase {
       position: absolute;
       top: 15px;
@@ -681,18 +722,6 @@ input[type="button"] {
   cursor: pointer;
   border-radius: 3px;
   z-index: 100; }
-
-.editor-preferences {
-  position: absolute;
-  height: 100%;
-  width: 300px;
-  background: whitesmoke;
-  right: -300px;
-  top: 50px;
-  z-index: 100;
-  padding: 0 15px; }
-  .editor-preferences.showed {
-    right: 0; }
 
 .welcome-screen {
   width: 100%;
