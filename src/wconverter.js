@@ -147,11 +147,8 @@ exports.decode = function (lineElement) {
     else if(tag.includes('<span class="icon icon-tag tag">')){
 
     }
-    else if(temp.includes('=hljs')){
-
-    }
     else{
-      s = toMarkdown(temp)
+      s = toMarkdown(temp,{gfm: true})
       lineElement.text(s)
     }
 

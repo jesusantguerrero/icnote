@@ -3,7 +3,8 @@ const notification = new notifications.init()
 const myDB = require('./myDB.js')
 const DB = new myDB.DB(notification)
 const wconverter = require('./wconverter.js')
-const lib = require('./mylib.js')
+const views = require('./views.js')
+const controllerAbout = require('./aboutController')
 
 // the DOM Elements
 
@@ -183,13 +184,11 @@ $("#btn-devtools").on("click",function(){
   ipcRenderer.send("devtools")
 })
 
-
 $("#btn-pdf").on("click",function(){
   ipcRenderer.send("reload")
 })
 
-searchbar.on('change',function(){
-  console.log('Estoy buscando');  
+searchbar.on('change',function(){ 
   var text = searchbar.val()
   DB.search(text)
   searchbar.css({border: "2px solid 333"})
@@ -197,10 +196,21 @@ searchbar.on('change',function(){
 })
 
 
+$(".call-about").on("click",function(){
+  var aboutScreen = views.aboutScreen()
+  $(".content-fluid").append(aboutScreen)
+  aboutScreen.animate({opacity:1},200,function(){
+    $(".editor-tools").css({visibility:"hidden"})
+    controllerAbout.init(views)
+  })
+  
+
+})
+
 // ====  Editor states ====
 
 function resetEditor() {
-  let views = require("./views.js")
+  
   editor.removeAttr("contenteditable")
   editor.addClass("modo-espera")
   editor.html(views.welcomeScreen())

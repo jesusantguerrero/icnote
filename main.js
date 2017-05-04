@@ -9,15 +9,17 @@ let winNewNote
 
 app.on('ready', () => {
   newNote()
+  require("./src/documentation.js")
 
   // notes
   function newNote () {
 
-    let winNewNote = new BrowserWindow({
+   winNewNote = new BrowserWindow({
       width: 900,
       height: 600,
       show: false,
       transparent: true,
+      resizable: false,
       frame: false
     })
 

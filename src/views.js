@@ -1,5 +1,11 @@
 var _callback = function(){}
 var _text = ""
+const appVersion = process.env.npm_package_version
+const fs = require('fs')
+const remark = require('remark')
+const remarkHmtl = require('remark-html')
+let filepath = `${__dirname}/../documentation/`
+
 
 /**
  * it's a Helper who take the data and diplay it in a ui
@@ -64,7 +70,7 @@ var _text = ""
         items += "<p class='preview'>" + data[key]["preview"].slice(0,50) + "</p>"
         items += "<p class='tags'> <span clas='icon icon-tag'></span>" + data[key]["tags"] + "</p>"
         items += "<div class='body'>" + data[key]["body"] + "</div>"
-        items += "<p class='metadata'><span class='lines'>" + data[key]["lines"] + "</span></span>" 
+        items += "<div class='metadata'><span class='lines'>" + data[key]["lines"] + "</span></span>" 
 
         items += "<div class='erase' data-title='"+ data[key]["title"]+"'> <span class='icon icon-trash'></span></div>"
         items += "</div>";
@@ -84,9 +90,9 @@ var _text = ""
     html = '<div class="welcome-screen">'
     html +='<h3 class="logo"><span class="company">IC</span> <span class="product">Note</span> </h3>'
     html += '<p class="more-info"> <span>Press Enter to write</span></p>' 
+    html +=`<p class="info"> <span>${appVersion}</span></p>`
     html += '<p class="more-info"> <a href="">or Read the Turorial</a></p>'
     html += '</div>'
-
     return html   
 
   }
@@ -94,9 +100,44 @@ var _text = ""
 
   exports.aboutScreen = function(){
     var html = ""
-        html +='<div class="about-screen">'
-        html +='<h3 class="logo"><span class="company">IC</span> <span class="product">Not<span class="movable">e</span></span> </h3>'
-        html +='<p class="info"> <span>0.6 BETA</span></p>'
-        html +='<p class="info"> <span>Developed by Insane Code, Inc</span></p>'
-        html += '</div>'
+    var about = $("<div>").addClass('about-screen')
+
+    html += '<p class="close"><span> close</span></p>'
+    html += '<div class="block-container">' 
+    html += '   <h3 class="logo"><span class="company">IC</span> <span class="product">Not<span class="movable">e</span></span> </h3>'
+    html += '</div>'
+    html += '<div class="block-container">'  
+    html += `   <p class="app-version"> <span>${appVersion}</span></p>`
+    html += '</div>'
+    html += '<p class="about-nav"><button>Tutorial</button> <button>License</button> <button>Info</button> <button>Thanks To</button></p>'
+    html += '<div class="information-container"> </div>'
+    html += "<div class='logos'></div>"
+    html += '<div class="block-container"><p class="app-version">  Developed  by <span class="author">Jesus Guerrero</span></p></div>'
+    html += '<div class=""></div>'
+
+    return about.html(html) 
+  }
+
+  exports.getDocumentation = function(documentName){
+    fs.readFile(filepath + documentName + ".md",(err,data)=>{
+      if(err) throw err
+      let mdFile = data.toString(); 
+      let htmlFile = remark().use(remarkHmtl).processSync([mdFile].join('\n'))
+      $(".information-container").html((String(htmlFile))); 
+      lib.externalLinks()
+      $(".logos").html(getLogos()); 
+    })
+
+  }
+
+  exports.clearDocumentation = function(){}
+
+  function getLogos(){
+
+    var html = "<img src='../assets/img/aboutIcon.svg' alt='logos'/>"
+    html += "<img src='../assets/img/aboutIconBlue.svg' alt='logos'/>"
+    html += "<img src='../assets/img/icnote.png' alt='logos'/>"
+    html += "<img src='../assets/img/insanecode_logo_transparent.png' alt='logos'/>"
+
+    return html
   }

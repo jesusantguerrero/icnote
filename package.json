@@ -1,7 +1,7 @@
 {
   "name": "icnote",
-  "version": "0.6.0",
-  "description": "keep your notes in a simple way with jtools",
+  "version": "0.6.0-Alpha",
+  "description": "keep your notes in a simple way with IC Notes",
   "bugs": {
     "url": "https://github.com/jesusantguerrero/icnote/issues",
     "email": "jesusant.guerrero@gmail.com"

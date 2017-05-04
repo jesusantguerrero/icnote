@@ -7,6 +7,7 @@
   flex-direction: column
   justify-content: center
   align-items: center
+  z-index: 1
 
   .info
     color: #aaa
@@ -44,8 +45,32 @@
 //  About Screen Styles
 
 .about-screen
+  position: absolute
+  width: 100%
+  top: 50px
+  left: 0
+  height: 550px
+  background: #fdfdfd
+  text-align: center
+  z-index: 1000
+  overflow-y: auto
+  opacity: 0
+
+  .close
+    text-align: right
+    margin-right: 15px
+
+  .block-container
+    display: flex
+    justify-content: center
+    width: 100%
   .logo
     transition: all ease .3s
+    padding: 0
+    margin: 0
+    width: fit-content
+    font-size: 90px
+    overflow: hidden
 
     &:hover
       color: dodgerblue
@@ -54,5 +79,38 @@
       .movable
         -webkit-transform: rotate(35deg)
         transform: rotate(35deg)
+  
+  .app-version
+    font:
+      size: 24px
+      weight: bolder
+    color: #ccc
+
+    &:hover
+      color: #999
+
+  .about-nav
+    button
+      margin: 0 0 0 0
+      background: #ccc
+      border: 2px solid #ccc
+      &:first-child
+        border-radius: 4px 0 0 4px
+
+      &:last-child
+        border-radius: 0 4px 4px 0
+
+      &:hover
+        border: 2px solid #999
+
+  .information-container
+    text-align: left
+    width: 100%
+    padding: 20px 
+
+  .logos
+    img
+      width: 240px
+    
 
 // End of About Screen Styles
