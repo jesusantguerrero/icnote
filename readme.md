@@ -6,8 +6,6 @@ A simple note taker for programers using electron.
 ![ICNOTE](./documentation/assets/images/img1.png)
 
 
-
-
 ## The goals
 
 * **EASY and Fast** Provide an easy way to keep little notes
