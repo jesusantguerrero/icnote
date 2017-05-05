@@ -57,15 +57,32 @@
   opacity: 0
 
   .close
-    text-align: right
-    margin-right: 15px
+    margin: 20px 0 0 30px
+    text-align: left
+
+    .icon
+      display: block
+      width: 40px
+      height: 40px
+      font-size: 30px
+      cursor: pointer
+      transition: border-radius ease .3s
+      text-align: center
+      background: #ddd
+      border-radius: 6px
+      
+      &:hover
+        border-radius: 60px
+        color: white
+        background: lighten($primary-color,10%)
+
 
   .block-container
     display: flex
     justify-content: center
     width: 100%
   .logo
-    transition: all ease .3s
+    transition: all ease 1s
     padding: 0
     margin: 0
     width: fit-content
@@ -106,11 +123,12 @@
   .information-container
     text-align: left
     width: 100%
-    padding: 20px 
+    padding: 20px 100px
 
   .logos
+    margin-top: 70px
     img
-      width: 240px
+      width: 120px
     
 
 // End of About Screen Styles

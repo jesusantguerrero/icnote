@@ -4,7 +4,7 @@ const appVersion = process.env.npm_package_version
 const fs = require('fs')
 const remark = require('remark')
 const remarkHmtl = require('remark-html')
-let filepath = `${__dirname}/../documentation/`
+var filepath = `${__dirname}/../documentation/`
 
 
 /**
@@ -102,7 +102,7 @@ let filepath = `${__dirname}/../documentation/`
     var html = ""
     var about = $("<div>").addClass('about-screen')
 
-    html += '<p class="close"><span> close</span></p>'
+    html += '<p class="close"><span class="icon icon-left-open"> </span></p>'
     html += '<div class="block-container">' 
     html += '   <h3 class="logo"><span class="company">IC</span> <span class="product">Not<span class="movable">e</span></span> </h3>'
     html += '</div>'
@@ -119,10 +119,17 @@ let filepath = `${__dirname}/../documentation/`
   }
 
   exports.getDocumentation = function(documentName){
-    fs.readFile(filepath + documentName + ".md",(err,data)=>{
+    var file
+    if(documentName == "license"){ 
+      file = filepath + "../" + documentName.toUpperCase() + ".md"
+    }else{
+      file = filepath + documentName + ".md"
+    }
+
+    fs.readFile(file,(err,data)=>{
       if(err) throw err
-      let mdFile = data.toString(); 
-      let htmlFile = remark().use(remarkHmtl).processSync([mdFile].join('\n'))
+      var mdFile = data.toString(); 
+      var htmlFile = remark().use(remarkHmtl).processSync([mdFile].join('\n'))
       $(".information-container").html((String(htmlFile))); 
       lib.externalLinks()
       $(".logos").html(getLogos()); 
@@ -134,10 +141,7 @@ let filepath = `${__dirname}/../documentation/`
 
   function getLogos(){
 
-    var html = "<img src='../assets/img/aboutIcon.svg' alt='logos'/>"
-    html += "<img src='../assets/img/aboutIconBlue.svg' alt='logos'/>"
-    html += "<img src='../assets/img/icnote.png' alt='logos'/>"
-    html += "<img src='../assets/img/insanecode_logo_transparent.png' alt='logos'/>"
+    var html = "<img src='../assets/img/insanecode_logo_transparent.png' alt='logos'/>"
 
     return html
   }

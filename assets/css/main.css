@@ -228,7 +228,6 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 0 0 0; }
 
 code {
-  display: block;
   background: rgba(27, 31, 35, 0.05);
   font-family: "Fira Code", "Consolas";
   font-size: 14px;
@@ -236,6 +235,9 @@ code {
   width: 80%;
   position: relative;
   padding-left: 20px; }
+
+pre code {
+  display: block; }
 
 [type="text"] {
   height: 38px;
@@ -637,7 +639,7 @@ button {
 
 #editor,
 #viewer {
-  padding: 20px 3% 2% 3%;
+  padding: 30px 3% 2% 3%;
   position: relative;
   display: block;
   overflow-y: scroll;
@@ -649,6 +651,10 @@ button {
 
 #editor {
   cursor: text; }
+
+.linea:first-child:empty:before {
+  content: "# Your Note Title";
+  color: #ddd; }
 
 .linea {
   min-width: 100%;
@@ -772,14 +778,28 @@ button {
   overflow-y: auto;
   opacity: 0; }
   .about-screen .close {
-    text-align: right;
-    margin-right: 15px; }
+    margin: 20px 0 0 30px;
+    text-align: left; }
+    .about-screen .close .icon {
+      display: block;
+      width: 40px;
+      height: 40px;
+      font-size: 30px;
+      cursor: pointer;
+      transition: border-radius ease 0.3s;
+      text-align: center;
+      background: #ddd;
+      border-radius: 6px; }
+      .about-screen .close .icon:hover {
+        border-radius: 60px;
+        color: white;
+        background: #22aaf6; }
   .about-screen .block-container {
     display: flex;
     justify-content: center;
     width: 100%; }
   .about-screen .logo {
-    transition: all ease 0.3s;
+    transition: all ease 1s;
     padding: 0;
     margin: 0;
     width: fit-content;
@@ -810,9 +830,11 @@ button {
   .about-screen .information-container {
     text-align: left;
     width: 100%;
-    padding: 20px; }
-  .about-screen .logos img {
-    width: 240px; }
+    padding: 20px 100px; }
+  .about-screen .logos {
+    margin-top: 70px; }
+    .about-screen .logos img {
+      width: 120px; }
 
 .body {
   background: transparent; }
@@ -905,7 +927,6 @@ table {
   border-top: 0; }
 
 h1 {
-  height: 28px;
   color: #555;
   margin: 6px 0 5px 0;
   padding: 0 20px;
@@ -1066,7 +1087,7 @@ a {
 
 .information-container h1 {
   font-size: 2em;
-  margin: 0.67em 0; }
+  margin: 1em 0; }
 
 .information-container img {
   border-style: none; }

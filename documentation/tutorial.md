@@ -1,7 +1,6 @@
 # Instrucciones de Uso
 
 Con **IC Note** pudes utilizar markdown para escribir tus
-
 notas, si no estas familiarizado con markdown aqui te dejo lo mas importante:
 
 > Esto no busca ser una guia de markdown, solo lo basico 
@@ -33,6 +32,6 @@ y para el cuerpo de la tabla
 
 `| Item 1      | Item 2     | Item 3`
 
-Como ven las cabeceras al principio llevan dos key ||
+Como ven las cabeceras al principio llevan dos `||`
 
 Para mas info puedes leer [Git Flavored Markdown](https://guides.github.com/features/mastering-markdown/#examples)

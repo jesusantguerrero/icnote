@@ -79,7 +79,7 @@
 
 #editor,
 #viewer
-  padding: 20px  3% 2% 3%
+  padding: 30px  3% 2% 3%
   position: relative
   display: block
   overflow-y: scroll
@@ -91,6 +91,10 @@
 
 #editor
   cursor: text
+
+.linea:first-child:empty:before
+  content: '# Your Note Title'
+  color: #ddd
 
 .linea
   min-width: 100%

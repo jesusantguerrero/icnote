@@ -23,7 +23,6 @@ var searchbar = $(".searchbar")
 
 
 // the context vars
-const SMOOTHSAVE = true
 var line = 0
 var temp
 var key
@@ -202,6 +201,7 @@ $(".call-about").on("click",function(){
   aboutScreen.animate({opacity:1},200,function(){
     $(".editor-tools").css({visibility:"hidden"})
     controllerAbout.init(views)
+    togglePReferences()
   })
   
 
