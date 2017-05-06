@@ -9,7 +9,6 @@ let winNewNote
 
 app.on('ready', () => {
   newNote()
-  require("./src/documentation.js")
 
   // notes
   function newNote () {

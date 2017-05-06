@@ -77,8 +77,7 @@
 
 // Editor
 
-#editor,
-#viewer
+#editor
   padding: 30px  3% 2% 3%
   position: relative
   display: block
@@ -88,9 +87,6 @@
 
   &:focus
     outline: 0px
-
-#editor
-  cursor: text
 
 .linea:first-child:empty:before
   content: '# Your Note Title'
@@ -120,6 +116,12 @@
     padding: 0
     width: 100%
     display: inline-block
+
+.read-mode
+  .linea
+    &:hover,
+    &:focus
+      border: 1px solid transparent
 
 .between-div
   background: white
@@ -162,21 +164,20 @@
 
 ::-webkit-scrollbar-track
   background-color: transparent
-  cursor: pointer
-  z-index: 500
-
 
 ::-webkit-scrollbar
-  width: 10px
+  width: 15px
   background-color: white
-  cursor: pointer
 
 
 ::-webkit-scrollbar-thumb
-  background-color: #ddd
-  cursor: pointer
+  background-color: #eee
   border-radius: 3px 
-  z-index: 100 
+
+  &:hover
+    background: #ddd
+
+ 
 
 
 

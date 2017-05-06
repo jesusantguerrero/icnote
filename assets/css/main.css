@@ -265,10 +265,12 @@ pre code {
     outline: 0; }
 
 [for^="check"] {
-  display: inline-block;
+  display: block;
   font-size: 20px;
   padding: 2px 0;
-  cursor: pointer; }
+  cursor: pointer;
+  width: 80%;
+  height: fit-content; }
 
 [type="checkbox"]:checked {
   background: #655; }
@@ -382,6 +384,7 @@ button {
 .editor-tools .btn-tab {
   position: relative; }
   .editor-tools .btn-tab:after {
+    content: attr(data-tooltip);
     position: absolute;
     width: 130px;
     height: 16px;
@@ -421,23 +424,10 @@ button {
   .editor-tools .btn-tab:hover .icon {
     color: #aaa; }
 
-#btn-devtools:after {
-  content: "Table of Contents"; }
-
-#btn-pdf:after {
-  content: "Exp. to PDF"; }
-
-#btn-trash:after {
-  content: "clear"; }
-
-#btn-save-note:after {
-  content: "Save As"; }
-
-#btn-read-mode:after {
-  content: "Read Mode"; }
-
-#btn-preferences:after {
-  content: "preferences"; }
+.btn-tab.activated .icon {
+  color: #2d5; }
+.btn-tab.activated:hover .icon {
+  color: #0d0; }
 
 #btn-close:hover .icon {
   color: #f15555; }
@@ -637,20 +627,15 @@ button {
   color: white;
   position: relative; }
 
-#editor,
-#viewer {
+#editor {
   padding: 30px 3% 2% 3%;
   position: relative;
   display: block;
   overflow-y: scroll;
   z-index: 100;
   background: transparent; }
-  #editor:focus,
-  #viewer:focus {
+  #editor:focus {
     outline: 0px; }
-
-#editor {
-  cursor: text; }
 
 .linea:first-child:empty:before {
   content: "# Your Note Title";
@@ -676,6 +661,9 @@ button {
     padding: 0;
     width: 100%;
     display: inline-block; }
+
+.read-mode .linea:hover, .read-mode .linea:focus {
+  border: 1px solid transparent; }
 
 .between-div {
   background: white;
@@ -714,20 +702,17 @@ button {
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.7); }
 
 ::-webkit-scrollbar-track {
-  background-color: transparent;
-  cursor: pointer;
-  z-index: 500; }
+  background-color: transparent; }
 
 ::-webkit-scrollbar {
-  width: 10px;
-  background-color: white;
-  cursor: pointer; }
+  width: 15px;
+  background-color: white; }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #ddd;
-  cursor: pointer;
-  border-radius: 3px;
-  z-index: 100; }
+  background-color: #eee;
+  border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ddd; }
 
 .welcome-screen {
   width: 100%;
@@ -842,19 +827,6 @@ button {
 .mytool, .mytool-ext {
   color: #777;
   box-shadow: 1px 0 2px 2px rgba(238, 238, 238, 0.3); }
-  .mytool .btn, .mytool-ext .btn {
-    color: #0990dc;
-    opacity: 1;
-    border: none; }
-  .mytool .icon, .mytool-ext .icon {
-    color: #777; }
-
-.pane-sm {
-  background: #fff; }
-
-.toolbar-footer {
-  background: #0990dc;
-  color: white; }
 
 button {
   color: white;

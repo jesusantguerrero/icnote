@@ -22,6 +22,7 @@ var btnClose = $('#btn-close')
 var searchbar = $(".searchbar")
 
 
+
 // the context vars
 var line = 0
 var temp
@@ -33,6 +34,7 @@ var modoEscritura = false
 var widthTable
 var is_preferences = false
 var is_menu = false
+var is_readMode = false
 
 
 getTyping()
@@ -187,6 +189,10 @@ $("#btn-pdf").on("click",function(){
   ipcRenderer.send("reload")
 })
 
+$("#btn-read-mode").on("click",function(){
+  toggleReadMode()
+})
+
 searchbar.on('change',function(){ 
   var text = searchbar.val()
   DB.search(text)
@@ -260,6 +266,31 @@ function toggleMenu () {
   }
 }
 
+function toggleReadMode(){
+  if(!is_readMode){
+    readModeOn()
+    
+  }else{
+    readModeOff()
+    
+  }
+}
+
+function readModeOn(){
+  editor.addClass("read-mode")
+  $("#btn-read-mode").toggleClass("activated")
+  $(".linea").attr("contenteditable","false") 
+  $(".linea").off("click")
+  is_readMode = true
+}
+
+function readModeOff(){
+  editor.removeClass("read-mode")
+  $("#btn-read-mode").toggleClass("activated")
+  updateLines()
+  is_readMode = false
+}
+
 //==== other functions ====
 
 /**
@@ -267,13 +298,17 @@ function toggleMenu () {
  */
 function updateLines(){
     var editorLines = $(".linea")
-
-    editorLines.on('click',function(){
+    editorLines.on('click',function(e){
+      e.stopImmediatePropagation()
       var $this = $(this)
-      $this.attr("contenteditable","true")
       lineElement = $this
-      wconverter.encode(lineElement)
-      lib.focusElement(lineElement)
+
+      if($this.attr("contenteditable") == "false"){
+        wconverter.encode(lineElement)
+      }
+      $this.focus()
+      var range = lightrange.saveSelection()
+      var sel = lightrange.restoreSelection(range)
     })
 
     editorLines.on('blur',function(e){
@@ -284,6 +319,8 @@ function updateLines(){
       
     })
 }
+
+
 /**
  * get the data of the current note and send it to a db.saveNote() to storage in a file
  * @return {void}
@@ -343,6 +380,7 @@ function recognizeItems(){
 
     docTitle.text(ntitle) 
     editor.html(nbody) 
+    editor.removeClass('modo-espera')
     line = parseInt(nlines)
     lib.externalLinks();
     modoEscritura = true

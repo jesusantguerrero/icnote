@@ -46,3 +46,9 @@ exports.externalLinks = function getAllLinks () {
     }
   })
 }
+
+
+exports.replaceClass = function(element, className, newClass){
+  element.removeClass(className);
+  element.addClass(newClass)
+}

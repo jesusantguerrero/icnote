@@ -11,29 +11,33 @@
 <body class="body">
   <div class="content-fluid">
 
-    <header class="toolbar toolbar-header mytool">
+<!-- ******************************************** Editor Toolbar ************************************
+      *                                                                                             *
+     *************************************************************************************************
+-->
+    <header class="mytool">
       <span id="btn-menu" class="note-menu">&#9776;</span>
       <p id="doc-title" class="doc-title"> New Note</p>
 
       <div class="btn-group editor-tools">
 
-        <button class="btn btn-tab" id="btn-devtools">
+        <button class="btn btn-tab" id="btn-devtools" data-tooltip="Table of Contents">
                 <span class="icon icon-bookmarks"></span>
         </button>
 
-        <button class="btn btn-tab" id="btn-pdf">
+        <button class="btn btn-tab" id="btn-pdf" data-tooltip="Reload">
                <span class="icon icon-print"></span>
         </button>
-        <button class="btn btn-tab" id="btn-trash">
+        <button class="btn btn-tab" id="btn-trash" data-tooltip="Clear">
                <span class="icon icon-trash"></span>
         </button>
-        <button class="btn btn-tab" id="btn-save-note">
+        <button class="btn btn-tab" id="btn-save-note" data-tooltip="Save As">
               <span class="icon icon-folder"></span>
         </button>
-        <button class="btn btn-tab" id="btn-read-mode">
+        <button class="btn btn-tab" id="btn-read-mode" data-tooltip="Read Mode">
           <span class="icon icon-eye"></span>
         </button>
-        <button class="btn btn-tab" id="btn-preferences">
+        <button class="btn btn-tab" id="btn-preferences" data-tooltip="Options">
               <span class="icon icon-cog"></span>
         </button>
         
@@ -132,10 +136,11 @@
       
 
   </div>
-
+  <script src="../src/lightRange.min.js"></script>
   <script > 
     const {remote, ipcRenderer} = require('electron')
     const main = remote.require("./main.js")
+    
     const $  = require('jquery')
     const lib = require('../src/mylib.js')
     const views = require('../src/views.js')

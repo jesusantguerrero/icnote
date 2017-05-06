@@ -4,6 +4,7 @@
   position: relative
 
   &:after
+    content: attr(data-tooltip)
     position: absolute
     width: 130px
     height: 16px
@@ -50,24 +51,13 @@
     .icon
       color: #aaa
 
-#btn-devtools
-  &:after
-    content: 'Table of Contents'
-#btn-pdf
-  &:after
-    content: 'Exp. to PDF'
-#btn-trash
-  &:after
-    content: 'clear'
-#btn-save-note
-  &:after
-    content: 'Save As'
-#btn-read-mode
-  &:after
-    content: 'Read Mode'
-#btn-preferences
-  &:after
-    content: 'preferences'
+.btn-tab.activated
+  .icon
+    color: #2d5
+
+  &:hover
+    .icon
+      color: #0d0
 
 // control buttons
 #btn-close

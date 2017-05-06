@@ -38,7 +38,7 @@ exports.decode = function (lineElement) {
                                                                                                                          
       case '[]': {
         var text = temp.slice(2)
-        temp = `<input type='checkbox' id='check-${checkNumber}' class='filled-in'/> <label for='check-${checkNumber}'>` + text + '</label>'
+        temp = `<input type='checkbox' id='check-${checkNumber}' class='filled-in'/>` + text 
         lineElement.html(temp)
         lineElement.addClass('linea-lista')
         checkNumber++
@@ -46,7 +46,7 @@ exports.decode = function (lineElement) {
         break
       case '[x]': {
         var text = temp.slice(3)
-        temp = `<input type='checkbox' id='check-${checkNumber}' class='filled-in' checked='true'/> <label for='check-${checkNumber}'>` + text + '</label>'
+        temp = `<input type='checkbox' id='check-${checkNumber}' class='filled-in' checked='true'/>` + text
         lineElement.html(temp)
         lineElement.addClass('linea-lista')
         checkNumber++
@@ -120,10 +120,10 @@ exports.decode = function (lineElement) {
     
     if(tag.includes('type="checkbox"')){
       if(tag.includes('checked="true"')){
-        text = lineElement.find("label").text();
+        text = lineElement.text()
         lineElement.text("[x] " + text)
       }else{
-        text = lineElement.find("label").text();
+        text = lineElement.text();
         lineElement.text("[] " + text)
       }
 
@@ -141,16 +141,20 @@ exports.decode = function (lineElement) {
         result += "| " + $(this).text() + " "
       })
 
-      lineElement.text(result)
-
     }
     else if(tag.includes('<span class="icon icon-tag tag">')){
 
     }
     else{
-      s = toMarkdown(temp,{gfm: true})
-      lineElement.text(s)
+      result = toMarkdown(temp,{gfm: true})
+      
     }
+
+    lineElement.text(result)
+    lineElement.attr("contenteditable","true")
+    
+    
+    
 
   }
 
