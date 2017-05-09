@@ -92,30 +92,30 @@ function getTyping () {
     }
   })
 
-  editor.on("keypress",function(){
-    key = event.which
+  // editor.on("keypress",function(){
+  //   key = event.which
 
-    switch (key) {
-      case keys.lParenthesis:
-        lineElement.append(Simbols.rParenthesis)
-        break;
-      case keys.lBracket:
-        lineElement.append(Simbols.rBracket)
-        break;
-      case keys.lBrace:
-        lineElement.append(Simbols.rBrace)
-        break;
-      case keys.grave:
-        lineElement.append(Simbols.grave)
-        break;
-      case keys.quot:
-        lineElement.append(Simbols.quot)
-        break;
-      default:
+  //   switch (key) {
+  //     case keys.lParenthesis:
+  //       lineElement.append(Simbols.rParenthesis)
+  //       break;
+  //     case keys.lBracket:
+  //       lineElement.append(Simbols.rBracket)
+  //       break;
+  //     case keys.lBrace:
+  //       lineElement.append(Simbols.rBrace)
+  //       break;
+  //     case keys.grave:
+  //       lineElement.append(Simbols.grave)
+  //       break;
+  //     case keys.quot:
+  //       lineElement.append(Simbols.quot)
+  //       break;
+  //     default:
         
-        break;
-      }
-  })
+  //       break;
+  //     }
+  // })
 
   function addLine () {
     lineElement = $('<div></div>').addClass('linea line-' + line)
@@ -224,6 +224,7 @@ function resetEditor() {
   docTitle.text("New Note")
   modoEscritura = false
   line = 0
+  readModeOff()
 }
 
 function togglePReferences () {
@@ -306,7 +307,6 @@ function updateLines(){
       if($this.attr("contenteditable") == "false"){
         wconverter.encode(lineElement)
       }
-      $this.focus()
       var range = lightrange.saveSelection()
       var sel = lightrange.restoreSelection(range)
     })
@@ -317,6 +317,16 @@ function updateLines(){
       $this.attr("contenteditable","false")
       wconverter.decode(lineElement)
       
+    })
+
+    $(":checkbox").on('click',function(){
+      $this = $(this)
+      var state = $this.attr("ckecked")
+      if(state == "true"){
+        $this.attr("checked","false")
+      }else{
+        $this.attr("checked","true")
+      }
     })
 }
 
@@ -334,11 +344,17 @@ function saveNote () {
       preview = editor.text().replace(noteTitle, ""),
       tagsToSave = "",
       date = lib.getSqlDateNow(),
-      data
+      data,
+      type ="Note"
 
   tagsDoc.each(function (i, tag) {
     tagsToSave += tag.textContent
   }, this)
+
+  if(editor.find(':checkbox').length > 0){
+    console.log($('#editor input[type="checkbox"]'))
+    type = "TODO"
+  }
 
   data = {
       title: noteTitle,
@@ -346,10 +362,14 @@ function saveNote () {
       tags: tagsToSave,
       preview: preview,
       date: date,
+      type: type,
       lines: line
   }
 
+  if(noteTitle.trim() != "New Note"){
     DB.saveNote(data)
+  }
+    
 
 }
 
@@ -359,6 +379,7 @@ function deleteNote(noteName) {
   ipcRenderer.on('delete-item-response',function(event,index){
     if(index == 0){
       DB.deleteNote(noteName); 
+      DB.getNotes(recognizeItems)
     }
   });
 
@@ -368,15 +389,24 @@ function deleteNote(noteName) {
  */
 
 function recognizeItems(){
-  var noteItem = $(".note-item"),
+  var btnEdit = $(".action.edit-note"),
+      btnRead = $(".action.read-note"),
       btnErase = $(".erase")
 
 
-  noteItem.on('click',function(){
-    var $this = $(this),
-        ntitle = $this.find(".title").text(),
-        nbody = $this.find(".body").html(),
-        nlines = $this.find(".lines").text()
+  btnEdit.on('click',function(){
+    noteToEditor($(this))  
+  })
+
+  btnRead.on('click',function(){
+    noteToEditor($(this),readModeOn)
+  })
+
+  function noteToEditor(caller,callback){
+    var noteItem  = caller.parents(".note-item"),
+        ntitle = noteItem.find(".title").text(),
+        nbody  = noteItem.find(".body").html(),
+        nlines = noteItem.find(".lines").text()
 
     docTitle.text(ntitle) 
     editor.html(nbody) 
@@ -385,13 +415,13 @@ function recognizeItems(){
     lib.externalLinks();
     modoEscritura = true
     updateLines();
-    
-  })
+    toggleMenu()
+    callback()
+  }
 
   btnErase.on('click',function(){
     var noteName = $(this).attr("data-title")
     deleteNote(noteName)
-    DB.getNotes(recognizeItems)
   })
 
 }

@@ -28,22 +28,14 @@ var filepath = `${__dirname}/../documentation/`
  */ 
 
   exports.makeItems = function(data){
-    var items = ""
+    var items = " "
 
     for(var key in data){
-      items += "<div class='note-item'>";
-      items += "<h3 class='title'>" + data[key]["title"] + "</h3>"
-      items += "<small class='date'>" + data[key]["date"] + "</small>"
-      items += "<p class='preview'>" + data[key]["preview"].slice(0,50) + "</p>"
-      items += "<p class='tags'>" + data[key]["tags"] + "</p>"
-      items += "<div class='body'>" + data[key]["body"] + "</div>"
-      items += "<p class='metadata'><span class='lines'>" + data[key]["lines"] + "</span></span>" 
-
-      items += "<div class='erase' data-title='"+ data[key]["title"]+"'> <span class='icon icon-trash'></span></div>"
-      items += "</div>";
+      items += theNote(data, key)
     }
 
     $(".notes-list").html(items);
+    makeFalseLines();
     _callback();
   }
 
@@ -53,8 +45,8 @@ var filepath = `${__dirname}/../documentation/`
  * @return {void}
  */ 
   exports.makeSearchedItems = function(data){
-    var items = "",
-    title,date,preview,tags,
+    var items = " ",
+    title,date,preview,tags,type
     text = this.searchedText
 
     for(var key in data){
@@ -62,23 +54,15 @@ var filepath = `${__dirname}/../documentation/`
       date = data[key]["date"].toLowerCase()
       preview = data[key]["preview"].toLowerCase()
       tags = data[key]["tags"].toLowerCase()
+      type = data[key]["tags"].toLowerCase()
 
-      if(title.includes(_text) ||date.includes(_text) ||preview.includes(_text) || tags.includes(_text)){
-        items += "<div class='note-item'>";
-        items += "<h3 class='title'>" + data[key]["title"] + "</h3>"
-        items += "<small class='date'>" + data[key]["date"] + "</small>"
-        items += "<p class='preview'>" + data[key]["preview"].slice(0,50) + "</p>"
-        items += "<p class='tags'> <span clas='icon icon-tag'></span>" + data[key]["tags"] + "</p>"
-        items += "<div class='body'>" + data[key]["body"] + "</div>"
-        items += "<div class='metadata'><span class='lines'>" + data[key]["lines"] + "</span></span>" 
-
-        items += "<div class='erase' data-title='"+ data[key]["title"]+"'> <span class='icon icon-trash'></span></div>"
-        items += "</div>";
-      }
-           
+      if(title.includes(_text) ||date.includes(_text) ||preview.includes(_text) || tags.includes(_text) || type.includes(_text)){
+        items += theNote(data, key)
+      }          
     }
 
     $(".notes-list").html(items);
+    makeFalseLines();
     _callback();
   }
 
@@ -145,3 +129,36 @@ var filepath = `${__dirname}/../documentation/`
 
     return html
   }
+
+
+    
+  function makeFalseLines(){
+    var lines = " "
+  
+  for(var i = 1; i < 10; i++){
+    lines += `<div class="false-lines num${i}"><span></span></div>`
+  }
+  $(".false-doc").html(lines) 
+}
+
+function theNote(data,key){
+  var item = " "
+      item += `<div class="note-item ${data[key]["type"].toLowerCase()}">`
+      item +=   '<div class="preview">'
+      item +=        '<div class="false-doc"></div>'
+      item +=        `<div class="body">${data[key]["body"]}</div>`
+      item +=        '<div class="options">'
+      item +=            `<h2 class="o-title">${data[key]["title"]}</h2>`
+      item +=            `<small class="date">${data[key]["date"] }</small>`
+      item +=            `<a class="action edit-note" href="#">Edit</a> <a class="action read-note" href="#">Read</a>`
+      item +=        '</div>'
+      item +=   '</div>'
+      item +=   '<div class="title-bar">'
+      item +=      `<div class="type">${data[key]["type"]}</div>`
+      item +=      `<h2 class="title">${data[key]["title"]}</h2>`
+      item +=      `<div class="delete" ><span class='erase icon icon-trash' data-title="${data[key]["title"]}"></span></div>`
+      item +=      `<div class='metadata'><span class='lines'>${data[key]["lines"]}</span></div>`
+      item +=  '</div>'
+      item += "</div>";
+  return item
+}

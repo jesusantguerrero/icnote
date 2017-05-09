@@ -1,0 +1,167 @@
+.note-item
+  width: 30%
+  height: 270px
+  margin: 5px 1.5%
+  border-radius: 4px
+  border: 1px solid #aaa
+  position: relative
+  
+  &:after
+    content: ' '
+    position: absolute
+    width: 0
+    height: 0
+    top: -2px
+    right: -2px
+    border-bottom: 32px solid transparent
+    border-right: 52px solid white
+    border-left: 35px solid transparent
+    z-index: 200
+  &:before
+    content: ' '
+    position: absolute
+    width: 0
+    height: 0
+    top: -1.2px
+    right: -1.2px
+    border-bottom: 30px solid #f2f2f2
+    border-right: 50px solid transparent
+    border-left: 0px solid transparent
+    border-radius-bottom: 4px
+    z-index: 100
+    box-shadow: -2px 2px 3px rgba(0,0,0,.5) 
+  &:hover
+    .preview .options
+      visibility: visible
+    
+  .preview
+    background: white
+    height: 85%
+    padding: 15px
+    position: relative
+    overflow: hidden
+    border-radius: 4px 0 0 0
+
+  .body
+    display: none
+  .options
+    position: absolute
+    background: rgba(0,0,0,.9)
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    color: white
+    display: flex
+    flex-direction: column 
+    justify-content: center
+    align-items: center
+    visibility: hidden
+    transition: all ease .3s
+  
+  .title-bar
+    background: #333
+    display: flex
+    height: 15%
+    justify-content: space-between
+    padding: 5px
+    color: #f8f8f8
+    position: relative
+    
+  .type
+    background: #f8f8f8
+    color: #555
+    padding: 7px
+    font-size: 12px
+    border-radius: 4px
+    width: 23%
+    text-align: center
+    
+  .title,.o-title 
+    margin: 0
+    padding: 0
+    color: #f8f8f8
+    font-size: 22px
+    width: 63%
+
+.action
+  width: 100px
+  height: 28px
+  display: block
+  color: #ddd
+  text-decoration: none
+  margin: 5px
+  padding: 5px
+  text-align: center
+  background: transparentize(#fff,.9)
+  
+  &:hover
+    background: transparentize(#fff,.7)
+  
+.false-lines
+  padding: 0 5px
+  height: 13px
+  width: 90%
+  background: #ccc
+  margin: 5px 0
+  overflow: hidden
+    
+  span
+    display: block
+    height: 100%
+    width: 15px
+    background: rgba(24,24,25,0)
+    animation: cargando 3s 
+.todo
+  .false-lines
+    padding: 0 5px
+    height: 13px
+    position: relative
+    &:after
+      content: ''
+      width: 20px
+      height: 100%
+      position: absolute
+      background: white
+      top: 0
+      left: 25px
+    
+    &:before
+      content: '\2718'
+      width: 15px
+      height: 100%
+      position: absolute
+      border: 2px solid #ccc
+      top: 0
+      left: 0
+      color: #fff
+      padding: 0 6px
+      font-size: 9px
+
+    span
+      display: block
+      height: 100%
+      width: 15px
+      
+      
+.num1
+  height: 13px
+  width: 30%
+  margin: 15px 0
+  background: #bbb
+
+.num9
+  height: 13px
+  width: 50%
+  margin: 15px 0
+  
+@keyframes cargando
+  0% 
+    background: rgba(24,25,25,.2)
+    transform: translate(-20%,0)
+  50%
+    background: rgba(0,0,0,0.2)
+    transform: translate(1800%,0)
+  100% 
+    background: rgba(24,25,25,0)
+    transform: translate(-20%,0)

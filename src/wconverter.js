@@ -38,7 +38,7 @@ exports.decode = function (lineElement) {
                                                                                                                          
       case '[]': {
         var text = temp.slice(2)
-        temp = `<input type='checkbox' id='check-${checkNumber}' class='filled-in'/>` + text 
+        temp = `<input type='checkbox' id='check-${checkNumber}' class='filled-in' checked='false'/>` + text 
         lineElement.html(temp)
         lineElement.addClass('linea-lista')
         checkNumber++

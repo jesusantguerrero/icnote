@@ -152,6 +152,7 @@
   border: 2px solid #666
   border-radius: 4px
   cursor: text
+  
 
   &:focus
     outline: 0
@@ -160,6 +161,8 @@
   width: 95%
   height: 55%
   overflow-x: auto
+  display: flex
+  flex-wrap: wrap
 
 .list-menu
   border-top: 3px solid #ccc
@@ -171,53 +174,30 @@
   color: $primary-color
   
 
-.note-item
-  padding: 15px
-  margin: 5px 0
-  height: 120px
-  width: 100%
-  background: #fefefe
-  cursor: pointer
-  overflow: hidden
-  border-top: 1px solid #f7f7f7
-  position: relative
+.metadata
+  visibility: hidden  
 
-
-  &:hover
-    background: #eee
-    
-    .title
-      color: #222
-
-    .erase
-      position: absolute
-      top: 15px
-      right: 15px
-      display: block
-
-  .title
-    text-align: left
-    font-size: 18px
-    color: $accent-color
-
-  .date
-    text-decoration: dotted
-
-
-  .preview
-   
-  .tags
-
-  .body
-    visibility: hidden
-
-  .metadata
-    visibility: hidden  
-
-.erase
-  position: absolute
-  top: 15px
-  right: 15px
-  display: none
+.delete
   font-size: 15px
   cursor: pointer
+  z-index: 100
+  text-align: right
+  padding: 0 5px
+  width: 13%
+
+  .icon
+    cursor: pointer
+    display: block
+    height: 100%
+    width: 25px
+    border-radius: 4px
+    text-align: center
+    transition: all ease .3s
+    padding: 5px 0 0 0
+
+  &:hover
+    .icon
+      background: rgba(0,0,0,.3)
+      
+
+@import _noteItems

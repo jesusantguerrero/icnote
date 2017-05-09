@@ -16,7 +16,7 @@ exports.DB = function(notification){
  
 /**
  * This method saves the note in a json file
- * @param {{title:string,body:string,tags:string,preview:string,date:string,lines:number}} data 
+ * @param {{title:string,body:string,tags:string,preview:string,date:string,type:string,lines:number}} data 
  * @return {void}
  */    
  

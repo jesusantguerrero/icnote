@@ -28,9 +28,10 @@ A simple note taker for programers using electron.
 > You'll use real checkboxes not images
 
 TODO:
-- Export to markdown
 - Table of content
 - Drag and drop images to the editor
+- floating note
+- Reminder and send to the tray
 
 ## Technologies
 
@@ -41,7 +42,7 @@ TODO:
 * And some helpfull [npm modules]()
 
 ## Captures
-![ICNOTE](./documentation/assets/images/img5.png)
+![ICNOTE](./documentation/assets/images/img2.png)
 ![ICNOTE](./documentation/assets/images/img6.png)
 
 ## License
