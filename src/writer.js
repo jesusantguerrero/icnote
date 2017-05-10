@@ -279,7 +279,7 @@ function toggleReadMode(){
 
 function readModeOn(){
   editor.addClass("read-mode")
-  $("#btn-read-mode").toggleClass("activated")
+  $("#btn-read-mode").addClass("activated")
   $(".linea").attr("contenteditable","false") 
   $(".linea").off("click")
   is_readMode = true
@@ -287,7 +287,7 @@ function readModeOn(){
 
 function readModeOff(){
   editor.removeClass("read-mode")
-  $("#btn-read-mode").toggleClass("activated")
+  $("#btn-read-mode").removeClass("activated")
   updateLines()
   is_readMode = false
 }

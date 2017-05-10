@@ -145,6 +145,11 @@ exports.decode = function (lineElement) {
     else if(tag.includes('<span class="icon icon-tag tag">')){
 
     }
+    else if(temp.includes('start=')){
+      var ol = lineElement.find("ol")
+      result = ol.attr("start")
+      result += ". " + toMarkdown(ol.find('li').html(),{gmf:true})
+    }
     else{
       result = toMarkdown(temp,{gfm: true})
       
