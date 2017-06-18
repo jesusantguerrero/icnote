@@ -1,0 +1,120 @@
+// structure mixins
+
+=makeFlex($width: 100%,$direction: row,$justify: flex-start,$align: flex-start)
+  width: $width
+  display: flex
+  flex-direction: $direction
+  justify-content: $justify
+  align-items: $align
+
+=content-padding($padding: $page-content-padding)
+  padding: 0 $padding
+
+=col($num)
+  width: $num /10 * 100%
+
+=offset($offset)
+  margin-left: $offset
+
+//  my simple grid system: 
+
+.n-row
+  +makeFlex(100%,row,flex-start ,center)
+  height: 60vh
+  background: #eee
+  color: white
+
+.u-row
+  @extend .n-row
+  align-items: space-around
+
+.half,.five,
+.three,
+.four,
+.six,
+.seven,
+.eight,
+.nine,
+.ten,
+.col
+  margin: 0 $gap-cols
+  background: white
+  height: 80%
+  padding: $gap-cols
+  text-align: center
+
+  &:last-child
+    margin-right: $gap
+  
+  &:first-child
+    margin-left: $gap
+
+.flex-container
+  min-height: 200px
+
+.half,
+.five
+  width: 50% 
+  background: white
+
+.two
+  +col(2)
+.three
+  +col(3) 
+.four
+  +col(4)
+
+.six
+  +col(6)
+.seven
+  +col(7)
+
+.eight
+  +col(8)
+
+.nine
+  +col(9)
+
+.ten,.col
+  +col(10)
+
+// section types
+
+.wide-section
+  background: initial
+
+.my-proof
+  +offset(33%)
+
+@media (max-width: $s_smartphone)
+  
+  .n-row
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    padding: 0 20px
+    min-height: 60vh
+    height: max-content
+
+  .half,.five,
+  .three,
+  .four,
+  .six,
+  .seven,
+  .eight,
+  .nine,
+  .ten,
+  .col
+    margin: 10px 0px
+    background: white
+    min-height: 60px
+    height: max-content
+    padding: $gap-cols
+    text-align: center
+    width: 100%
+
+    &:last-child
+      margin-right: 0
+  
+    &:first-child
+      margin-left: 0

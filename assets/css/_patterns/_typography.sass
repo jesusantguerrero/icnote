@@ -73,7 +73,7 @@ pre
   height: 24px
   background: white
   display: block
-  margin: 5px 10px 0 0
+  margin: 2px 10px 5px 0
   border-radius: 3px
   border: 3px solid #666
   position: relative
@@ -84,12 +84,16 @@ pre
     outline: 0
     
 [for^="check"] 
-  display: block
+  display: inline-block
+  width: 80%
+  font-size: 18px
+  z-index: 200
+  cursor: text
+  color: #777
   font-size: 20px
   padding: 2px 0
-  cursor: pointer
-  width: 80%
-  height: fit-content
+  // width: 80%
+  // flex-wrap: wrap
     
 [type="checkbox"]:checked
   background: #655

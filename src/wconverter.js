@@ -38,7 +38,8 @@ exports.decode = function (lineElement) {
                                                                                                                          
       case '[]': {
         var text = temp.slice(2)
-        temp = `<input type='checkbox' id='check-${checkNumber}' class='filled-in' checked='false'/>` + text 
+        temp = `<input type='checkbox' id='check-${checkNumber}' class='filled-in'/>`
+        temp += `<p>${text}</p>` 
         lineElement.html(temp)
         lineElement.addClass('linea-lista')
         checkNumber++
@@ -46,7 +47,8 @@ exports.decode = function (lineElement) {
         break
       case '[x]': {
         var text = temp.slice(3)
-        temp = `<input type='checkbox' id='check-${checkNumber}' class='filled-in' checked='true'/>` + text
+        temp = `<input type='checkbox' id='check-${checkNumber}' class='filled-in' checked='true'/>` 
+        temp += `<p>${text}</p>` 
         lineElement.html(temp)
         lineElement.addClass('linea-lista')
         checkNumber++
@@ -98,7 +100,7 @@ exports.decode = function (lineElement) {
         lineElement.html(temp)
       }
         break
-
+        
      // default is a markdownsupport
 
       default:

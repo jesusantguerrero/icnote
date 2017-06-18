@@ -92,16 +92,16 @@ function getTyping () {
     }
   })
 
-  // editor.on("keypress",function(){
-  //   key = event.which
+  editor.on("keypress",function(){
+     key = event.which
 
-  //   switch (key) {
+     switch (key) {
   //     case keys.lParenthesis:
   //       lineElement.append(Simbols.rParenthesis)
   //       break;
-  //     case keys.lBracket:
-  //       lineElement.append(Simbols.rBracket)
-  //       break;
+       case keys.lBracket:
+         lineElement.append(Simbols.rBracket)
+         break;
   //     case keys.lBrace:
   //       lineElement.append(Simbols.rBrace)
   //       break;
@@ -111,11 +111,11 @@ function getTyping () {
   //     case keys.quot:
   //       lineElement.append(Simbols.quot)
   //       break;
-  //     default:
+       default:
         
-  //       break;
-  //     }
-  // })
+         break;
+       }
+   })
 
   function addLine () {
     lineElement = $('<div></div>').addClass('linea line-' + line)
@@ -323,7 +323,7 @@ function updateLines(){
       $this = $(this)
       var state = $this.attr("ckecked")
       if(state == "true"){
-        $this.attr("checked","false")
+        $this.removeAttr("checked")
       }else{
         $this.attr("checked","true")
       }
@@ -352,7 +352,6 @@ function saveNote () {
   }, this)
 
   if(editor.find(':checkbox').length > 0){
-    console.log($('#editor input[type="checkbox"]'))
     type = "TODO"
   }
 
@@ -395,7 +394,7 @@ function recognizeItems(){
 
 
   btnEdit.on('click',function(){
-    noteToEditor($(this))  
+    noteToEditor($(this),readModeOff)  
   })
 
   btnRead.on('click',function(){
