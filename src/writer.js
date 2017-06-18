@@ -320,12 +320,13 @@ function updateLines(){
     })
 
     $(":checkbox").on('click',function(){
-      $this = $(this)
-      var state = $this.attr("ckecked")
-      if(state == "true"){
+      var $this = $(this)
+      var state = $this.attr("checked");
+      console.log(state);
+      if(state){
         $this.removeAttr("checked")
       }else{
-        $this.attr("checked","true")
+        $this.attr("checked","checked")
       }
     })
 }

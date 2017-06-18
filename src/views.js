@@ -33,7 +33,9 @@ var filepath = `${__dirname}/../documentation/`
     for(var key in data){
       items += theNote(data, key)
     }
-    $(".notes-list").html("");
+    $(".notes-list").html("Cargando.....");
+    console.log('cargando....');
+    
     $(".notes-list").html(items);
     makeFalseLines();
     _callback();
