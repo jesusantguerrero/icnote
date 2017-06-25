@@ -1,8 +1,9 @@
 var _callback = function(){}
 var _text = ""
-const appVersion = process.env.npm_package_version
 const fs = require('fs')
 const remark = require('remark')
+const package = require('../package.json')
+const appVersion = package.version
 const remarkHmtl = require('remark-html')
 var filepath = `${__dirname}/../documentation/`
 
@@ -157,7 +158,7 @@ function theNote(data,key){
       item +=   '</div>'
       item +=   '<div class="title-bar">'
       item +=      `<div class="type">${data[key]["type"]}</div>`
-      item +=      `<h2 class="title">${data[key]["title"]}</h2>`
+      item +=      `<h2 class="title">${data[key]["title"].slice(0,12) + '...'}</h2>`
       item +=      `<div class="delete" ><span class='erase icon icon-trash' data-title="${data[key]["title"]}"></span></div>`
       item +=      `<div class='metadata'><span class='lines'>${data[key]["lines"]}</span></div>`
       item +=  '</div>'

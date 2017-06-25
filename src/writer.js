@@ -307,8 +307,6 @@ function updateLines(){
       if($this.attr("contenteditable") == "false"){
         wconverter.encode(lineElement)
       }
-      var range = lightrange.saveSelection()
-      var sel = lightrange.restoreSelection(range)
     })
 
     editorLines.on('blur',function(e){
@@ -328,6 +326,7 @@ function updateLines(){
       }else{
         $this.attr("checked","checked")
       }
+      saveNote()
     })
 }
 
