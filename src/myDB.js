@@ -74,5 +74,19 @@ exports.DB = function(notification){
       });
   }
 
-
+  this.getRemoteNotes = function(){
+    $.ajax({
+      method: 'get',
+      url:'https://icnote.herokuapp.com/api/users',
+      success: function(res){ 
+        for (var index = 0; index < res.length; index++) {
+          var element = res[index];
+          console.log(element);
+        }
+      },
+      error: function(){console.log('No hay conexion');
+      ;}
+    })
+  
+  }
 }

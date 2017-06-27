@@ -145,6 +145,10 @@ var filepath = `${__dirname}/../documentation/`
 }
 
 function theNote(data,key){
+  var title = data[key]["title"];
+  if(title.length > 13){
+    title = title.slice(0,12) + '...'
+  }
   var item = " "
       item += `<div class="note-item ${data[key]["type"].toLowerCase()}">`
       item +=   '<div class="preview">'
@@ -158,7 +162,7 @@ function theNote(data,key){
       item +=   '</div>'
       item +=   '<div class="title-bar">'
       item +=      `<div class="type">${data[key]["type"]}</div>`
-      item +=      `<h2 class="title">${data[key]["title"].slice(0,12) + '...'}</h2>`
+      item +=      `<h2 class="title">${title}</h2>`
       item +=      `<div class="delete" ><span class='erase icon icon-trash' data-title="${data[key]["title"]}"></span></div>`
       item +=      `<div class='metadata'><span class='lines'>${data[key]["lines"]}</span></div>`
       item +=  '</div>'

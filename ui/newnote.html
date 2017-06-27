@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>New Note</title>
+
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
   <link rel="stylesheet" href="../assets/css/main.css" />
   <link rel="stylesheet" href="../node_modules/highlight.js/styles/vs.css">
   <link rel="stylesheet" href="../assets/css/photon.min.css" />
@@ -11,7 +14,7 @@
 <body class="body">
   <div class="content-fluid">
 
-<!-- ******************************************** Editor Toolbar ************************************
+    <!-- ******************************************** Editor Toolbar ************************************
       *                                                                                             *
      *************************************************************************************************
 -->
@@ -21,7 +24,7 @@
 
       <div class="btn-group editor-tools">
 
-        <button class="btn btn-tab" id="btn-devtools" data-tooltip="Table of Contents">
+        <button class="btn btn-tab" id="btn-devtools" data-toggle="tooltip" data-placement="bottom" title="Tabla de Contenidos">
                 <span class="icon icon-bookmarks"></span>
         </button>
 
@@ -40,7 +43,7 @@
         <button class="btn btn-tab" id="btn-preferences" data-tooltip="Options">
               <span class="icon icon-cog"></span>
         </button>
-        
+
       </div>
 
       <div class="btn-group control-group">
@@ -60,15 +63,16 @@
     <section class="panel-principal modo-espera" id="editor" tabindex="0">
 
       <div class="welcome-screen">
-        <h3 class="logo"><span class="company">IC</span> <span class="product">Not<span class="movable">e</span></span> </h3>
+        <h3 class="logo"><span class="company">IC</span> <span class="product">Not<span class="movable">e</span></span>
+        </h3>
 
         <p class="more-info"> <span>Press Enter to write</span></p>
         <p class="more-info"> <a href="">or Read the Turorial</a></p>
       </div>
-      
+
     </section>
 
-    <div id="notification-bar">  
+    <div id="notification-bar">
       <div class="message-box">Hola Soy Un Mensaje</div>
     </div>
 
@@ -79,7 +83,7 @@
         <label for="directory">Note Title</label>
         <input type="text">
       </div>
-      
+
       <div class="input-group">
         <label for="directory">Headers Color</label>
         <input type="text">
@@ -104,7 +108,7 @@
       <br>
       <a href="#" class="call-about">About IC Note</a>
 
-       
+
     </div>
 
 
@@ -115,33 +119,59 @@
         <input class="searchbar" type="search" placeholder="Search note by Name, Tag, Date: 2017 May 03 or content">
       </div>
 
-      <div class="notes-list">
-        <!-- { note items here}-->
+      <div class="notes-container">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Local</a></li>
+          <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Remoto</a></li>
+          <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+          <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="home">
+            <div class="notes-list">
+              <!-- { note items here}-->
+
+            </div>
+
+          </div>
+          <div role="tabpanel" class="tab-pane" id="profile">...</div>
+          <div role="tabpanel" class="tab-pane" id="messages">...</div>
+          <div role="tabpanel" class="tab-pane" id="settings">...</div>
+        </div>
 
       </div>
 
       <div class="list-menu">
         Keep it simple
-
-  </div>
+      </div>
     </div>
-
-    
-      
-
   </div>
-  <script src="../src/lightRange.min.js"></script>
-  <script > 
-    const {remote, ipcRenderer} = require('electron')
-    const main = remote.require("./main.js")
-    
-    const $  = require('jquery')
-    const lib = require('../src/mylib.js')
-    const views = require('../src/views.js')
-        
-    require("../src/writer.js");
-    
   
+  <script src="../src/lightRange.min.js"></script>
+  <script>
+    const {
+      remote,
+      ipcRenderer
+    } = require('electron')
+    const main = remote.require("./main.js")
+
+    const $ = require('jquery');
+    const jQuery = $;
+    const lib = require('../src/mylib.js');
+    const views = require('../src/views.js');
+
+    require("../src/writer.js");
+    require("../src/bootstrap.min.js");
+  </script>
+
+  <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
   </script>
 
 </body>

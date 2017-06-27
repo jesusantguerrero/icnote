@@ -19,9 +19,9 @@ var links
  * @return {void}
  */  
 
-exports.decode = function (lineElement) {
+exports.decode = function (lineElement,mode) {
     var temp = lineElement.text()
-    var params = temp.split(' ')
+    var params = temp.split(' ')  
     
     switch (params[0]) {
      // J-shunks support                                                                                                                     
@@ -153,16 +153,13 @@ exports.decode = function (lineElement) {
       result += ". " + toMarkdown(ol.find('li').html(),{gmf:true})
     }
     else{
-      result = toMarkdown(temp,{gfm: true})
-      
+      result = toMarkdown(temp,{gfm: true}) 
     }
 
-    lineElement.text(result)
+    lineElement.empty();
+    lineElement.focus()
+    lineElement.text(result);   
     lineElement.attr("contenteditable","true")
-    
-    
-    
-
   }
 
 

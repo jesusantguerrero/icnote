@@ -51,7 +51,9 @@ function getTyping () {
         lBracket: 91,
         lBrace: 123,
         grave: 96,
-        quot: 34
+        quot: 34,
+        upRow: 38,
+        downRow: 40
   }
 
   var Simbols = {
@@ -64,7 +66,7 @@ function getTyping () {
 
   editor.on('keydown', function (event) {
     key = event.which
-
+    
     switch (key) {
       case keys.ENTER:
         if (line < 1) {
@@ -88,7 +90,13 @@ function getTyping () {
       case keys.TAB:
         event.preventDefault()
         lineElement.prepend("&nbsp;&nbsp;&nbsp;&nbsp;")
-        break
+        break;
+      case keys.upRow:
+        previousLine();
+        break;
+      case keys.downRow:
+        nextLine();
+        break;
     }
   })
 
@@ -138,7 +146,7 @@ function getTyping () {
   }
 
   function removeLine () {
-    oldLine = lineElement.prev();
+    oldLine = lineElement.prev('.linea');
     lineElement.remove()
     lineElement = oldLine
     lineElement.attr("contenteditable","true")
@@ -147,6 +155,32 @@ function getTyping () {
     line--
     updateLines()
     saveNote()
+  }
+
+  function previousLine(){
+    if(lineElement.prev().hasClass('linea')){
+      wconverter.decode(lineElement,true);
+      lineElement = lineElement.prev('.linea');
+      lineElement.attr("contenteditable","true")   
+      wconverter.encode(lineElement);
+      lib.focusElement(lineElement);
+      lineElement.focus();
+      updateLines()
+     }
+  }
+
+  function nextLine(){
+  
+    if(lineElement.next().hasClass('linea')){
+      wconverter.decode(lineElement,true);
+      lineElement = lineElement.next('.linea');
+      lineElement.attr("contenteditable","true")
+      wconverter.encode(lineElement);
+      lib.focusElement(lineElement);
+      lineElement.focus();
+      updateLines()
+    }
+    
   }
 
 }
@@ -243,7 +277,8 @@ function togglePReferences () {
 
 function toggleMenu () {
   if (!is_menu) {
-    DB.getNotes(recognizeItems)   
+    DB.getNotes(recognizeItems) 
+    DB.getRemoteNotes();  
     btnMenu.css({background:"#333",color:"#f1f1f1"});
     btnMenu.html("&#10132;");
     btnMenu.css({transform:"rotate(90deg)"});
@@ -320,7 +355,6 @@ function updateLines(){
     $(":checkbox").on('click',function(){
       var $this = $(this)
       var state = $this.attr("checked");
-      console.log(state);
       if(state){
         $this.removeAttr("checked")
       }else{
