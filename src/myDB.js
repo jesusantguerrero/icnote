@@ -55,7 +55,7 @@ exports.DB = function(notification){
   this.getNotes = function(callback){
     views.setCallback(callback)
     storage.getAll((err,data)=>{
-          if(err) main.log("ha ocurrido un error 11")
+          if(err) main.log(err.toString())
           views.makeItems(data)
         });
   }

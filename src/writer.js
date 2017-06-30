@@ -164,20 +164,17 @@ function getTyping () {
       lineElement.attr("contenteditable","true")   
       wconverter.encode(lineElement);
       lib.focusElement(lineElement);
-      lineElement.focus();
       updateLines()
      }
   }
 
   function nextLine(){
-  
     if(lineElement.next().hasClass('linea')){
       wconverter.decode(lineElement,true);
       lineElement = lineElement.next('.linea');
       lineElement.attr("contenteditable","true")
       wconverter.encode(lineElement);
-      lib.focusElement(lineElement);
-      lineElement.focus();
+      lib.focusElement(lineElement)
       updateLines()
     }
     

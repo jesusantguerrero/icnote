@@ -477,7 +477,8 @@ button {
   font-size: 25px;
   cursor: pointer;
   height: 100%;
-  width: 40px;
+  width: 42px;
+  max-width: 42px;
   display: flex;
   align-items: center;
   justify-content: flex;
@@ -1164,6 +1165,19 @@ table {
   background: whitesmoke;
   border: 1px solid #777;
   border-top: 0; }
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover {
+  border: none;
+  border-bottom: 4px solid #333;
+  color: #333;
+  font-weight: bolder;
+  background: transparent; }
+
+.nav-tabs > li > a {
+  color: #999;
+  font-size: 20px; }
 
 h1 {
   color: #555;

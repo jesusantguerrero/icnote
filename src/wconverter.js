@@ -38,8 +38,9 @@ exports.decode = function (lineElement,mode) {
                                                                                                                          
       case '[]': {
         var text = temp.slice(2)
-        temp = `<input type='checkbox' id='check-${checkNumber}' class='filled-in'/>`
-        temp += `<p>${text}</p>` 
+        var fileresult = remark().use(remarkHmtl).processSync([text].join('\n'));
+        temp = `<input type='checkbox' id='check-${checkNumber}' class='filled-in'/>` 
+        temp += String(fileresult).trim()
         lineElement.html(temp)
         lineElement.addClass('linea-lista')
         checkNumber++
@@ -47,10 +48,12 @@ exports.decode = function (lineElement,mode) {
         break
       case '[x]': {
         var text = temp.slice(3)
+        var fileresult = remark().use(remarkHmtl).processSync([text].join('\n'));
         temp = `<input type='checkbox' id='check-${checkNumber}' class='filled-in' checked/>` 
-        temp += `<p>${text}</p>` 
+        temp += String(fileresult).trim()
         lineElement.html(temp)
         lineElement.addClass('linea-lista')
+        lib.externalLinks(); 
         checkNumber++
       }
         break
@@ -118,16 +121,16 @@ exports.decode = function (lineElement,mode) {
     var tag = temp.slice(0,endTag + 1)
     var text = "",
         th,
-        result
+        result,
+        checkbox
     
     if(tag.includes('type="checkbox"')){
-      if(tag.includes('checked="true"')){
-        text = lineElement.text()
-        lineElement.text("[x] " + text)
-      }else{
-        text = lineElement.text();
-        lineElement.text("[] " + text)
+      checkbox = "[] ";
+      if(tag.includes('checked')){
+          checkbox = "[x] ";
       }
+      text   = lineElement.find('p').html();
+      result = checkbox + toMarkdown(text,{gmf:true})
 
     }
     else if(tag.includes("<table")){
