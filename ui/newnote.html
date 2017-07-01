@@ -19,30 +19,31 @@
 -->
     <header class="mytool">
       <span id="btn-menu" class="note-menu">&#9776;</span>
+      <img src="" alt="">
       <p id="doc-title" class="doc-title"> New Note</p>
 
       <div class="btn-group editor-tools">
-        <button class="btn btn-tab" id="btn-save-note" data-toggle="tooltip" data-placement="bottom" title="Save in The Cloud">
+        <button class="btn btn-tab" id="btn-save-note"    title="Save">
               <span class="icon icon-folder"></span>
         </button>
-        <button class="btn btn-tab" id="btn-devtools" data-toggle="tooltip" data-placement="bottom" title="Tabla de Contenidos">
+        <button class="btn btn-tab" id="btn-devtools"    title="Tabla de Contenidos">
                 <span class="icon icon-bookmarks"></span>
         </button>
-        <button class="btn btn-tab" id="btn-graphic" data-toggle="tooltip" data-placement="bottom" title="Graphics">
+        <button class="btn btn-tab" id="btn-graphic"    title="Graphics">
                 <span class="icon icon-chart-pie"></span>
         </button>
 
-        <button class="btn btn-tab" id="btn-reload" data-toggle="tooltip" data-placement="bottom" title="Reload">
+        <button class="btn btn-tab" id="btn-reload"    title="Reload">
                <span class="icon icon-arrows-ccw"></span>
         </button>
         
-        <button class="btn btn-tab" id="btn-read-mode" data-toggle="tooltip" data-placement="bottom" title="Read Mode">
+        <button class="btn btn-tab" id="btn-read-mode"    title="Read Mode">
           <span class="icon icon-eye"></span>
         </button>
-        <button class="btn btn-tab" id="btn-trash" data-toggle="tooltip" data-placement="bottom" title="Close Document">
+        <button class="btn btn-tab" id="btn-trash"    title="Close Document">
                <span class="icon icon-cancel-circled"></span>
         </button>
-        <button class="btn btn-tab" id="btn-preferences" data-toggle="tooltip" data-placement="bottom" title="Settings">
+        <button class="btn btn-tab" id="btn-preferences"    title="Settings">
               <span class="icon icon-cog"></span>
         </button>
 
@@ -75,7 +76,7 @@
     </section>
 
     <div id="notification-bar">
-      <div class="message-box">Hola Soy Un Mensaje</div>
+      <div class="message-box"></div>
     </div>
 
     <div class="editor-preferences" id="editor-preferences">
@@ -114,8 +115,23 @@
     </div>
 
     <div class="editor-preferences" id="editor-graphic-view">
+      <h4 class="doc-title">IC Note</h4>
       <div class="normal-chart">
         <canvas id="graphic-view"></canvas>
+      </div>
+      <div class="in-numbers-container">
+        <div class="in-number">
+          <h4 class="title">Done</h4>
+          <div class="numbers">7</div>
+        </div>
+        <div class="in-number">
+          <h4 class="title">Todo</h4>
+          <div class="numbers">3</div>
+        </div>
+        <div class="in-number">
+          <h4 class="title">Progress</h4>
+          <div class="numbers">70%</div>
+        </div>
       </div>
       
     </div>
@@ -125,7 +141,7 @@
 
       <div class="note-list-header">
         <h3 class="menu-title"> Your Notes </h3>
-        <input class="searchbar" type="search" placeholder="Search note by Name, Tag, Date: 2017 May 03 or content">
+        <input class="searchbar" type="search" placeholder="Search note by Name, Tag,or content and press enter">
       </div>
 
       <div class="notes-container">
@@ -133,9 +149,6 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
           <li role="presentation" class="active"><a href="#all" aria-controls="home" role="tab" data-toggle="tab">All</a></li>
-          <li role="presentation"><a href="#todos" aria-controls="profile" role="tab" data-toggle="tab">TODO's</a></li>
-          <li role="presentation"><a href="#notes" aria-controls="messages" role="tab" data-toggle="tab">Notes</a></li>
-          <li role="presentation"><a href="#favorites" aria-controls="settings" role="tab" data-toggle="tab">Favorites</a></li>
         </ul>
 
         <!-- Tab panes -->
@@ -147,20 +160,16 @@
             </div>
 
           </div>
-          <div role="tabpanel" class="tab-pane" id="todos">...</div>
-          <div role="tabpanel" class="tab-pane" id="notes">...</div>
-          <div role="tabpanel" class="tab-pane" id="favorites">...</div>
         </div>
 
       </div>
 
       <div class="list-menu">
-        Keep it simple
+      
       </div>
     </div>
   </div>
   
-  <script src="../src/lightRange.min.js"></script>
   <script src="../assets/js/chart.js"></script>
   <script>
     const {
@@ -178,11 +187,7 @@
     require("../src/bootstrap.min.js");
   </script>
 
-  <script>
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-    })
-  </script>
+
 
 </body>
 

@@ -55,9 +55,9 @@ exports.DB = function(notification){
   this.getNotes = function(callback){
     views.setCallback(callback)
     storage.getAll((err,data)=>{
-          if(err) main.log(err.toString())
-          views.makeItems(data)
-        });
+      if(err) main.log(err.toString())
+      views.makeItems(data)
+    });
   }
 
 /**
@@ -75,18 +75,6 @@ exports.DB = function(notification){
   }
 
   this.getRemoteNotes = function(){
-    $.ajax({
-      method: 'get',
-      url:'https://icnote.herokuapp.com/api/users',
-      success: function(res){ 
-        for (var index = 0; index < res.length; index++) {
-          var element = res[index];
-          console.log(element);
-        }
-      },
-      error: function(){console.log('No hay conexion');
-      ;}
-    })
   
   }
 }

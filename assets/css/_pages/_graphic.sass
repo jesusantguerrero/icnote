@@ -1,5 +1,33 @@
 .normal-chart
-  +size(100%,230px)
+  +size(100%,120px)
 
 canvas
   +size(100%,100%)
+
+#editor-graphic-view
+  height: 200px
+  overflow: hidden
+  background: transparentize(#fff,.9)
+  .normal-chart
+  .doc-title
+    display: block
+    padding: 0 0 0 0
+    margin: 0 0 0 0
+    +size(100%,28px)
+    font-size: 20px
+    font-weight: bolder
+    text-align: center
+    
+  .in-numbers-container
+    +makeFlex(100%,row,space-around,center)
+    height: 80px
+  .in-number
+    +size(30%,100%)
+    font-size: 20px
+    .title 
+      border-bottom: 4px solid #aaaa
+      font-size: 20px
+    .numbers
+      color: #aaa
+
+  

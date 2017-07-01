@@ -1,12 +1,11 @@
-
-exports.makeChart = function servicesChart(canvas,values,labels) {
+exports.makeChart = function(canvas,values,labels) {
     var data = {
-      labels: services.nombres,
+      labels: labels,
       datasets: [{
         label: "Clientes",
         fill: true,
-        backgroundColor: ["rgba(3,169,244 ,1)", "rgba(3,169,244 ,.8)", "rgba(3,169,244 ,.6)","rgba(3,169,244 ,.4)"],
-        borderColor: "rgba(3,169,244 ,1)",
+        backgroundColor: ["#555", "#ccc"],
+        borderColor: "#fff",
         borderCapStyle: 'butt',
         borderDash: [],
         borderDashOffset: 0.0,
@@ -20,7 +19,7 @@ exports.makeChart = function servicesChart(canvas,values,labels) {
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
-        data:values,
+        data: values,
         spanGaps: false,
       }]
     }
@@ -33,4 +32,10 @@ exports.makeChart = function servicesChart(canvas,values,labels) {
       data: data,
       options: options
     });
+
+    console.log('creado chart');
+    console.log(canvas);
+    console.log(values)
+    console.log(labels)
+    
   }

@@ -24,8 +24,6 @@ var btnMinimaze    = $('#btn-minimaze')
 var btnClose       = $('#btn-close')
 var searchbar      = $(".searchbar")
 
-
-
 // the context vars
 var line = 0
 var temp
@@ -39,12 +37,13 @@ var is_preferences = false
 var is_menu = false
 var is_readMode = false
 
-
 getTyping()
+
 /**
- * this is where the magic happens gettyping controls what happens when you type in the editor
- * convertions,addlines, remove lines, etc
- */
+  * get Typing: controls the editor/writer like behavior adding lines , removing, advancing and calling the conversion
+  * @return {void}
+  *
+*/
 function getTyping () {
   var keys = {
         ENTER: 13,
@@ -107,26 +106,27 @@ function getTyping () {
      key = event.which
 
      switch (key) {
-  //     case keys.lParenthesis:
-  //       lineElement.append(Simbols.rParenthesis)
-  //       break;
        case keys.lBracket:
          lineElement.append(Simbols.rBracket)
          break;
-  //     case keys.lBrace:
-  //       lineElement.append(Simbols.rBrace)
-  //       break;
-  //     case keys.grave:
-  //       lineElement.append(Simbols.grave)
-  //       break;
-  //     case keys.quot:
-  //       lineElement.append(Simbols.quot)
-  //       break;
+      // case keys.lBrace:
+      //   lineElement.append(Simbols.rBrace)
+      //   break;
+      // case keys.grave:
+      //   lineElement.append(Simbols.grave)
+      //   break;
+      // case keys.quot:
+      //   lineElement.append(Simbols.quot)
+      //   break;
        default:
-        
          break;
        }
    })
+
+  /********************************************************
+  *             Editor Write mode functions                            
+  *                                                       *
+  ********************************************************/
 
   function addLine () {
     lineElement = $('<div></div>').addClass('linea line-' + line)
@@ -185,7 +185,10 @@ function getTyping () {
 
 }
 
-//  buttons functions / funciones de los botones
+/********************************************************
+*                 Editor Events                            
+*                                                       *
+********************************************************/
 
 $('#btn-save-note').on('click', saveNote)
 
@@ -211,7 +214,7 @@ btnPreferences.on('click', function () {
   togglePReferences()
 })
 
-btnGraphic.on('click',function(){
+btnGraphic.on('click', function(){
   toggleGraphic()
 })
 
@@ -219,19 +222,19 @@ btnMenu.on('click', function () {
   toggleMenu()
 })
 
-$("#btn-devtools").on("click",function(){
+$("#btn-devtools").on("click", function(){
   ipcRenderer.send("devtools")
 })
 
-$("#btn-reload").on("click",function(){
+$("#btn-reload").on("click", function(){
   ipcRenderer.send("reload")
 })
 
-$("#btn-read-mode").on("click",function(){
+$("#btn-read-mode").on("click", function(){
   toggleReadMode()
 })
 
-searchbar.on('change',function(){ 
+searchbar.on('change', function(){ 
   var text = searchbar.val()
   DB.search(text)
   searchbar.css({border: "2px solid 333"})
@@ -239,7 +242,7 @@ searchbar.on('change',function(){
 })
 
 
-$(".call-about").on("click",function(){
+$(".call-about").on("click", function(){
   var aboutScreen = views.aboutScreen()
   $(".content-fluid").append(aboutScreen)
   aboutScreen.animate({opacity:1},200,function(){
@@ -250,8 +253,10 @@ $(".call-about").on("click",function(){
   
 
 })
-
-// ====  Editor states ====
+/********************************************************
+*                    Editor States                            
+*                                                       *
+********************************************************/
 
 function resetEditor() {
   
@@ -263,6 +268,7 @@ function resetEditor() {
   modoEscritura = false
   line = 0
   readModeOff()
+  hideTodoGraphic();
 }
 
 function togglePReferences () {
@@ -281,15 +287,11 @@ function togglePReferences () {
 
 function toggleGraphic() {
   if (!is_preferences) {
-      GraphicView.animate({right: '0'}, 500, function () {
-      GraphicView.addClass('show')
-      is_preferences = true
-    })
+      if(!is_readMode) return false;
+      showTodoGraphic();
   } else {
-      GraphicView.animate({right: '-300px'}, 500, function () {
-      GraphicView.removeClass('show')
-      is_preferences = false
-    })
+     hideTodoGraphic();
+  
   }
 }
 
@@ -345,7 +347,25 @@ function readModeOff(){
   is_readMode = false
 }
 
-//==== other functions ====
+function showTodoGraphic(){
+    GraphicView.animate({right: '0'}, 500, function () {
+    GraphicView.addClass('show')
+    is_preferences = true
+    todographic.makeChart($("#graphic-view"),[7,3],["Done","Todo"])
+  })
+}
+
+function hideTodoGraphic(){
+    GraphicView.animate({right: '-300px'}, 500, function () {
+    GraphicView.removeClass('show')
+    is_preferences = false
+  })
+}
+
+/********************************************************
+*                  Editor utilities                            
+*                                                       *
+********************************************************/
 
 /**
  *  get the new created lines to give them an onclick functionality
@@ -382,6 +402,47 @@ function updateLines(){
     })
 }
 
+function recognizeItems(){
+  var btnEdit = $(".action.edit-note"),
+      btnRead = $(".action.read-note"),
+      btnErase = $(".erase")
+
+
+  btnEdit.on('click',function(){
+    noteToEditor($(this),readModeOff)  
+  })
+
+  btnRead.on('click',function(){
+    noteToEditor($(this),readModeOn)
+  })
+
+  function noteToEditor(caller,callback){
+    var noteItem  = caller.parents(".note-item"),
+        ntitle = noteItem.find(".o-title").text(),
+        nbody  = noteItem.find(".body").html(),
+        nlines = noteItem.find(".lines").text()
+
+    docTitle.text(ntitle) 
+    editor.html(nbody) 
+    editor.removeClass('modo-espera')
+    line = parseInt(nlines)
+    lib.externalLinks();
+    modoEscritura = true
+    updateLines();
+    toggleMenu()
+    callback()
+  }
+
+  btnErase.on('click',function(){
+    var noteName = $(this).attr("data-title")
+    deleteNote(noteName)
+  })
+
+}
+/********************************************************
+*                    Editor CRUD                            
+*                                                       *
+********************************************************/
 
 /**
  * get the data of the current note and send it to a db.saveNote() to storage in a file
@@ -424,7 +485,6 @@ function saveNote () {
 
 }
 
-
 function deleteNote(noteName) {    
   ipcRenderer.send('delete-item');
   ipcRenderer.on('delete-item-response',function(event,index){
@@ -435,44 +495,5 @@ function deleteNote(noteName) {
   });
 
 }
-/**
- *  get the note-items elements in order to give them an onclick functionality
- */
-
-function recognizeItems(){
-  var btnEdit = $(".action.edit-note"),
-      btnRead = $(".action.read-note"),
-      btnErase = $(".erase")
 
 
-  btnEdit.on('click',function(){
-    noteToEditor($(this),readModeOff)  
-  })
-
-  btnRead.on('click',function(){
-    noteToEditor($(this),readModeOn)
-  })
-
-  function noteToEditor(caller,callback){
-    var noteItem  = caller.parents(".note-item"),
-        ntitle = noteItem.find(".title").text(),
-        nbody  = noteItem.find(".body").html(),
-        nlines = noteItem.find(".lines").text()
-
-    docTitle.text(ntitle) 
-    editor.html(nbody) 
-    editor.removeClass('modo-espera')
-    line = parseInt(nlines)
-    lib.externalLinks();
-    modoEscritura = true
-    updateLines();
-    toggleMenu()
-    callback()
-  }
-
-  btnErase.on('click',function(){
-    var noteName = $(this).attr("data-title")
-    deleteNote(noteName)
-  })
-
-}

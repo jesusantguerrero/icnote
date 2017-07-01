@@ -477,13 +477,11 @@ button {
   font-size: 25px;
   cursor: pointer;
   height: 100%;
-  width: 42px;
-  max-width: 42px;
+  width: 40px;
   display: flex;
   align-items: center;
   justify-content: flex;
-  box-shadow: none;
-  background: transparent; }
+  box-shadow: none; }
   .btn-tab:hover, .btn-tab:focus {
     color: #fff;
     outline: 0; }
@@ -494,7 +492,8 @@ button {
     cursor: pointer;
     text-align: center;
     color: #333;
-    font-size: 18px; }
+    font-size: 18px;
+    width: 100%; }
 
 .btn-lm {
   width: 100%;
@@ -515,6 +514,10 @@ button {
       text-align: center;
       color: #fff;
       font-size: 25px; }
+
+.tooltip-inner {
+  padding-top: 8themepx;
+  height: 30px; }
 
 .editor-tools .btn-tab {
   position: relative; }
@@ -899,6 +902,8 @@ button {
   background: transparent; }
   #editor:focus {
     outline: 0px; }
+  #editor img {
+    max-width: 100%; }
 
 .linea:first-child:empty:before {
   content: "# Your Note Title";
@@ -1091,11 +1096,41 @@ button {
 
 .normal-chart {
   width: 100%;
-  height: 230px; }
+  height: 120px; }
 
 canvas {
   width: 100%;
   height: 100%; }
+
+#editor-graphic-view {
+  height: 200px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1); }
+  #editor-graphic-view .doc-title {
+    display: block;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    width: 100%;
+    height: 28px;
+    font-size: 20px;
+    font-weight: bolder;
+    text-align: center; }
+  #editor-graphic-view .in-numbers-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 80px; }
+  #editor-graphic-view .in-number {
+    width: 30%;
+    height: 100%;
+    font-size: 20px; }
+    #editor-graphic-view .in-number .title {
+      border-bottom: 4px solid #aaaa;
+      font-size: 20px; }
+    #editor-graphic-view .in-number .numbers {
+      color: #aaa; }
 
 .body {
   background: transparent; }
