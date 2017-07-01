@@ -351,7 +351,8 @@ function showTodoGraphic(){
     GraphicView.animate({right: '0'}, 500, function () {
     GraphicView.addClass('show')
     is_preferences = true
-    todographic.makeChart($("#graphic-view"),[7,3],["Done","Todo"])
+    var tasks = getCheckBoxes()
+    todographic.makeChart($("#graphic-view"),[tasks.checked,tasks.unchecked],["Done","Todo"])
   })
 }
 
@@ -438,6 +439,14 @@ function recognizeItems(){
     deleteNote(noteName)
   })
 
+}
+
+function getCheckBoxes(){
+  var checkboxes  = $(":checkbox")
+  var total       = checkboxes.length;
+  var checked     = checkboxes.has("[checked]").length;
+
+  return {total: checkboxes.length, checked: checked, unchecked: total - checked }
 }
 /********************************************************
 *                    Editor CRUD                            

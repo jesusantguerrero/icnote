@@ -1165,12 +1165,14 @@ button {
     border-right: 5px solid #0990dc; }
 
 table {
-  border: 1px solid #aaa;
+  border: 2px solid #ddd;
   text-align: center; }
   table th {
     text-align: center;
-    background: #0990dc;
-    color: white;
+    background: #333;
+    color: #fff theme;
+    font-size: 16px;
+    font-weight: bolder;
     border-right: 1px solid white; }
   table td {
     text-align: center; }
