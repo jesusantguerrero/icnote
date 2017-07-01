@@ -1,25 +1,28 @@
-const notifications = require('./notifications.js')
-const notification = new notifications.init()
-const myDB = require('./myDB.js')
-const DB = new myDB.DB(notification)
-const wconverter = require('./wconverter.js')
-const views = require('./views.js')
+const notifications   = require('./notifications.js')
+const notification    = new notifications.init()
+const myDB            = require('./myDB.js')
+const DB              = new myDB.DB(notification)
+const wconverter      = require('./wconverter.js')
+const views           = require('./views.js')
 const controllerAbout = require('./aboutController')
+const todographic     = require('./todographic')
 
 // the DOM Elements
 
-var editor = $('#editor')
-var docTitle = $('#doc-title')
-var preferences = $('.editor-preferences')
-var noteListBox = $('.notes-list-box')
-var btnMenu = $('#btn-menu')
-var btnTrash = $('#btn-trash')
-var btnSave = $('#btn-save-note')
+var editor         = $('#editor')
+var docTitle       = $('#doc-title')
+var preferences    = $('#editor-preferences')
+var GraphicView    = $('#editor-graphic-view')
+var noteListBox    = $('.notes-list-box')
+var btnMenu        = $('#btn-menu')
+var btnTrash       = $('#btn-trash')
+var btnGraphic     = $('#btn-graphic')
+var btnSave        = $('#btn-save-note')
 var btnPreferences = $('#btn-preferences')
-var btnMaximaze = $('#btn-maximaze')
-var btnMinimaze = $('#btn-minimaze')
-var btnClose = $('#btn-close')
-var searchbar = $(".searchbar")
+var btnMaximaze    = $('#btn-maximaze')
+var btnMinimaze    = $('#btn-minimaze')
+var btnClose       = $('#btn-close')
+var searchbar      = $(".searchbar")
 
 
 
@@ -208,6 +211,10 @@ btnPreferences.on('click', function () {
   togglePReferences()
 })
 
+btnGraphic.on('click',function(){
+  toggleGraphic()
+})
+
 btnMenu.on('click', function () {
   toggleMenu()
 })
@@ -216,7 +223,7 @@ $("#btn-devtools").on("click",function(){
   ipcRenderer.send("devtools")
 })
 
-$("#btn-pdf").on("click",function(){
+$("#btn-reload").on("click",function(){
   ipcRenderer.send("reload")
 })
 
@@ -260,13 +267,27 @@ function resetEditor() {
 
 function togglePReferences () {
   if (!is_preferences) {
-    preferences.animate({right: '0'}, 500, function () {
+      preferences.animate({right: '0'}, 500, function () {
       preferences.addClass('show')
       is_preferences = true
     })
   } else {
-    preferences.animate({right: '-300px'}, 500, function () {
+      preferences.animate({right: '-300px'}, 500, function () {
       preferences.removeClass('show')
+      is_preferences = false
+    })
+  }
+}
+
+function toggleGraphic() {
+  if (!is_preferences) {
+      GraphicView.animate({right: '0'}, 500, function () {
+      GraphicView.addClass('show')
+      is_preferences = true
+    })
+  } else {
+      GraphicView.animate({right: '-300px'}, 500, function () {
+      GraphicView.removeClass('show')
       is_preferences = false
     })
   }
