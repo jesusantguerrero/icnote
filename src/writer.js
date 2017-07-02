@@ -351,8 +351,8 @@ function showTodoGraphic(){
     GraphicView.animate({right: '0'}, 500, function () {
     GraphicView.addClass('show')
     is_preferences = true
-    var tasks = getCheckBoxes()
-    todographic.makeChart($("#graphic-view"),[tasks.checked,tasks.unchecked],["Done","Todo"])
+    buildTodoGraphic();
+    
   })
 }
 
@@ -361,6 +361,11 @@ function hideTodoGraphic(){
     GraphicView.removeClass('show')
     is_preferences = false
   })
+}
+
+function buildTodoGraphic(){
+  var tasks = getTasks()
+  todographic.makeChart($("#graphic-view"),[tasks.done,tasks.todo],["Done","Todo"],tasks);
 }
 
 /********************************************************
@@ -399,6 +404,7 @@ function updateLines(){
       }else{
         $this.attr("checked","checked")
       }
+      buildTodoGraphic()
       saveNote()
     })
 }
@@ -431,6 +437,7 @@ function recognizeItems(){
     modoEscritura = true
     updateLines();
     toggleMenu()
+    buildTodoGraphic();
     callback()
   }
 
@@ -441,12 +448,13 @@ function recognizeItems(){
 
 }
 
-function getCheckBoxes(){
-  var checkboxes  = $(":checkbox")
+function getTasks(){
+  var checkboxes  = editor.find(":checkbox")
   var total       = checkboxes.length;
-  var checked     = checkboxes.has("[checked]").length;
+  var checked     = editor.find(":checkbox[checked]").length;
+  var average     = checked/total * 100
 
-  return {total: checkboxes.length, checked: checked, unchecked: total - checked }
+  return {total: checkboxes.length, done: checked, todo: total - checked , avg: average.toPrecision(3) + '%'}
 }
 /********************************************************
 *                    Editor CRUD                            

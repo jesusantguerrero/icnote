@@ -1,4 +1,5 @@
-exports.makeChart = function(canvas,values,labels) {
+var myPieChart = null;
+exports.makeChart = function(canvas,values,labels,tasksInfo) {
     var data = {
       labels: labels,
       datasets: [{
@@ -27,15 +28,19 @@ exports.makeChart = function(canvas,values,labels) {
       responsive: true,
       maintainAspectRatio: false
     };
-    var myPieChart = new Chart(canvas, {
-      type: 'doughnut',
-      data: data,
-      options: options
-    });
-
-    console.log('creado chart');
-    console.log(canvas);
-    console.log(values)
-    console.log(labels)
     
+
+    if(tasksInfo){
+      $('.done').text(tasksInfo.done)
+      $('.todo').text(tasksInfo.todo)
+      $('.avg').text(tasksInfo.avg)
+    }
+      myPieChart = new Chart(canvas, {
+        type: 'doughnut',
+        data: data,
+        options: options
+      }); 
+  
   }
+
+  

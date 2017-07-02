@@ -1,0 +1,11 @@
+languaje: node_js
+node_js:
+  -"6"
+cache:
+  directories:
+    - node_modules
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change

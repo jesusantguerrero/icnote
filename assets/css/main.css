@@ -1103,6 +1103,7 @@ canvas {
   height: 100%; }
 
 #editor-graphic-view {
+  margin-top: 10px;
   height: 200px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.1); }
@@ -1170,7 +1171,7 @@ table {
   table th {
     text-align: center;
     background: #333;
-    color: #fff theme;
+    color: #fff;
     font-size: 16px;
     font-weight: bolder;
     border-right: 1px solid white; }
