@@ -1,6 +1,11 @@
+os:
+  - linux
+  - osx
 languaje: node_js
+
 node_js:
-  -"6"
+  - "iojs"
+  - "6"
 cache:
   directories:
     - node_modules

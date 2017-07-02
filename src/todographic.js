@@ -1,4 +1,4 @@
-var myPieChart = null;
+
 exports.makeChart = function(canvas,values,labels,tasksInfo) {
     var data = {
       labels: labels,
@@ -35,7 +35,12 @@ exports.makeChart = function(canvas,values,labels,tasksInfo) {
       $('.todo').text(tasksInfo.todo)
       $('.avg').text(tasksInfo.avg)
     }
-      myPieChart = new Chart(canvas, {
+    var parent = canvas.parent();
+    var clone  = canvas.clone();
+    canvas.remove();
+    parent.html(clone);
+   
+    var myPieChart = new Chart(clone, {
         type: 'doughnut',
         data: data,
         options: options
