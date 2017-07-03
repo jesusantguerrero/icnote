@@ -3,5 +3,4 @@
 - (^|/)custom\.bootstrap([^\s]*)(js|css|less|scss|styl)$
 
 # css
-- .css
-- _githubmarkdown.css
+- assets/css/**.css$
