@@ -3,4 +3,4 @@
 - (^|/)custom\.bootstrap([^\s]*)(js|css|less|scss|styl)$
 
 # css
-- assets/css/**.css$
+- assets/css/*.css
