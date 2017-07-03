@@ -1034,10 +1034,11 @@ button {
   z-index: 1000;
   overflow-y: auto;
   opacity: 0; }
-  .about-screen .close {
+  .about-screen .close-bar {
     margin: 20px 0 0 30px;
-    text-align: left; }
-    .about-screen .close .icon {
+    text-align: left;
+    position: fixed; }
+    .about-screen .close-bar .icon {
       display: block;
       width: 40px;
       height: 40px;
@@ -1047,7 +1048,7 @@ button {
       text-align: center;
       background: #ddd;
       border-radius: 6px; }
-      .about-screen .close .icon:hover {
+      .about-screen .close-bar .icon:hover {
         border-radius: 60px;
         color: white;
         background: #22aaf6; }

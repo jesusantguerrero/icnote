@@ -13,7 +13,7 @@ app.on('ready', () => {
   // notes
   function newNote () {
 
-   winNewNote = new BrowserWindow({
+   let winNewNote = new BrowserWindow({
       width: 900,
       height: 600,
       show: false,
@@ -26,6 +26,7 @@ app.on('ready', () => {
     winNewNote.loadURL(`file://${__dirname}/ui/newnote.html`)
     winNewNote.on('ready-to-show', () => {
       winNewNote.show()
+      winNewNote.webContents.openDevTools();
     })
 
     

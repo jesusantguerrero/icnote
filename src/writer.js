@@ -35,9 +35,11 @@ var modoEscritura = false
 var widthTable
 var is_preferences = false
 var is_menu = false
+var is_graphics = false
 var is_readMode = false
 
-getTyping()
+getTyping();
+lib.allowDrop();
 
 /**
   * get Typing: controls the editor/writer like behavior adding lines , removing, advancing and calling the conversion
@@ -142,10 +144,8 @@ function getTyping () {
 
     lineElement.html('')
     setTimeout(() => { lineElement.html(''), 1 })
-    lineElement.focus()
     line++
-    updateLines()
-    saveNote()
+    endTyping();
   }
 
   function removeLine () {
@@ -154,10 +154,8 @@ function getTyping () {
     lineElement = oldLine
     lineElement.attr("contenteditable","true")
     wconverter.encode(lineElement)
-    lib.focusElement(lineElement) 
     line--
-    updateLines()
-    saveNote()
+    endTyping();
   }
 
   function previousLine(){
@@ -166,8 +164,7 @@ function getTyping () {
       lineElement = lineElement.prev('.linea');
       lineElement.attr("contenteditable","true")   
       wconverter.encode(lineElement);
-      lib.focusElement(lineElement);
-      updateLines()
+      endTyping();
      }
   }
 
@@ -177,10 +174,16 @@ function getTyping () {
       lineElement = lineElement.next('.linea');
       lineElement.attr("contenteditable","true")
       wconverter.encode(lineElement);
-      lib.focusElement(lineElement)
-      updateLines()
+      endTyping();
     }
     
+  }
+
+  function endTyping(){
+    lib.focusElement(lineElement)
+    lib.getImageFromTo(lineElement);
+    updateLines()
+    saveNote()
   }
 
 }
@@ -211,7 +214,7 @@ btnClose.on('click', function () {
 })
 
 btnPreferences.on('click', function () {
-  togglePReferences()
+  togglePreferences()
 })
 
 btnGraphic.on('click', function(){
@@ -248,7 +251,7 @@ $(".call-about").on("click", function(){
   aboutScreen.animate({opacity:1},200,function(){
     $(".editor-tools").css({visibility:"hidden"})
     controllerAbout.init(views)
-    togglePReferences()
+    togglePreferences()
   })
   
 
@@ -271,11 +274,12 @@ function resetEditor() {
   hideTodoGraphic();
 }
 
-function togglePReferences () {
+function togglePreferences () {
   if (!is_preferences) {
       preferences.animate({right: '0'}, 500, function () {
-      preferences.addClass('show')
-      is_preferences = true
+      preferences.addClass('show');
+      hideTodoGraphic();
+      is_preferences = true;
     })
   } else {
       preferences.animate({right: '-300px'}, 500, function () {
@@ -286,12 +290,11 @@ function togglePReferences () {
 }
 
 function toggleGraphic() {
-  if (!is_preferences) {
-      if(!is_readMode) return false;
-      showTodoGraphic();
+  if (!is_graphics){
+    if(!is_readMode) return false;
+    showTodoGraphic();   
   } else {
      hideTodoGraphic();
-  
   }
 }
 
@@ -348,9 +351,11 @@ function readModeOff(){
 }
 
 function showTodoGraphic(){
+    is_preferences =true;
+    togglePreferences();
     GraphicView.animate({right: '0'}, 500, function () {
-    GraphicView.addClass('show')
-    is_preferences = true
+    GraphicView.addClass('show');
+    is_graphics = true;
     buildTodoGraphic();
     
   })
@@ -358,8 +363,8 @@ function showTodoGraphic(){
 
 function hideTodoGraphic(){
     GraphicView.animate({right: '-300px'}, 500, function () {
-    GraphicView.removeClass('show')
-    is_preferences = false
+    GraphicView.removeClass('show');
+    is_graphics = false;
   })
 }
 

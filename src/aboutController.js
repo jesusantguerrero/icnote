@@ -11,7 +11,7 @@ $(".about-nav button").on('click',function(e){
 
 
 
-$(".close span").on('click',function(){
+$(".close-about").on('click',function(){
   $(".about-screen").animate({opacity:0,width:0,height:0},600,function(){
     $(".about-screen").remove()
   })

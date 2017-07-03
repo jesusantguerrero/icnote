@@ -89,7 +89,7 @@ var filepath = `${__dirname}/../documentation/`
     var html = ""
     var about = $("<div>").addClass('about-screen')
 
-    html += '<p class="close"><span class="icon icon-left-open"> </span></p>'
+    html += '<p class="close-about"><span class="close-about icon icon-left-open"> </span></p>'
     html += '<div class="block-container">' 
     html += '   <h3 class="logo"><span class="company">IC</span> <span class="product">Not<span class="movable">e</span></span> </h3>'
     html += '</div>'

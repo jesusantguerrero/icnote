@@ -52,3 +52,18 @@ exports.replaceClass = function(element, className, newClass){
   element.removeClass(className);
   element.addClass(newClass)
 }
+
+exports.allowDrop = function preventDrop(){
+    document.ondragover = document.ondrop = (e)=>{
+      e.preventDefault();
+    } 
+  }
+
+exports.getImageFromTo = (element)=>{
+    document.body.ondrop = (ev)=>{
+    ev.preventDefault();
+     if(element){
+         element.append(ev.dataTransfer.files[0].path);
+     }
+    }
+}
