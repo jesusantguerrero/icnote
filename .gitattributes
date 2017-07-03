@@ -1,2 +1,4 @@
 assets/css/*.css linguist-vendored= false
 assets/css/*.min.css linguist-vendored= false
+assets/css/_theme/_githubmarkdown.scss linguist-vendored= false
+assets/css/_patterns/normalize.scss linguist-vendored= false
