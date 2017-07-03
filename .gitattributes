@@ -1,1 +1,1 @@
-.css linguist-vendored= true
+assets/css/*.css linguist-vendored= false
