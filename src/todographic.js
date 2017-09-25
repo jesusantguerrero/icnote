@@ -1,6 +1,7 @@
 
-exports.makeChart = function(canvas,values,labels,tasksInfo) {
-    var data = {
+export default class {
+  constructor(canvas,values,labels,tasksInfo) {
+    const data = {
       labels: labels,
       datasets: [{
         label: "Clientes",
@@ -24,28 +25,38 @@ exports.makeChart = function(canvas,values,labels,tasksInfo) {
         spanGaps: false,
       }]
     }
-    var options = {
+
+    const options = {
       responsive: true,
       maintainAspectRatio: false
-    };
+    } 
+
     
+    this.$doneCount = $('.done')
+    this.$todoCount = $('.todo')
+    this.$avgCount = $('.avg')
+    
+    this.myPieChart = new Chart(canvas, {
+      type: 'doughnut',
+      data: data,
+      options: options
+    }) 
 
     if(tasksInfo){
-      $('.done').text(tasksInfo.done)
-      $('.todo').text(tasksInfo.todo)
-      $('.avg').text(tasksInfo.avg)
+      this.updateTaskInfo(tasksInfo)
     }
-    var parent = canvas.parent();
-    var clone  = canvas.clone();
-    canvas.remove();
-    parent.html(clone);
-   
-    var myPieChart = new Chart(clone, {
-        type: 'doughnut',
-        data: data,
-        options: options
-      }); 
+  }
   
+  update (values, tasksInfo) {
+    this.myPieChart.config.data.datasets[0].data = values
+    this.myPieChart.update()
+    this.updateTaskInfo(tasksInfo)
   }
 
+  updateTaskInfo (tasksInfo) {
+    this.$doneCount.text(tasksInfo.done)
+    this.$todoCount.text(tasksInfo.todo)
+    this.$avgCount.text(tasksInfo.avg)
+  }
   
+}

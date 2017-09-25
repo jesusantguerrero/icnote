@@ -1,29 +1,25 @@
 // A simple test to verify a visible window is opened with a title
-// var Application = require('spectron').Application
+var Application = require('spectron').Application
+var electron = require('electron')
 var assert = require('assert')
+var timeout = 60000
 
-// var app = new Application({
-//   path: '/Applications/MyApp.app/Contents/MacOS/MyApp'
-// })
+var app = new Application({
+  path: electron,
+  connectionRetryCount: 1,
+  connectionRetryTimeout: timeout,
+  startTimeout: timeout,
+  waitTimeout: timeout,
+  debuggerAddress: 'localhost:9090',
+  args: ['.']
+})
 
-// app.start().then(function () {
-//   // Check if the window is visible
-//   return app.browserWindow.isVisible()
-// }).then(function (isVisible) {
-//   // Verify the window is visible
-//   assert.equal(isVisible, true)
-// }).then(function () {
-//   // Get the window's title
-//   return app.client.getTitle()
-// }).then(function (title) {
-//   // Verify the window's title
-//   assert.equal(title, 'My App')
-// }).then(function () {
-//   // Stop the application
-//   return app.stop()
-// }).catch(function (error) {
-//   // Log any failures
-//   console.error('Test failed', error.message)
-// })
-
-console.log("hola?")
+app.start().then(function(){
+  return app.browserWindow.isVisible();
+}).then(function(result){
+  assert.equal(result,true,'correcto')
+  console.log(result)
+}).catch(function (error) {
+  // Log any failures
+  console.error('Test failed', error.message)
+})

@@ -2,35 +2,35 @@ const {shell} = require('electron')
 
 // focus line and go to the end of the line
 exports.focusElement = function(el){  
-  var classname = el.attr("class").split(" ").join('\.');
-  el = document.querySelector("." + classname); 
+  var classname = el.attr("class").split(" ").join('\.') 
+  el = document.querySelector("." + classname)  
   
-  el.focus();
+  el.focus() 
     if (typeof window.getSelection != "undefined"
             && typeof document.createRange != "undefined") {
-        var range = document.createRange();
-        range.selectNodeContents(el);
-        range.collapse(false);
-        var sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
+        var range = document.createRange() 
+        range.selectNodeContents(el) 
+        range.collapse(false) 
+        var sel = window.getSelection() 
+        sel.removeAllRanges() 
+        sel.addRange(range) 
     } else if (typeof document.body.createTextRange != "undefined") {
-        var textRange = document.body.createTextRange();
-        textRange.moveToElementText(el);
-        textRange.collapse(false);
-        textRange.select();
+        var textRange = document.body.createTextRange() 
+        textRange.moveToElementText(el) 
+        textRange.collapse(false) 
+        textRange.select() 
     }
 }
 
 
 exports.getSqlDateNow =function(){
-    var date = new Date();
-    var d,m,y = date.getFullYear();
-    m = date.toString().slice(3,7);
-    d = date.toString().slice(8,10);
-    date = y + " " + m + " " + d;
+    var date = new Date() 
+    var d,m,y = date.getFullYear() 
+    m = date.toString().slice(3,7) 
+    d = date.toString().slice(8,10) 
+    date = y + " " + m + " " + d 
 
-    return date;
+    return date 
 }
 
 
@@ -49,21 +49,21 @@ exports.externalLinks = function getAllLinks () {
 
 
 exports.replaceClass = function(element, className, newClass){
-  element.removeClass(className);
+  element.removeClass(className) 
   element.addClass(newClass)
 }
 
 exports.allowDrop = function preventDrop(){
     document.ondragover = document.ondrop = (e)=>{
-      e.preventDefault();
+      e.preventDefault() 
     } 
   }
 
 exports.getImageFromTo = (element)=>{
     document.body.ondrop = (ev)=>{
-    ev.preventDefault();
+    ev.preventDefault() 
      if(element){
-         element.append(ev.dataTransfer.files[0].path);
+         element.append(ev.dataTransfer.files[0].path) 
      }
     }
 }

@@ -1,521 +1,586 @@
-const notifications   = require('./notifications.js')
-const notification    = new notifications.init()
-const myDB            = require('./myDB.js')
-const DB              = new myDB.DB(notification)
-const wconverter      = require('./wconverter.js')
-const views           = require('./views.js')
-const controllerAbout = require('./aboutController')
-const todographic     = require('./todographic')
+import notifications from './notifications.js'
+import myDB from './myDB.js'
+import wconverter from './wconverter.js'
+import views from './views.js'
+import controllerAbout from './aboutController'
+import todographic from './todographic'
+const notification = new notifications()
+const DB = new myDB(notification)
+
 
 // the DOM Elements
 
-var editor         = $('#editor')
-var docTitle       = $('#doc-title')
-var preferences    = $('#editor-preferences')
-var GraphicView    = $('#editor-graphic-view')
-var noteListBox    = $('.notes-list-box')
-var btnMenu        = $('#btn-menu')
-var btnTrash       = $('#btn-trash')
-var btnGraphic     = $('#btn-graphic')
-var btnSave        = $('#btn-save-note')
-var btnPreferences = $('#btn-preferences')
-var btnMaximaze    = $('#btn-maximaze')
-var btnMinimaze    = $('#btn-minimaze')
-var btnClose       = $('#btn-close')
-var searchbar      = $(".searchbar")
+const editorDom = {
+  $editor: $('#editor'),
+  $docTitle: $('#doc-title'),
+  $preferences: $('#editor-preferences'),
+  $graphicView: $('#editor-graphic-view'),
+  $noteListBox: $('.notes-list-box'),
+  $btnMenu: $('#btn-menu'),
+  $btnTrash: $('#btn-trash'),
+  $btnGraphic: $('#btn-graphic'),
+  $btnSave: $('#btn-save-note'),
+  $btnPreferences: $('#btn-preferences'),
+  $btnMaximaze: $('#btn-maximaze'),
+  $btnMinimaze: $('#btn-minimaze'),
+  $btnClose: $('#btn-close'),
+  $btnDevTools: $("#btn-devtools"),
+  $btnReload: $("#btn-reload"),
+  $btnReadMode: $("#btn-read-mode"),
+  $btnCallAbout: $(".call-about"),
+  $searchbar: $(".searchbar"),
+}
 
-// the context vars
-var line = 0
-var temp
-var key
-var lineElement
-var oldLine
-var listNumber
-var modoEscritura = false
-var widthTable
-var is_preferences = false
-var is_menu = false
-var is_graphics = false
-var is_readMode = false
+export default class Editor {
 
-getTyping();
-lib.allowDrop();
+  constructor() {
+    this.line = 0
+    this.lineElement = null
+    this.oldLine = null
+    this.modoEscritura = false
+    this.is_preferences = false
+    this.is_menu = false
+    this.is_graphics = false
+    this.is_readMode = false
+    this.myGraphic = null
+    this.dom = editorDom
 
-/**
-  * get Typing: controls the editor/writer like behavior adding lines , removing, advancing and calling the conversion
-  * @return {void}
-  *
-*/
-function getTyping () {
-  var keys = {
-        ENTER: 13,
-        BACKSPACE: 8,
-        TAB: 9,
-        lParenthesis: 40,
-        lBracket: 91,
-        lBrace: 123,
-        grave: 96,
-        quot: 34,
-        upRow: 38,
-        downRow: 40
+    this.typingListener()
+    editorEvents(this)
+    lib.allowDrop()
   }
 
-  var Simbols = {
+  typingListener() {
+    const _self = this
+
+    const keys = {
+      ENTER: 13,
+      BACKSPACE: 8,
+      TAB: 9,
+      lParenthesis: 40,
+      lBracket: 91,
+      lBrace: 123,
+      grave: 96,
+      quot: 34,
+      upRow: 38,
+      downRow: 40
+    }
+
+    const Simbols = {
       rParenthesis: "&rpar;",
       rBracket: "&rbrack;",
       rBrace: "&rbrace;",
       grave: "&grave;",
       quot: "&quot;"
-  }
-
-  editor.on('keydown', function (event) {
-    key = event.which
-    
-    switch (key) {
-      case keys.ENTER:
-        if (line < 1) {
-          editor.removeClass('modo-espera')
-          editor.html('')
-          modoEscritura = true
-          addLine()
-        } else {
-          wconverter.decode(lineElement)
-          addLine()
-        } 
-        break;
-      case keys.BACKSPACE:
-        if (lineElement.text() === '' && line > 1) {
-          removeLine()
-        } 
-        else if (line == 1 && lineElement.text() === '') {
-          resetEditor()
-        }
-        break;
-      case keys.TAB:
-        event.preventDefault()
-        lineElement.prepend("&nbsp;&nbsp;&nbsp;&nbsp;")
-        break;
-      case keys.upRow:
-        previousLine();
-        break;
-      case keys.downRow:
-        nextLine();
-        break;
     }
-  })
 
-  editor.on("keypress",function(){
-     key = event.which
+    this.dom.$editor.on('keydown', function (event) {
+      const key = event.which
 
-     switch (key) {
-       case keys.lBracket:
-         lineElement.append(Simbols.rBracket)
-         break;
-      // case keys.lBrace:
-      //   lineElement.append(Simbols.rBrace)
-      //   break;
-      // case keys.grave:
-      //   lineElement.append(Simbols.grave)
-      //   break;
-      // case keys.quot:
-      //   lineElement.append(Simbols.quot)
-      //   break;
-       default:
-         break;
-       }
-   })
+      switch (key) {
+        case keys.ENTER:
+          if (_self.line < 1) {
+            _self.dom.$editor.removeClass('modo-espera')
+            _self.dom.$editor.html('')
+            _self.modoEscritura = true
+            _self.addLine()
+            console.log('here')
+            console.log(_self.line)
+          } else {
+            console.log('here in else')
+            wconverter.decode(_self.lineElement, false)
+            _self.addLine()
+          }
+          break
+        case keys.BACKSPACE:
+          if (_self.lineElement.text() === '' && _self.line > 1) {
+            _self.removeLine()
+          } else if (_self.line == 1 && _self.lineElement.text() === '') {
+            _self.resetEditor()
+          }
+          break
+        case keys.TAB:
+          event.preventDefault()
+          _self.lineElement.prepend("&nbsp &nbsp &nbsp &nbsp ")
+          break
+        case keys.upRow:
+          _self.previousLine()
+          break
+        case keys.downRow:
+          _self.nextLine()
+          break
+      }
+    })
+
+    this.dom.$editor.on("keypress", function () {
+      const key = event.which
+
+      switch (key) {
+        case keys.lBracket:
+          _self.lineElement.append(Simbols.rBracket)
+          break
+          // case keys.lBrace:
+          //   lineElement.append(Simbols.rBrace)
+          //   break 
+          // case keys.grave:
+          //   lineElement.append(Simbols.grave)
+          //   break 
+          // case keys.quot:
+          //   lineElement.append(Simbols.quot)
+          //   break 
+      }
+    })
+  }
 
   /********************************************************
-  *             Editor Write mode functions                            
-  *                                                       *
-  ********************************************************/
+   *             Editor Write mode functions                            
+   *                                                       *
+   ********************************************************/
 
-  function addLine () {
-    lineElement = $('<div></div>').addClass('linea line-' + line)
-    lineElement.attr('contenteditable', 'true')
+  addLine() {
+    const _self = this
+    this.lineElement = $('<div></div>').addClass('linea line-' + this.line)
+    this.lineElement.attr('contenteditable', 'true')
 
-    if (line > 0 || !modoEscritura) {
-      oldLine = $('.linea:focus')
-      oldLine.removeAttr('contenteditable')
-      oldLine.after(lineElement)
+    if (this.line > 0 || !this.modoEscritura) {
+      this.oldLine = $('.linea:focus')
+      this.oldLine.removeAttr('contenteditable')
+      this.oldLine.after(this.lineElement)
     } else {
-      editor.append(lineElement)
+      this.dom.$editor.append(this.lineElement)
     }
 
-    lineElement.html('')
-    setTimeout(() => { lineElement.html(''), 1 })
-    line++
-    endTyping();
+    this.lineElement.html('')
+    setTimeout(() => {
+      _self.lineElement.html(''), 1
+    })
+    this.line++
+      this.endTyping()
   }
 
-  function removeLine () {
-    oldLine = lineElement.prev('.linea');
-    lineElement.remove()
-    lineElement = oldLine
-    lineElement.attr("contenteditable","true")
-    wconverter.encode(lineElement)
-    line--
-    endTyping();
+  removeLine() {
+    this.oldLine = this.lineElement.prev('.linea')
+    this.lineElement.remove()
+    this.lineElement = this.oldLine
+    this.lineElement.attr("contenteditable", "true")
+    wconverter.encode(this.lineElement)
+    this.line--
+      this.endTyping()
   }
 
-  function previousLine(){
-    if(lineElement.prev().hasClass('linea')){
-      wconverter.decode(lineElement,true);
-      lineElement = lineElement.prev('.linea');
-      lineElement.attr("contenteditable","true")   
-      wconverter.encode(lineElement);
-      endTyping();
-     }
-  }
-
-  function nextLine(){
-    if(lineElement.next().hasClass('linea')){
-      wconverter.decode(lineElement,true);
-      lineElement = lineElement.next('.linea');
-      lineElement.attr("contenteditable","true")
-      wconverter.encode(lineElement);
-      endTyping();
+  previousLine() {
+    if (this.lineElement.prev().hasClass('linea')) {
+      wconverter.decode(this.lineElement, true)
+      this.lineElement = this.lineElement.prev('.linea')
+      this.lineElement.attr("contenteditable", "true")
+      wconverter.encode(this.lineElement)
+      this.endTyping()
     }
-    
   }
 
-  function endTyping(){
-    lib.focusElement(lineElement)
-    lib.getImageFromTo(lineElement);
-    updateLines()
-    saveNote()
+  nextLine() {
+    if (this.lineElement.next().hasClass('linea')) {
+      wconverter.decode(this.lineElement, true)
+      this.lineElement = this.lineElement.next('.linea')
+      this.lineElement.attr("contenteditable", "true")
+      wconverter.encode(this.lineElement)
+      this.endTyping()
+    }
   }
 
-}
-
-/********************************************************
-*                 Editor Events                            
-*                                                       *
-********************************************************/
-
-$('#btn-save-note').on('click', saveNote)
-
-btnTrash.on('click', function () {
-  if (modoEscritura) {
-    resetEditor()
+  endTyping() {
+    lib.focusElement(this.lineElement)
+    lib.getImageFromTo(this.lineElement)
+    this.updateLines()
+    this.saveNote()
   }
-})
 
-btnMinimaze.on('click', function () {
-  ipcRenderer.send('note-min')
-})
+  /********************************************************
+   *                    Editor States                            
+   *                                                       *
+   ********************************************************/
 
-btnMaximaze.on('click', function () {
-  ipcRenderer.send('note-max')
-})
+  resetEditor() {
+    this.dom.$editor.removeAttr("contenteditable")
+    this.dom.$editor.addClass("modo-espera")
+    this.dom.$editor.html(views.welcomeScreen())
+    this.dom.$editor.focus()
+    this.dom.$docTitle.text("New Note")
+    this.modoEscritura = false
+    this.line = 0
+    this.readModeOff()
+    this.hideTodoGraphic()
+  }
 
-btnClose.on('click', function () {
-  ipcRenderer.send('note-close')
-})
+  togglePreferences() {
+    const _self = this
+    if (!this.is_preferences) {
+      this.dom.$preferences.animate({
+        right: '0'
+      }, 500, function () {
+        _self.dom.$preferences.addClass('show')
+        _self.hideTodoGraphic()
+        _self.is_preferences = true
+      })
+    } else {
+      this.dom.$preferences.animate({
+        right: '-300px'
+      }, 500, function () {
+        _self.dom.$preferences.removeClass('show')
+        _self.is_preferences = false
+      })
+    }
+  }
 
-btnPreferences.on('click', function () {
-  togglePreferences()
-})
+  toggleGraphic() {
+    if (!this.is_graphics) {
+      if (!this.is_readMode) return false
+      this.showTodoGraphic()
+    } else {
+      this.hideTodoGraphic()
+    }
+  }
 
-btnGraphic.on('click', function(){
-  toggleGraphic()
-})
+  toggleMenu() {
+    const _self = this
+    if (!_self.is_menu) {
+      _self.getNotes()
+      _self.dom.$btnMenu.css({
+        background: "#333",
+        color: "#f1f1f1"
+      })
 
-btnMenu.on('click', function () {
-  toggleMenu()
-})
+      _self.dom.$btnMenu.html("&#10132 ")
 
-$("#btn-devtools").on("click", function(){
-  ipcRenderer.send("devtools")
-})
+      _self.dom.$btnMenu.css({
+        transform: "rotate(90deg)"
+      })
 
-$("#btn-reload").on("click", function(){
-  ipcRenderer.send("reload")
-})
+      _self.dom.$noteListBox.animate({
+        top: '50px'
+      }, 500, function () {
+        _self.dom.$noteListBox.addClass('show-list')
+        $(".editor-tools").css({
+          visibility: "hidden"
+        })
+        _self.is_menu = true
+      })
 
-$("#btn-read-mode").on("click", function(){
-  toggleReadMode()
-})
+    } else {
+      _self.dom.$btnMenu.css({
+        background: "#f1f1f1",
+        color: "#333"
+      })
+      _self.dom.$btnMenu.html("&#9776 ")
+      _self.dom.$btnMenu.css({
+        transform: "rotate(0deg)"
+      })
 
-searchbar.on('change', function(){ 
-  var text = searchbar.val()
-  DB.search(text)
-  searchbar.css({border: "2px solid 333"})
-  searchbar.animate({border: "1px solid #666"},1000)
-})
 
+      _self.dom.$noteListBox.animate({
+        top: '610px'
+      }, 500, function () {
+        _self.dom.$noteListBox.removeClass('show-list')
+        $(".editor-tools").css({
+          visibility: "visible"
+        })
+        _self.is_menu = false
+      })
+    }
+  }
 
-$(".call-about").on("click", function(){
-  var aboutScreen = views.aboutScreen()
-  $(".content-fluid").append(aboutScreen)
-  aboutScreen.animate({opacity:1},200,function(){
-    $(".editor-tools").css({visibility:"hidden"})
-    controllerAbout.init(views)
-    togglePreferences()
-  })
-  
+  toggleReadMode() {
+    if (!this.is_readMode) {
+      this.readModeOn()
+    } else {
+      this.readModeOff()
 
-})
-/********************************************************
-*                    Editor States                            
-*                                                       *
-********************************************************/
+    }
+  }
 
-function resetEditor() {
-  
-  editor.removeAttr("contenteditable")
-  editor.addClass("modo-espera")
-  editor.html(views.welcomeScreen())
-  editor.focus()
-  docTitle.text("New Note")
-  modoEscritura = false
-  line = 0
-  readModeOff()
-  hideTodoGraphic();
-}
+  readModeOn() {
+    this.dom.$editor.addClass("read-mode")
+    $("#btn-read-mode").addClass("activated")
+    $(".linea").attr("contenteditable", "false")
+    $(".linea").off("click")
+    this.is_readMode = true
 
-function togglePreferences () {
-  if (!is_preferences) {
-      preferences.animate({right: '0'}, 500, function () {
-      preferences.addClass('show');
-      hideTodoGraphic();
-      is_preferences = true;
+  }
+
+  readModeOff() {
+    this.dom.$editor.removeClass("read-mode")
+    $("#btn-read-mode").removeClass("activated")
+    this.updateLines()
+    this.is_readMode = false
+  }
+
+  showTodoGraphic() {
+    const _self = this
+    this.is_preferences = true
+    this.togglePreferences()
+    this.dom.$graphicView.animate({
+      right: '0'
+    }, 500, function () {
+      _self.dom.$graphicView.addClass('show')
+      _self.is_graphics = true
+      _self.buildTodoGraphic()
+
     })
-  } else {
-      preferences.animate({right: '-300px'}, 500, function () {
-      preferences.removeClass('show')
-      is_preferences = false
+  }
+
+  hideTodoGraphic() {
+    const _self = this
+    this.dom.$graphicView.animate({
+      right: '-300px'
+    }, 500, function () {
+      _self.dom.$graphicView.removeClass('show')
+      _self.is_graphics = false
     })
   }
-}
 
-function toggleGraphic() {
-  if (!is_graphics){
-    if(!is_readMode) return false;
-    showTodoGraphic();   
-  } else {
-     hideTodoGraphic();
+  buildTodoGraphic() {
+    const tasks = this.getTasks()
+    this.myGraphic = new todographic($("#graphic-view"), [tasks.done, tasks.todo], ["Done", "Todo"], tasks)
   }
-}
 
-function toggleMenu () {
-  if (!is_menu) {
-    DB.getNotes(recognizeItems) 
-    DB.getRemoteNotes();  
-    btnMenu.css({background:"#333",color:"#f1f1f1"});
-    btnMenu.html("&#10132;");
-    btnMenu.css({transform:"rotate(90deg)"});
-
-    noteListBox.animate({top: '50px'}, 500, function () {
-      noteListBox.addClass('show-list')
-      $(".editor-tools").css({visibility:"hidden"})
-      is_menu = true     
-    })
-  } else {
-      btnMenu.css({background:"#f1f1f1",color:"#333"});
-      btnMenu.html("&#9776;");
-      btnMenu.css({transform:"rotate(0deg)"});
-    
-    
-    noteListBox.animate({top: '610px'}, 500, function () {
-      noteListBox.removeClass('show-list')
-      $(".editor-tools").css({visibility:"visible"})
-      is_menu = false
-    })
+  updateTodoGraphic() {
+    const tasks = this.getTasks()
+    this.myGraphic.update([tasks.done,tasks.todo], tasks)
   }
-}
 
-function toggleReadMode(){
-  if(!is_readMode){
-    readModeOn()
-    
-  }else{
-    readModeOff()
-    
-  }
-}
+  /********************************************************
+   *                  Editor utilities                            
+   *                                                       *
+   ********************************************************/
 
-function readModeOn(){
-  editor.addClass("read-mode")
-  $("#btn-read-mode").addClass("activated")
-  $(".linea").attr("contenteditable","false") 
-  $(".linea").off("click")
-  is_readMode = true
-}
 
-function readModeOff(){
-  editor.removeClass("read-mode")
-  $("#btn-read-mode").removeClass("activated")
-  updateLines()
-  is_readMode = false
-}
+  updateLines() {
+    const editorLines = $(".linea")
+    const _self = this
 
-function showTodoGraphic(){
-    is_preferences =true;
-    togglePreferences();
-    GraphicView.animate({right: '0'}, 500, function () {
-    GraphicView.addClass('show');
-    is_graphics = true;
-    buildTodoGraphic();
-    
-  })
-}
-
-function hideTodoGraphic(){
-    GraphicView.animate({right: '-300px'}, 500, function () {
-    GraphicView.removeClass('show');
-    is_graphics = false;
-  })
-}
-
-function buildTodoGraphic(){
-  var tasks = getTasks()
-  todographic.makeChart($("#graphic-view"),[tasks.done,tasks.todo],["Done","Todo"],tasks);
-}
-
-/********************************************************
-*                  Editor utilities                            
-*                                                       *
-********************************************************/
-
-/**
- *  get the new created lines to give them an onclick functionality
- */
-function updateLines(){
-    var editorLines = $(".linea")
-    editorLines.on('click',function(e){
+    editorLines.on('click', function (e) {
       e.stopImmediatePropagation()
-      var $this = $(this)
-      lineElement = $this
+      const $this = $(this)
+      _self.lineElement = $this
 
-      if($this.attr("contenteditable") == "false"){
-        wconverter.encode(lineElement)
+      if ($this.attr("contenteditable") === "false") {
+        wconverter.encode(_self.lineElement)
       }
     })
 
-    editorLines.on('blur',function(e){
+    editorLines.on('blur', function (e) {
       e.stopImmediatePropagation()
-      var $this = $(this)
-      $this.attr("contenteditable","false")
-      wconverter.decode(lineElement)
-      
+      const $this = $(this)
+      $this.attr("contenteditable", "false")
+      wconverter.decode(_self.lineElement)
+
     })
 
-    $(":checkbox").on('click',function(){
-      var $this = $(this)
-      var state = $this.attr("checked");
-      if(state){
+    $(":checkbox").on('click', function () {
+      const $this = $(this)
+      const state = $this.attr("checked")
+      if (state) {
         $this.removeAttr("checked")
-      }else{
-        $this.attr("checked","checked")
+      } else {
+        $this.attr("checked", "checked")
       }
-      buildTodoGraphic()
-      saveNote()
+      _self.updateTodoGraphic()
+      _self.saveNote()
     })
-}
 
-function recognizeItems(){
-  var btnEdit = $(".action.edit-note"),
-      btnRead = $(".action.read-note"),
-      btnErase = $(".erase")
-
-
-  btnEdit.on('click',function(){
-    noteToEditor($(this),readModeOff)  
-  })
-
-  btnRead.on('click',function(){
-    noteToEditor($(this),readModeOn)
-  })
-
-  function noteToEditor(caller,callback){
-    var noteItem  = caller.parents(".note-item"),
-        ntitle = noteItem.find(".o-title").text(),
-        nbody  = noteItem.find(".body").html(),
-        nlines = noteItem.find(".lines").text()
-
-    docTitle.text(ntitle) 
-    editor.html(nbody) 
-    editor.removeClass('modo-espera')
-    line = parseInt(nlines)
-    lib.externalLinks();
-    modoEscritura = true
-    updateLines();
-    toggleMenu()
-    buildTodoGraphic();
-    callback()
   }
 
-  btnErase.on('click',function(){
-    var noteName = $(this).attr("data-title")
-    deleteNote(noteName)
-  })
+  recognizeItems() {
+    const _self = this
+      const btnEdit = $(".action.edit-note")
+    const btnRead = $(".action.read-note")
+    const btnErase = $(".erase")
+    console.log(_self);
 
-}
+    btnEdit.on('click', function () {
+      _self.noteToEditor($(this)) 
+      _self.readModeOff()
+    })
 
-function getTasks(){
-  var checkboxes  = editor.find(":checkbox")
-  var total       = checkboxes.length;
-  var checked     = editor.find(":checkbox[checked]").length;
-  var average     = checked/total * 100
+    btnRead.on('click', function () {
+      _self.noteToEditor($(this))
+      _self.readModeOn()
+    })
 
-  return {total: checkboxes.length, done: checked, todo: total - checked , avg: average.toPrecision(3) + '%'}
-}
-/********************************************************
-*                    Editor CRUD                            
-*                                                       *
-********************************************************/
-
-/**
- * get the data of the current note and send it to a db.saveNote() to storage in a file
- * @return {void}
- */  
-
-function saveNote () {
-
-  var noteTitle = docTitle.text(),
-      body = editor.html(),
-      tagsDoc = editor.find(".tag"),
-      preview = editor.text().replace(noteTitle, ""),
-      tagsToSave = "",
-      date = lib.getSqlDateNow(),
-      data,
-      type ="Note"
-
-  tagsDoc.each(function (i, tag) {
-    tagsToSave += tag.textContent
-  }, this)
-
-  if(editor.find(':checkbox').length > 0){
-    type = "TODO"
+    btnErase.on('click', function () {
+      const noteName = $(this).attr("data-title")
+      _self.deleteNote(noteName)
+    })
   }
 
-  data = {
+  noteToEditor(caller, callback) {
+    const _self = this
+    let noteItem = caller.parents(".note-item")
+    let ntitle = noteItem.find(".o-title").text()
+    let nbody = noteItem.find(".body").html()
+    let nlines = noteItem.find(".lines").text()
+
+    _self.dom.$docTitle.text(ntitle)
+    _self.dom.$editor.html(nbody)
+    _self.dom.$editor.removeClass('modo-espera')
+    _self.line = parseInt(nlines)
+    lib.externalLinks()
+    _self.modoEscritura = true
+
+    _self.updateLines()
+    _self.toggleMenu()
+    _self.buildTodoGraphic()
+  }
+
+  getTasks() {
+    let checkboxes = this.dom.$editor.find(":checkbox")
+    let total = checkboxes.length
+    let checked = this.dom.$editor.find(":checkbox[checked]").length
+    let average = checked / total * 100
+
+    return {
+      total: checkboxes.length,
+      done: checked,
+      todo: total - checked,
+      avg: average.toPrecision(3) + '%'
+    }
+  }
+
+  /********************************************************
+   *                    Editor CRUD                            
+   *                                                       *
+   ********************************************************/
+
+  saveNote() {
+    const dom = this.dom
+    let noteTitle = dom.$docTitle.text()
+    let body = dom.$editor.html()
+    let tagsDoc = dom.$editor.find(".tag")
+    let preview = dom.$editor.text().replace(noteTitle, "")
+    let tagsToSave = ""
+    let date = lib.getSqlDateNow()
+    let data
+    let type = "Note"
+
+    tagsDoc.each(function (i, tag) {
+      tagsToSave += tag.textContent
+    }, this)
+
+    if (dom.$editor.find(':checkbox').length > 0) {
+      type = "TODO"
+    }
+
+    data = {
       title: noteTitle,
       body: body,
       tags: tagsToSave,
       preview: preview,
       date: date,
       type: type,
-      lines: line
-  }
-
-  if(noteTitle.trim() != "New Note"){
-    DB.saveNote(data)
-  }
-    
-
-}
-
-function deleteNote(noteName) {    
-  ipcRenderer.send('delete-item');
-  ipcRenderer.on('delete-item-response',function(event,index){
-    if(index == 0){
-      DB.deleteNote(noteName); 
-      DB.getNotes(recognizeItems)
+      lines: this.line
     }
-  });
+
+    if (noteTitle.trim() != "New Note") {
+      DB.saveNote(data)
+    }
+  }
+
+  deleteNote(noteName) {
+    ipcRenderer.send('delete-item')
+    ipcRenderer.on('delete-item-response', function (event, index) {
+      if (index == 0) 
+        DB.deleteNote(noteName)
+        Editor.getNotes()
+    })
+  }
+
+  getNotes(){
+    const _self = this
+    const promise = DB.getNotes()
+    promise.then( (status) => {
+      _self.recognizeItems()
+    })
+  }
 
 }
 
 
+
+
+function editorEvents(editor) {
+  const dom = editor.dom
+
+  dom.$btnSave.on('click', editor.saveNote)
+
+  dom.$btnTrash.on('click', function () {
+    if (editor.modoEscritura) {
+      editor.resetEditor()
+    }
+  })
+
+  dom.$btnMinimaze.on('click', function () {
+    ipcRenderer.send('note-min')
+  })
+
+  dom.$btnMaximaze.on('click', function () {
+    ipcRenderer.send('note-max')
+  })
+
+  dom.$btnClose.on('click', function () {
+    ipcRenderer.send('note-close')
+  })
+
+  dom.$btnPreferences.on('click', function () {
+    editor.togglePreferences()
+  })
+
+  dom.$btnGraphic.on('click', function () {
+    editor.toggleGraphic()
+  })
+
+  dom.$btnMenu.on('click', function () {
+    editor.toggleMenu()
+  })
+
+  dom.$btnDevTools.on("click", function () {
+    ipcRenderer.send("devtools")
+  })
+
+  dom.$btnReload.on("click", function () {
+    ipcRenderer.send("reload")
+  })
+
+  dom.$btnReadMode.on("click", function () {
+    editor.toggleReadMode()
+  })
+
+  dom.$searchbar.on('change', function () {
+    let text = searchbar.val()
+    DB.search(text)
+    searchbar.css({
+      border: "2px solid 333"
+    })
+
+    searchbar.animate({
+      border: "1px solid #666"
+    }, 500)
+
+  })
+
+
+  dom.$btnCallAbout.on("click", function () {
+    const aboutScreen = views.aboutScreen()
+    $(".content-fluid").append(aboutScreen)
+    aboutScreen.animate({
+      opacity: 1
+    }, 200, function () {
+      $(".editor-tools").css({
+        visibility: "hidden"
+      })
+      controllerAbout.open(views)
+      editor.togglePreferences()
+    })
+
+
+  })
+}

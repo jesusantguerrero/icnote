@@ -27,12 +27,6 @@ A simple note taker for programers using electron.
 ![ICNOTE](./documentation/assets/images/img7.png)
 > You'll use real checkboxes not images
 
-TODO:
-- Table of content
-- Drag and drop images to the editor
-- floating note
-- Reminder and send to the tray
-
 ## Technologies
 
 * HTML/CSS/ JavaScript

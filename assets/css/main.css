@@ -921,8 +921,7 @@ button {
   border: 1px solid transparent; }
   .linea:focus, .linea:hover {
     outline: 0;
-    cursor: text;
-    border: 1px solid #eee; }
+    cursor: text; }
   .linea p {
     margin: 0 0 0 0;
     padding: 0;
@@ -1029,13 +1028,14 @@ button {
   top: 50px;
   left: 0;
   height: 550px;
+  padding-top: 50px;
   background: #fdfdfd;
   text-align: center;
   z-index: 1000;
   overflow-y: auto;
   opacity: 0; }
   .about-screen .close-bar {
-    margin: 20px 0 0 30px;
+    margin: -20px 0 0 30px;
     text-align: left;
     position: fixed; }
     .about-screen .close-bar .icon {
@@ -1047,7 +1047,8 @@ button {
       transition: border-radius ease 0.3s;
       text-align: center;
       background: #ddd;
-      border-radius: 6px; }
+      border-radius: 6px;
+      padding-bottom: 10px; }
       .about-screen .close-bar .icon:hover {
         border-radius: 60px;
         color: white;

@@ -23,7 +23,9 @@
   },
   "main": "main.js",
   "dependencies": {
+    "ajv": "5.0.1",
     "electron-json-storage": "^3.0.1",
+    "fs": "0.0.1-security",
     "jquery": "^3.1.1",
     "remark": "^7.0.0",
     "remark-html": "^6.0.0",
@@ -31,14 +33,21 @@
   },
   "devDependencies": {
     "@types/jquery": "^2.0.41",
+    "babel-core": "6.26.0",
+    "babel-loader": "7.1.2",
+    "babel-preset-env": "1.6.0",
     "electron": "^1.6.2",
-    "electron-builder": "^16.6.0"
+    "electron-builder": "^16.6.0",
+    "uglifyjs-webpack-plugin": "0.4.6",
+    "webpack": "3.5.6"
   },
   "scripts": {
     "start": "electron .",
     "postinstall": "install-app-deps",
     "build": "build -w --x64",
-    "pack": "build --dir"
+    "pack": "build --dir",
+    "dev": "webpack --progress --watch",
+    "webpack": "webpack"
   },
   "build": {
     "appId": "com.insanecode.icnote",
