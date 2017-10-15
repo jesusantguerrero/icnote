@@ -3,8 +3,6 @@ const cp = require('child_process')
 const {app, BrowserWindow ,ipcMain,dialog} = electron
 
 let winNewNote
-
-
 // inicio de la app
 
 app.on('ready', () => {
@@ -21,20 +19,15 @@ app.on('ready', () => {
       resizable: false,
       frame: false
     })
-
     
     winNewNote.loadURL(`file://${__dirname}/ui/newnote.html`)
     winNewNote.on('ready-to-show', () => {
       winNewNote.show()
-      winNewNote.webContents.openDevTools()
     })
-
-    
 
     ipcMain.on('note-close', () => {
         winNewNote.close()
     })
-
 
     ipcMain.on('note-min', () => {
       // winNewNote.minimize()
@@ -65,8 +58,6 @@ app.on('ready', () => {
     ipcMain.on('reload', ()=>{
       winNewNote.webContents.reload()
     })
-
-
   }
 
 })
