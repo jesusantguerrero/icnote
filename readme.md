@@ -1,6 +1,6 @@
-# ICNOTE (in process)[![Build status](https://ci.appveyor.com/api/projects/status/g5twf1iugoeks470?svg=true)](https://ci.appveyor.com/project/jesusantguerrero/icnote)
+# ICNOTE [![Build status](https://ci.appveyor.com/api/projects/status/g5twf1iugoeks470?svg=true)](https://ci.appveyor.com/project/jesusantguerrero/icnote)
 
-A simple note taker for programers using electron.
+A simple note taker for programmers using electron.
 > I know that you'd like to use the mouse when it's    necessary,so let's save some time
 
 ![ICNOTE](./documentation/assets/images/img1.png)
