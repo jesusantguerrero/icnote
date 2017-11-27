@@ -22,7 +22,6 @@ export default class {
     }
 
     $(".notes-list").html("Cargando.....") 
-    console.log(data)
 
     $(".notes-list").html(items) 
     this.makeFalseLines() 

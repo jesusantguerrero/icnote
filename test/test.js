@@ -18,7 +18,6 @@ app.start().then(function(){
   return app.browserWindow.isVisible();
 }).then(function(result){
   assert.equal(result,true,'correcto')
-  console.log(result)
 }).catch(function (error) {
   // Log any failures
   console.error('Test failed', error.message)

@@ -2,16 +2,14 @@ const electron = require('electron')
 const cp = require('child_process')
 const {app, BrowserWindow ,ipcMain,dialog} = electron
 
-let winNewNote
-// inicio de la app
-
 app.on('ready', () => {
   newNote()
 
   // notes
   function newNote () {
 
-    winNewNote = new BrowserWindow({
+   
+   const winNewNote = new BrowserWindow({
       width: 900,
       height: 600,
       show: false,

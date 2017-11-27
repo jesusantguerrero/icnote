@@ -150,8 +150,8 @@
       ipcRenderer
     } = require('electron')
     const main = remote.require("./main.js")
-    const $ = require('jquery')
-    const jQuery = $
+    window.$ = require('jquery')
+    window.jQuery = window.$
     const lib = require('../src/mylib.js')
     require("../src/bootstrap.min.js");
   </script>

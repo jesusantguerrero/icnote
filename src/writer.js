@@ -84,10 +84,7 @@ export default class Editor {
             _self.dom.$editor.html('')
             _self.modoEscritura = true
             _self.addLine()
-            console.log('here')
-            console.log(_self.line)
           } else {
-            console.log('here in else')
             wconverter.decode(_self.lineElement, false)
             _self.addLine()
           }
@@ -395,7 +392,6 @@ export default class Editor {
       const btnEdit = $(".action.edit-note")
     const btnRead = $(".action.read-note")
     const btnErase = $(".erase")
-    console.log(_self);
 
     btnEdit.on('click', function () {
       _self.noteToEditor($(this)) 
