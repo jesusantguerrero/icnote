@@ -45,7 +45,7 @@
   "scripts": {
     "start": "electron .",
     "postinstall": "install-app-deps",
-    "build": "build -w --x64",
+    "build": "webpack && build -w --x64",
     "pack": "build --dir",
     "dev": "webpack --progress --watch",
     "webpack": "webpack"
