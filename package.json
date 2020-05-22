@@ -26,7 +26,7 @@
     "ajv": "5.0.1",
     "electron-json-storage": "^3.0.1",
     "fs": "0.0.1-security",
-    "jquery": "3.2.1",
+    "jquery": "3.5.0",
     "remark": "^7.0.0",
     "remark-html": "^6.0.0",
     "save": "2.3.1",
