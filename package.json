@@ -23,7 +23,7 @@
   },
   "main": "main.js",
   "dependencies": {
-    "ajv": "5.0.1",
+    "ajv": "6.12.3",
     "electron-json-storage": "^3.0.1",
     "fs": "0.0.1-security",
     "jquery": "3.5.0",
