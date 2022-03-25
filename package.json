@@ -37,7 +37,7 @@
     "babel-core": "6.26.0",
     "babel-loader": "7.1.2",
     "babel-preset-env": "1.6.0",
-    "electron": "7.2.4",
+    "electron": "13.6.6",
     "electron-builder": "16.8.4",
     "uglifyjs-webpack-plugin": "0.4.6",
     "webpack": "3.5.6"
